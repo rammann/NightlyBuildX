@@ -232,14 +232,14 @@ update_repo() {
 }
 
 compile_opalx() {
-    result['compile']='failed'
+    result_compile='failed'
 	cd "${branchdir}"
 	rm -rf "${builddir}"
 	mkdir -p "${builddir}"
 	cd "${builddir}"
 	cmake "${cmake_args[@]}" "${srcdir}"
 	time make -j8
-    result['compile']='ok'
+    result_compile='ok'
 }
 
 run_regressiontests() {
