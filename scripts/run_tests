@@ -375,15 +375,11 @@ update_overview() {
   $(cat ${prefix}/html/org-html-themes/src/readtheorg_theme/js/readtheorg.js 2>/dev/null || echo '')
 </script>"
 
-    emacs --batch --eval "
-            (with-current-buffer (find-file-noselect \"${index_org}\")
-                (setq org-html-head-include-default-style nil)
-                (setq org-html-head-include-scripts nil)
-                (setq org-html-head \"${style_content//\"/\\\"}\")
-                (org-html-export-as-html)
-                (write-file \"${index_org%.*}.html\"))"
+    pandoc -f org -t html \
+        --metadata title="OPALX" \
+        --include-in-header=<(echo "${style_content}") \
+        -s -o "${index_org%.*}.html" "${index_org}"
 }
-
 
 main() {
     # local variable for the opalx binary
@@ -394,12 +390,12 @@ main() {
 	update_repo "${srcdir}" "${branch}" "${src_repo_url}" && do_compile='yes'
 
     # If the binary does not exist we need to compile
-    [[ -e ${opalbin} ]] || do_compile='yes'
+    [[ -e ${opalxbin} ]] || do_compile='yes'
 	aborting='no'
-
+ 
     # Compilation
 	if [[ "${do_compile}" == "yes" ]]; then
-        printf "\nStarting OPAL compilation \n"
+        printf "\nStarting OPALX compilation \n"
 		compile_opalx
 		do_unittests='yes'
 		do_regtests='yes'
