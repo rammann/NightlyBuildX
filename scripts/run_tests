@@ -56,6 +56,57 @@ die() {
 	exit $1
 }
 
+usage() {
+	echo "Usage:
+	$(basename "$0") [OPTIONS...] 
+
+Compile OPALX, run regression-tests. 
+On the first time this script is called, the following steps will be
+performed:
+
+1. clone OPALX repository
+2. compile OPALX, stop on error
+3. clone regression-tests repository
+4. run regression-tests
+
+On further calls:
+
+1. update OPAL repository
+2. compile OPAL only if changed, stop on error
+3. update regression-tests repository
+4. run regression-tests only if OPAL has been compiled or the some 
+    regression-tests has been changed.
+
+
+OPTIONS:
+===========
+--publish-dir=DIR
+	Prefix of the publication directory. If not set
+	or empty, no HTML output will be created.
+
+--config=FILE
+	The options above can be defined in the configuration FILE.
+	
+--compile
+	Compile OPAL even nothing changed and a binary exists.
+
+--unit-tests
+	Run unit-tests even OPAL has not been compiled.
+
+--reg-tests
+	Run regression-tests even OPAL has not been compiled and the
+	tests has not been changed.
+
+-f | --force
+	Force compiling OPAL and run unit- and regression-tests.
+
+-h | -? | --help
+	This help.
+
+" 1>&2
+	exit 1
+}
+
 #-------------------------------------------------------------------------------
 # handle arguments
 #
