@@ -1,6 +1,8 @@
 import sys
 import subprocess
 import glob
+if sys.version_info < (3, 0):
+    import commands  # noqa: F401 used in _getRevision* Python 2 branches
 import datetime
 import os
 import time
@@ -70,14 +72,27 @@ class OpalRegressionTests:
         if sys.version_info < (3,0):
             return commands.getoutput("git rev-parse HEAD")
         else:
-            return subprocess.getoutput("git rev-parse HEAD")
+            result = subprocess.run(
+                ["git", "rev-parse", "HEAD"],
+                capture_output=True,
+                text=True,
+                timeout=10,
+            )
+            return (result.stdout or "").strip() if result.returncode == 0 else ""
 
     def _getRevisionOpalx(self):
-        exe = os.getenv("OPALX_EXE_PATH") + "/opalx"
+        exe = os.path.join(os.getenv("OPALX_EXE_PATH", ""), "opalx")
         if sys.version_info < (3,0):
             return commands.getoutput(exe + " --git-revision")
         else:
-            return subprocess.getoutput(exe + " --git-revision")
+            # Capture only stdout so stderr (e.g. Kokkos OMP warnings) does not pollute the hash
+            result = subprocess.run(
+                [exe, "--git-revision"],
+                capture_output=True,
+                text=True,
+                timeout=30,
+            )
+            return (result.stdout or "").strip() if result.returncode == 0 else ""
 
     def _addDate(self, rep):
         date_report = TempXMLElement("Date")
