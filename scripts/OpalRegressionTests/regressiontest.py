@@ -15,8 +15,6 @@ from OpalRegressionTests.reporter import Reporter
 from OpalRegressionTests.reporter import TempXMLElement
 import OpalRegressionTests.stattest as stattest
 
-_GIT_HASH_PATTERN = re.compile(r"\b[0-9a-fA-F]{7,40}\b")
-
 class OpalRegressionTests:
     def __init__(self, base_dir, tests, opalx_args, publish_dir = None, timestamp = None):
         self.base_dir = base_dir
@@ -85,75 +83,22 @@ class OpalRegressionTests:
     def _getRevisionOpalx(self):
         exe = os.path.join(os.getenv("OPALX_EXE_PATH", ""), "opalx")
         if sys.version_info < (3,0):
-            return commands.getoutput(exe + " --git-revision")
+            src_dir = os.path.abspath(os.path.join(os.path.dirname(exe), "..", "..", "src"))
+            return commands.getoutput("cd " + src_dir + " && git rev-parse HEAD")
         else:
-            # Capture only stdout so stderr (e.g. Kokkos OMP warnings) does not pollute the hash.
-            revision = self._run_opalx_revision_command(exe)
-            if revision:
-                return revision
-
-            # Fallback: derive revision from nearby OPALX source git repositories.
-            revision = self._getRevisionFromFallbackGitRepos(exe)
-            return revision
-
-    def _extract_hash(self, value):
-        if not value:
-            return ""
-        match = _GIT_HASH_PATTERN.search(value.strip())
-        return match.group(0).lower() if match else ""
-
-    def _run_opalx_revision_command(self, exe):
-        if not exe or not os.path.isfile(exe) or not os.access(exe, os.X_OK):
-            return ""
-        try:
-            result = subprocess.run(
-                [exe, "--git-revision"],
-                capture_output=True,
-                text=True,
-                timeout=30,
-            )
-        except (OSError, subprocess.SubprocessError):
-            return ""
-
-        if result.returncode != 0:
-            return ""
-        return self._extract_hash(result.stdout or "")
-
-    def _getRevisionFromFallbackGitRepos(self, exe):
-        env_source = os.getenv("OPALX_SOURCE_DIR", "")
-        exe_dir = os.path.dirname(exe) if exe else ""
-        candidate_dirs = [
-            env_source,
-            os.path.join(exe_dir, "..", "..", "src"),
-            os.path.join(exe_dir, "..", "..", "opalx"),
-            os.path.join(exe_dir, "..", ".."),
-            self.base_dir,
-        ]
-
-        for candidate in candidate_dirs:
-            if not candidate:
-                continue
-            source_dir = os.path.abspath(candidate)
-            if not os.path.isdir(source_dir):
-                continue
+            src_dir = os.path.abspath(os.path.join(os.path.dirname(exe), "..", "..", "src"))
             try:
                 result = subprocess.run(
                     ["git", "rev-parse", "HEAD"],
                     capture_output=True,
                     text=True,
                     timeout=10,
-                    cwd=source_dir,
+                    cwd=src_dir,
                 )
             except (OSError, subprocess.SubprocessError):
-                continue
+                return ""
 
-            if result.returncode != 0:
-                continue
-
-            revision = self._extract_hash(result.stdout or "")
-            if revision:
-                return revision
-        return ""
+            return (result.stdout or "").strip() if result.returncode == 0 else ""
 
     def _addDate(self, rep):
         date_report = TempXMLElement("Date")
@@ -167,7 +112,7 @@ class OpalRegressionTests:
 
         revisionCode = self._getRevisionOpalx()
         if not revisionCode:
-            sys.stderr.write("WARNING: Could not determine OPALX git revision.\\n")
+            sys.stderr.write("WARNING: Could not determine OPALX git revision.\n")
         code_report = TempXMLElement("code")
         code_report.appendTextNode(revisionCode[0:7])
         revision_report.appendChild(code_report)
