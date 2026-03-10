@@ -1,6 +1,8 @@
 import sys
 import subprocess
 import glob
+if sys.version_info < (3, 0):
+    import commands  # noqa: F401 used in _getRevision* Python 2 branches
 import datetime
 import os
 import time
@@ -70,14 +72,33 @@ class OpalRegressionTests:
         if sys.version_info < (3,0):
             return commands.getoutput("git rev-parse HEAD")
         else:
-            return subprocess.getoutput("git rev-parse HEAD")
+            result = subprocess.run(
+                ["git", "rev-parse", "HEAD"],
+                capture_output=True,
+                text=True,
+                timeout=10,
+            )
+            return (result.stdout or "").strip() if result.returncode == 0 else ""
 
     def _getRevisionOpalx(self):
-        exe = os.getenv("OPALX_EXE_PATH") + "/opalx"
+        exe = os.path.join(os.getenv("OPALX_EXE_PATH", ""), "opalx")
         if sys.version_info < (3,0):
-            return commands.getoutput(exe + " --git-revision")
+            src_dir = os.path.abspath(os.path.join(os.path.dirname(exe), "..", "..", "..", "src"))
+            return commands.getoutput("cd " + src_dir + " && git rev-parse HEAD")
         else:
-            return subprocess.getoutput(exe + " --git-revision")
+            src_dir = os.path.abspath(os.path.join(os.path.dirname(exe), "..", "..", "..", "src"))
+            try:
+                result = subprocess.run(
+                    ["git", "rev-parse", "HEAD"],
+                    capture_output=True,
+                    text=True,
+                    timeout=10,
+                    cwd=src_dir,
+                )
+            except (OSError, subprocess.SubprocessError):
+                return ""
+
+            return (result.stdout or "").strip() if result.returncode == 0 else ""
 
     def _addDate(self, rep):
         date_report = TempXMLElement("Date")
@@ -90,6 +111,8 @@ class OpalRegressionTests:
         revision_report = TempXMLElement("Revisions")
 
         revisionCode = self._getRevisionOpalx()
+        if not revisionCode:
+            sys.stderr.write("WARNING: Could not determine OPALX git revision.\n")
         code_report = TempXMLElement("code")
         code_report.appendTextNode(revisionCode[0:7])
         revision_report.appendChild(code_report)

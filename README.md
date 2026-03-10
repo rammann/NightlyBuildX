@@ -28,7 +28,7 @@ To run the standard workflow (update, build if needed, test if needed):
 *   `--publish-dir=DIR`: Directory to publish HTML results.
 *   `--force`, `-f`: Force compilation and running of all tests.
 *   `--compile`: Force compilation.
-*   `--unit-tests`: Force running unit tests (not implemented yet).
+*   `--unit-tests`: Force running unit tests (runs `ctest -L unit` in the build directory; requires `OPALX_ENABLE_UNIT_TESTS=ON` in your config).
 *   `--reg-tests`: Force running regression tests.
 
 ### Example
@@ -66,6 +66,7 @@ Configuration files in `scripts/config/` allow you to customize:
 *   CMake arguments (e.g., Build type, Platforms).
 *   OPALX arguments.
 *   **Architecture**: Define the build architecture (e.g., `cpu-serial`, `cpu-openmp`, `gpu-cuda-a100`). This organizes builds and test results by architecture, allowing multiple configurations to run independently.
+*   **Unit tests**: Set `do_unittests='yes'` in the config to run unit tests (`ctest -L unit`) after each build when using that config; set to `'no'` to disable. The provided configs enable unit tests by default.
 
 ### Example Configuration
 
