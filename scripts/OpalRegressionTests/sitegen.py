@@ -160,14 +160,33 @@ summary{
   list-style:none;
   cursor:pointer;
   padding: 12px 16px;
-  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap: wrap;
   position: relative;
 }
 summary::-webkit-details-marker{ display:none; }
 .simname{ font-family: var(--mono); font-size: 13px; }
 .desc{ color: var(--muted); font-size: 12px; margin-top: 4px; }
-.summary-left{ display:flex; flex-direction:column; gap:2px; }
-.summary-right{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
+.summary-left{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  flex: 1 1 520px;
+  min-width: 260px;
+}
+.summary-right{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  justify-content:center;
+  gap:8px;
+  flex: 0 0 auto;
+  margin-left: auto;
+  max-width: 100%;
+}
 .badge{
   font-family: var(--mono);
   font-size: 12px;
@@ -175,6 +194,9 @@ summary::-webkit-details-marker{ display:none; }
   border-radius: 999px;
   border: 1px solid var(--border);
   background: rgba(255,255,255,.04);
+  max-width: 100%;
+  text-align: right;
+  overflow-wrap: anywhere;
 }
 .badge.ok{
   border-color: color-mix(in srgb, var(--ok), var(--border) 55%);
@@ -191,6 +213,35 @@ summary::-webkit-details-marker{ display:none; }
   background: var(--broken_bg);
   color: color-mix(in srgb, var(--broken), var(--text) 35%);
 }
+.links{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+.linkbtn{
+  font-family: var(--mono);
+  font-size: 12px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.06);
+  color: var(--text);
+  text-decoration: none;
+}
+.linkbtn:hover{
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.kv{
+  margin-top: 10px;
+  display:grid;
+  grid-template-columns: 160px 1fr;
+  gap: 6px 12px;
+  font-size: 12px;
+}
+@media (max-width: 560px){ .kv{ grid-template-columns: 1fr; } }
+.kv .k{ color: var(--muted); font-family: var(--mono); }
+.kv .v{ font-family: var(--mono); overflow-wrap:anywhere; }
 .inner{ padding: 0 16px 14px; }
 table{
   width:100%;
@@ -256,6 +307,26 @@ def _count_states(sim):
 def _escape(s):
     return html.escape(s if s is not None else "")
 
+def _format_ts_for_display(ts: str) -> str:
+    """
+    Convert our timestamp formats into a nicer display string.
+    Accepts: YYYY-MM-DD_HH-MM, ISO8601, or falls back to input.
+    """
+    if not ts:
+        return ""
+    for fmt in ("%Y-%m-%d_%H-%M", "%Y-%m-%dT%H:%M:%S", "%Y-%m-%dT%H:%M:%S.%f"):
+        try:
+            dt = datetime.datetime.strptime(ts, fmt)
+            return dt.strftime("%b %d, %Y · %H:%M")
+        except ValueError:
+            continue
+    # try fromisoformat
+    try:
+        dt = datetime.datetime.fromisoformat(ts)
+        return dt.strftime("%b %d, %Y · %H:%M")
+    except Exception:
+        return ts
+
 
 def write_run_report(report_root: str, run_dir: str, results: dict) -> None:
     rel_assets = os.path.relpath(os.path.join(report_root, ASSETS_DIRNAME), run_dir)
@@ -263,9 +334,14 @@ def write_run_report(report_root: str, run_dir: str, results: dict) -> None:
 
     started = results.get("started_at") or ""
     timestamp = results.get("timestamp") or ""
+    started_disp = _format_ts_for_display(started)
+    run_disp = _format_ts_for_display(timestamp)
     rev_code = (results.get("revisions") or {}).get("code_full", "")
     rev_tests = (results.get("revisions") or {}).get("tests_full", "")
     summary = results.get("summary") or {}
+    build = results.get("build") or {}
+    build_dir = build.get("build_dir") or ""
+    build_info = (build.get("info") or {})
 
     sims_html = []
     for sim in results.get("simulations", []):
@@ -303,11 +379,11 @@ def write_run_report(report_root: str, run_dir: str, results: dict) -> None:
 
         log_link = ""
         if sim.get("log_relpath"):
-            log_link = f"<span class='pill linkpill'><a href='{_escape(sim.get('log_relpath'))}'>log</a></span>"
+            log_link = f"<a class='linkbtn' href='{_escape(sim.get('log_relpath'))}'>log</a>"
 
         data_link = ""
         if sim.get("data_url"):
-            data_link = f"<span class='pill linkpill'><a href='{_escape(sim.get('data_url'))}'>data</a></span>"
+            data_link = f"<a class='linkbtn' href='{_escape(sim.get('data_url'))}'>data</a>"
 
         sims_html.append(
             f"<details class='sim card' data-status='{badge}' data-sim='{_escape(simname)}' data-desc='{_escape(desc)}'>"
@@ -317,8 +393,8 @@ def write_run_report(report_root: str, run_dir: str, results: dict) -> None:
             f"<div class='desc'>{_escape(desc)}</div>"
             "</div>"
             "<div class='summary-right'>"
-            f"<span class='badge {badge}'>passed:{counts['passed']} failed:{counts['failed']} broken:{counts['broken']}</span>"
-            f"{log_link}{data_link}"
+            f"<div><span class='badge {badge}'>passed:{counts['passed']} failed:{counts['failed']} broken:{counts['broken']}</span></div>"
+            f"<div class='links'>{log_link}{data_link}</div>"
             "</div>"
             "</summary>"
             "<div class='inner'>"
@@ -337,7 +413,7 @@ def write_run_report(report_root: str, run_dir: str, results: dict) -> None:
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{_escape(title)} · { _escape(timestamp) }</title>
+  <title>{_escape(title)} · { _escape(run_disp or timestamp) }</title>
   <link rel="stylesheet" href="{_escape(os.path.join(rel_assets, 'style.css'))}">
   <script defer src="{_escape(os.path.join(rel_assets, 'app.js'))}"></script>
 </head>
@@ -346,7 +422,7 @@ def write_run_report(report_root: str, run_dir: str, results: dict) -> None:
     <div class="topbar">
       <div>
         <div class="title">{_escape(title)}</div>
-        <div class="subtitle">Run <span class="simname">{_escape(timestamp)}</span> · started <span class="simname">{_escape(started)}</span></div>
+        <div class="subtitle">Run <span class="simname">{_escape(run_disp or timestamp)}</span> · started <span class="simname">{_escape(started_disp or started)}</span></div>
         <div class="subtitle">code <span class="simname">{_escape(rev_code[:12])}</span> · tests <span class="simname">{_escape(rev_tests[:12])}</span></div>
       </div>
       <div class="pill"><span class="dot ok"></span><a href="../index.html">overview</a></div>
@@ -364,6 +440,10 @@ def write_run_report(report_root: str, run_dir: str, results: dict) -> None:
           <span class="pill"><span class="dot ok"></span>passed</span>
           <span class="pill"><span class="dot bad"></span>failed</span>
           <span class="pill"><span class="dot broken"></span>broken</span>
+        </div>
+        <div class="kv">
+          <div class="k">Build dir</div><div class="v">{_escape(build_dir)}</div>
+          {''.join([f"<div class='k'>{_escape(k)}</div><div class='v'>{_escape(str(v))}</div>" for k,v in build_info.items()])}
         </div>
         <div class="footer" style="margin-top:14px;">
           Generated {html.escape(datetime.datetime.now().isoformat(timespec='seconds'))}
@@ -399,10 +479,11 @@ def update_overview(report_root: str) -> None:
         except Exception:
             continue
         s = (data.get("summary") or {})
+        run_disp = _format_ts_for_display(run)
         badge = "ok" if (s.get("failed", 0) == 0 and s.get("broken", 0) == 0) else ("broken" if s.get("broken", 0) else "bad")
         cards.append(
             f"<div class='card p runstatus {badge}' style='display:flex; align-items:center; justify-content:space-between; gap:12px;'>"
-            f"<div><div class='simname'>{_escape(run)}</div><div class='subtitle'>total {s.get('total','-')} · passed {s.get('passed','-')} · failed {s.get('failed','-')} · broken {s.get('broken','-')}</div></div>"
+            f"<div><div class='simname'>{_escape(run_disp or run)}</div><div class='subtitle'>total {s.get('total','-')} · passed {s.get('passed','-')} · failed {s.get('failed','-')} · broken {s.get('broken','-')}</div></div>"
             f"<div style='display:flex; gap:10px; align-items:center;'><span class='badge {badge}'>status</span>"
             f"<span class='pill'><span class='dot ok'></span><a href='runs/{_escape(run)}/index.html'>open</a></span></div>"
             "</div>"

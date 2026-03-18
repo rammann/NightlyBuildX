@@ -17,8 +17,59 @@ from OpalRegressionTests.reporter import TempXMLElement
 import OpalRegressionTests.stattest as stattest
 from OpalRegressionTests.sitegen import write_report_assets, write_run_report, update_overview
 
+def _parse_cmake_cache(cache_path: str) -> dict:
+    """
+    Parse a CMakeCache.txt into a simple key/value dict.
+    """
+    out = {}
+    if not cache_path or not os.path.isfile(cache_path):
+        return out
+    try:
+        with open(cache_path, "r", encoding="utf-8", errors="replace") as f:
+            for line in f:
+                line = line.strip()
+                if not line or line.startswith("//") or line.startswith("#"):
+                    continue
+                if ":" not in line or "=" not in line:
+                    continue
+                # KEY:TYPE=VALUE
+                key_type, value = line.split("=", 1)
+                key, _typ = key_type.split(":", 1)
+                out[key] = value
+    except Exception:
+        return {}
+    return out
+
+def _select_build_info(cache: dict) -> dict:
+    """
+    Keep a focused subset of build information for display.
+    """
+    info = {}
+
+    build_type = cache.get("CMAKE_BUILD_TYPE") or "-"
+    info["Build Type"] = build_type
+
+    # Kokkos Architecture: pick the first Kokkos_ARCH_* that is ON.
+    arch_on = []
+    for k, v in cache.items():
+        if k.startswith("Kokkos_ARCH_") and str(v).upper() in {"ON", "TRUE", "1"}:
+            arch_on.append(k.replace("Kokkos_ARCH_", ""))
+    arch_on.sort()
+    info["Kokkos Architecture"] = (", ".join(arch_on) if arch_on else "-")
+
+    # CPU vs GPU: primarily driven by Kokkos backend selection.
+    kokkos_cuda = str(cache.get("Kokkos_ENABLE_CUDA", "OFF")).upper() in {"ON", "TRUE", "1"}
+    kokkos_hip = str(cache.get("Kokkos_ENABLE_HIP", "OFF")).upper() in {"ON", "TRUE", "1"}
+    info["Device"] = "GPU" if (kokkos_cuda or kokkos_hip) else "CPU"
+
+    # Compiler: prefer CXX compiler (path), fall back to C compiler.
+    compiler = cache.get("CMAKE_CXX_COMPILER") or cache.get("CMAKE_C_COMPILER") or "-"
+    info["Compiler"] = compiler
+
+    return info
+
 class OpalRegressionTests:
-    def __init__(self, base_dir, tests, opalx_args, publish_dir=None, timestamp=None, plots_dir=None, logs_dir=None, opalx_exe=None):
+    def __init__(self, base_dir, tests, opalx_args, publish_dir=None, timestamp=None, plots_dir=None, logs_dir=None, opalx_exe=None, build_dir=None):
         self.base_dir = base_dir
         self.tests = tests
         self.opalx_args = opalx_args
@@ -26,6 +77,7 @@ class OpalRegressionTests:
         self.plots_dir = plots_dir
         self.logs_dir = logs_dir
         self.opalx_exe = opalx_exe
+        self.build_dir = build_dir
         self.totalNrPassed = 0
         self.totalNrTests = 0
         self.rundir = sys.path[0]
@@ -45,10 +97,21 @@ class OpalRegressionTests:
             "timestamp": self.timestamp,
             "started_at": self.today.isoformat(),
             "opalx_exe": self.opalx_exe,
+            "build": {
+                "build_dir": self.build_dir,
+                "cmake_cache": {},
+                "info": {},
+            },
             "revisions": {},
             "summary": {"total": 0, "passed": 0, "failed": 0, "broken": 0},
             "simulations": [],
         }
+
+        if self.build_dir:
+            cache_path = os.path.join(self.build_dir, "CMakeCache.txt")
+            cache = _parse_cmake_cache(cache_path)
+            run_results["build"]["cmake_cache"] = cache_path if os.path.isfile(cache_path) else None
+            run_results["build"]["info"] = _select_build_info(cache)
 
         for test in self.tests:
             rt = RegressionTest(self.base_dir, test, self.opalx_args, timestamp=self.timestamp)

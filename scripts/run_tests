@@ -136,6 +136,7 @@ main() {
   opts+=( "--publish-dir=${run_dir}" )
   opts+=( "--plots-dir=${run_plots_dir}" )
   opts+=( "--logs-dir=${run_logs_dir}" )
+  opts+=( "--build-dir=${build_dir}" )
   opts+=( "--opalx-exe=${opalx_exe}" )
   opts+=( "--timestamp=${timestamp}" )
 

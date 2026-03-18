@@ -69,6 +69,9 @@ def main(argv):
     parser.add_argument('--logs-dir',
                         dest='logs_dir', type=str,
                         help='directory where per-test logs will be written')
+    parser.add_argument('--build-dir',
+                        dest='build_dir', type=str,
+                        help='OPALX build directory (used to read CMakeCache.txt)')
     parser.add_argument('--opalx-exe',
                         dest='opalx_exe', type=str,
                         help='full path to OPALX executable')
@@ -143,6 +146,7 @@ def main(argv):
     
     plots_dir = os.path.abspath(args.plots_dir) if args.plots_dir else None
     logs_dir = os.path.abspath(args.logs_dir) if args.logs_dir else None
+    build_dir = os.path.abspath(args.build_dir) if args.build_dir else None
 
     rt = OpalRegressionTests.OpalRegressionTests(
         base_dir=base_dir,
@@ -153,6 +157,7 @@ def main(argv):
         plots_dir=plots_dir,
         logs_dir=logs_dir,
         opalx_exe=opalx,
+        build_dir=build_dir,
     )
     rt.run()
 

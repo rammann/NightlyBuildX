@@ -285,8 +285,8 @@ class StatTest:
             rep.appendReport(f"ERROR: matplotlib not available ({e})\n")
             return ""
 
-        opalRevision, s1, y1 = self._readStatVariable(self.fname)
-        refRevision, s2, y2 = self._readStatVariable(self.reference_fname)
+        _opalRevision, s1, y1 = self._readStatVariable(self.fname)
+        _refRevision, s2, y2 = self._readStatVariable(self.reference_fname)
         if not s1 or not s2 or len(s1) != len(s2):
             return ""
 
@@ -306,8 +306,8 @@ class StatTest:
         ax = fig.add_subplot(gs[0, 0])
         ax2 = fig.add_subplot(gs[1, 0], sharex=ax)
 
-        ax.plot(s1, y1, lw=1.8, label=opalRevision)
-        ax.plot(s2, y2, lw=1.8, label=refRevision)
+        ax.plot(s1, y1, lw=1.8, label="simulation")
+        ax.plot(s2, y2, lw=1.8, label="reference")
         ax.set_ylabel(f"{prettyVar} [{getattr(self, 'var_unit', '').strip()}]".strip())
         ax.grid(True, alpha=0.25)
         ax.legend(loc="upper right", fontsize=8)
