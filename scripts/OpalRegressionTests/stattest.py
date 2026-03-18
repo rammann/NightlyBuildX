@@ -300,7 +300,8 @@ class StatTest:
 
         output_fname = os.path.join(self.prefix, self.name + "_" + self.var + ".png")
 
-        fig = plt.figure(figsize=(10.5, 6.5), dpi=140)
+        # Use constrained layout to avoid tight_layout warnings with shared axes/gridspec.
+        fig = plt.figure(figsize=(10.5, 6.5), dpi=140, constrained_layout=True)
         gs = fig.add_gridspec(2, 1, height_ratios=[3, 1], hspace=0.12)
         ax = fig.add_subplot(gs[0, 0])
         ax2 = fig.add_subplot(gs[1, 0], sharex=ax)
@@ -320,7 +321,6 @@ class StatTest:
         ax2.set_ylabel(f"Δ [{var_unit}]" if var_unit else "Δ")
         ax2.grid(True, alpha=0.25)
 
-        fig.tight_layout()
         fig.savefig(output_fname)
         plt.close(fig)
 

@@ -65,6 +65,20 @@ a:hover{ text-decoration:underline; }
   border-radius: 14px;
   box-shadow: var(--shadow);
 }
+.card.runstatus{ position: relative; overflow: hidden; }
+.card.runstatus::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius: 14px;
+  pointer-events:none;
+  opacity: .9;
+  background: transparent;
+}
+.card.runstatus.ok::before{ background: transparent; }
+.card.runstatus.bad::before{ background: var(--bad_bg); }
+.card.runstatus.broken::before{ background: var(--broken_bg); }
+.card.runstatus > *{ position: relative; }
 .grid{
   display:grid;
   grid-template-columns: 1.2fr .8fr;
@@ -90,6 +104,20 @@ a:hover{ text-decoration:underline; }
   background: rgba(255,255,255,.04);
   font-size: 12px;
   color: var(--muted);
+}
+.pill.linkpill{
+  color: var(--text);
+  background: rgba(255,255,255,.06);
+}
+.pill.linkpill a{
+  color: var(--text);
+  font-weight: 650;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: color-mix(in srgb, var(--text), transparent 55%);
+}
+.pill.linkpill a:hover{
+  text-decoration-color: currentColor;
 }
 .dot{ width:10px; height:10px; border-radius:999px; }
 .dot.ok{ background: var(--ok); }
@@ -119,21 +147,21 @@ details.sim{
 details.sim::before{
   content:"";
   position:absolute;
-  left:0; top:0; bottom:0;
-  width: 4px;
-  border-top-left-radius: 14px;
-  border-bottom-left-radius: 14px;
-  background: var(--border);
+  inset:0;
+  border-radius: 14px;
+  pointer-events:none;
   opacity: .9;
+  background: transparent;
 }
-details.sim[data-status="ok"]::before{ background: var(--ok); }
-details.sim[data-status="bad"]::before{ background: var(--bad); }
-details.sim[data-status="broken"]::before{ background: var(--broken); }
+details.sim[data-status="ok"]::before{ background: transparent; }
+details.sim[data-status="bad"]::before{ background: var(--bad_bg); }
+details.sim[data-status="broken"]::before{ background: var(--broken_bg); }
 summary{
   list-style:none;
   cursor:pointer;
   padding: 12px 16px;
   display:flex; align-items:center; justify-content:space-between; gap:12px;
+  position: relative;
 }
 summary::-webkit-details-marker{ display:none; }
 .simname{ font-family: var(--mono); font-size: 13px; }
@@ -275,11 +303,11 @@ def write_run_report(report_root: str, run_dir: str, results: dict) -> None:
 
         log_link = ""
         if sim.get("log_relpath"):
-            log_link = f"<span class='pill'><span class='dot ok'></span><a href='{_escape(sim.get('log_relpath'))}'>log</a></span>"
+            log_link = f"<span class='pill linkpill'><a href='{_escape(sim.get('log_relpath'))}'>log</a></span>"
 
         data_link = ""
         if sim.get("data_url"):
-            data_link = f"<span class='pill'><span class='dot ok'></span><a href='{_escape(sim.get('data_url'))}'>data</a></span>"
+            data_link = f"<span class='pill linkpill'><a href='{_escape(sim.get('data_url'))}'>data</a></span>"
 
         sims_html.append(
             f"<details class='sim card' data-status='{badge}' data-sim='{_escape(simname)}' data-desc='{_escape(desc)}'>"
@@ -373,7 +401,7 @@ def update_overview(report_root: str) -> None:
         s = (data.get("summary") or {})
         badge = "ok" if (s.get("failed", 0) == 0 and s.get("broken", 0) == 0) else ("broken" if s.get("broken", 0) else "bad")
         cards.append(
-            "<div class='card p' style='display:flex; align-items:center; justify-content:space-between; gap:12px;'>"
+            f"<div class='card p runstatus {badge}' style='display:flex; align-items:center; justify-content:space-between; gap:12px;'>"
             f"<div><div class='simname'>{_escape(run)}</div><div class='subtitle'>total {s.get('total','-')} · passed {s.get('passed','-')} · failed {s.get('failed','-')} · broken {s.get('broken','-')}</div></div>"
             f"<div style='display:flex; gap:10px; align-items:center;'><span class='badge {badge}'>status</span>"
             f"<span class='pill'><span class='dot ok'></span><a href='runs/{_escape(run)}/index.html'>open</a></span></div>"
