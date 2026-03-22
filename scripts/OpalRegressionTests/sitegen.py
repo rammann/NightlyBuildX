@@ -319,6 +319,8 @@ def _unit_badge(unit: dict) -> str:
         return "ok"
     if state == "failed":
         return "bad"
+    if state == "skipped":
+        return "skipped"
     return "broken"
 
 def _format_ts_for_display(ts: str) -> str:
