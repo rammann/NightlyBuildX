@@ -12,9 +12,7 @@ set -o pipefail
 declare -ri EC_ARG_ERROR=1
 declare -ri EC_RUNTIME_ERROR=20
 
-declare -r today="$(date +%Y-%m-%d)"
-declare -r time="$(date +%H-%M)"
-declare -r timestamp="${today}_${time}"
+# Outputs go to a stable directory so reruns overwrite prior artifacts.
 
 die() {
   (( $1 > 0 )) && exec 1>&2
@@ -38,7 +36,7 @@ Optional:
   <name of test>  If provided, run only that test (subfolder name under RegressionTests)
 
 Output:
-  Writes under NightlyBuildX/runs/<testName>/<timestamp>/ (or runs/all/<timestamp>/).
+  Writes under NightlyBuildX/runs/<testName>/ (or runs/all/).
 EOF
   exit ${EC_ARG_ERROR}
 }
@@ -160,9 +158,9 @@ fi
 
 declare run_dir=""
 if [[ -n "${test_name}" ]]; then
-  run_dir="${run_root}/${test_name}/${timestamp}"
+  run_dir="${run_root}/${test_name}"
 else
-  run_dir="${run_root}/all/${timestamp}"
+  run_dir="${run_root}/all"
 fi
 
 declare run_logs_dir="${run_dir}/logs"
