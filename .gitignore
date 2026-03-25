@@ -3,6 +3,7 @@ results/
 workspace/
 .DS_Store
 report/
+runs/
 scripts/__pycache__/
 regression-tests-x/
 *.png

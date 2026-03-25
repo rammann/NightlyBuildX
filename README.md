@@ -9,6 +9,14 @@ bash NightlyBuildX/scripts/run_tests --build <path-to-build> --tests <path-to-re
 - `--tests` specifies the path to the regression tests
 - `--unittests` switches unit tests on (default) and off
 
+To run regression test inputs only (no compare/report):
+```
+bash NightlyBuildX/scripts/run_only_input --build <path-to-build> --input <path-to-reg-tests> [<name-of-test>]
+```
+- `--input` specifies the regression tests directory (or the regression-tests-x repo root)
+- `<name-of-test>` is an optional test subfolder name (runs all if omitted)
+- Outputs go to `NightlyBuildX/runs/...`; results are not validated against `reference/`
+
 ## Regression Tests
 Any folder follwing the structure of https://github.com/rammann/regression-tests-x will work.
 
