@@ -47,7 +47,7 @@ This generates `NightlyBuildX/report/index.html`, which lists **local** runs (fr
 Use this when you run tests on another machine but want the summary in your local checkout.
 
 1. On the remote machine, run the same `run_tests` command with **`--save`**. Output goes to `report/runs_remote/<timestamp>/` (logs, plots, `results.json`, per-run `index.html`).
-2. Copy or commit that timestamped folder into your local repo’s `NightlyBuildX/report/runs_remote/`.
-3. Locally, run `run_tests` once (any successful run regenerates the overview), or rely on the next run to refresh `report/index.html`. Open `report/index.html` to see both columns.
+2. **Git:** Add the full run directory under `NightlyBuildX/report/runs_remote/<timestamp>/`, including **`plots/**/*.png`**. The repo’s `.gitignore` turns off the global `*.png` rule for paths under `report/runs_remote/`, so those images are meant to be **committed and pushed** like `results.json` and `index.html`. After `git add`, check `git status` shows the PNGs staged—not ignored.
+3. Regenerate the landing page if needed: `python3 NightlyBuildX/scripts/refresh_report_index.py`, then open `report/index.html`. (A local `run_tests` run also refreshes it.)
 
-The `report/runs/` tree stays git-ignored (large local history). The `report/runs_remote/` tree is intended to be **tracked** so you can push remote summaries; only that subtree is meant for version control under `report/`.
+The `report/runs/` tree stays git-ignored (large local history). The `report/runs_remote/` tree is for **tracked** remote summaries, including plot PNGs so reports render after clone.
