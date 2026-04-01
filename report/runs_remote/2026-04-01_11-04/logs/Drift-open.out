@@ -1,0 +1,2395 @@
+OPAL-X[5]> Couldn't find startup file '/Users/rammann/init.opal'
+OPAL-X[5]> Note: this is not mandatory for an OPAL simulation!
+OPAL-X[5]> 
+OPAL-X>               ____  _____        _       __   __
+OPAL-X> [1;32m
+OPAL-X> 
+OPAL-X>   ██████  ██████   █████  ██      ██   ██
+OPAL-X>  ██    ██ ██   ██ ██   ██ ██       ██ ██
+OPAL-X>  ██    ██ ██████  ███████ ██        ███
+OPAL-X>  ██    ██ ██      ██   ██ ██       ██ ██
+OPAL-X>   ██████  ██      ██   ██ ███████ ██   ██
+OPAL-X> 
+OPAL-X>          This is OPALX (Object Oriented Parallel Accelerator Library for Exascale)
+OPAL-X> 
+OPAL-X> [0m
+OPAL-X> 
+OPAL-X> OPALX is the performance portable version of OPAL :: Version 0.9
+OPAL-X>             git rev. 9688c9ef687d1f3fff87c3d7a338293d024d3198
+OPAL-X> 
+OPAL-X> 
+OPAL-X>              (c) PSI, https://github.com/OPALX-project/OPALX
+OPAL-X> 
+OPAL-X> 
+OPAL-X> Please send cookies, goodies or other motivations (wine and beer ... ) 
+OPAL-X> to the OPAL developers https://github.com/OPALX-project/OPALX/issues
+OPAL-X> 
+OPAL-X> Time: 11:04:20 date: 01/04/2026
+OPAL-X> 
+OPAL-X> * Host:   Serial
+OPAL-X> * Device: Serial execution
+OPAL-X> 
+OPAL-X> * Reading input stream 'Drift-open.in'
+OPAL-X> 
+OPAL-X> value: {OPALVERSION} = {900}
+OPAL-X> 
+OPAL-X> 
+OPAL-X> value: {EDES,P0} = {1e-09, 1.01094e-06}
+OPAL-X> 
+OPAL-X> * ************* F I E L D S O L V E R ********************************************** 
+OPAL-X> * FIELDSOLVER  FS1
+OPAL-X> * BINS         NONE
+OPAL-X> * TYPE         OPEN
+OPAL-X> * RANKS        1
+OPAL-X> * NX           32
+OPAL-X> * NY           32
+OPAL-X> * NZ           32
+OPAL-X> * BBOXINCR     5
+OPAL-X> * GREENSF      STANDARD
+OPAL-X> * XDIM         parallel  
+OPAL-X> * YDIM         parallel  
+OPAL-X> * ZDIM         serial  
+OPAL-X> * ********************************************************************************** 
+OPAL-X> 
+OPAL-X> * RUN resolved beams: BEAM1
+OPAL-X> * ************* B E A M ************************************************************ 
+OPAL-X> * BEAM        BEAM1
+OPAL-X> * PARTICLE    ELECTRON
+OPAL-X> * REST MASS   0.000510999 [GeV]
+OPAL-X> * CHARGE      -e * 1 
+OPAL-X> * MOMENTUM    1010.94 [eV/c]
+OPAL-X> * MOMENTUM    1.01094e-06 [GeV/c]
+OPAL-X> * CURRENT     13000 [A]
+OPAL-X> * FREQUENCY   1.3e+09 [MHz]
+OPAL-X> * NPART       32768
+OPAL-X> * ********************************************************************************** 
+OPAL-X> 
+OPAL-X[2]> * Beam[0] BEAM1 macro charge per particle [C]: -3.05176e-16
+OPAL-X[2]> * Beam[0] BEAM1 macro mass per particle [GeV/c^2]: 0.973329
+OPAL-X[2]> * Beam[0] BEAM1 particles per macro particle: 1904.76
+OPAL-X> 
+OPAL-X> * Creating new file for data: 'Drift-open.stat'
+OPAL-X> * Creating new file for data: 'Drift-open.lbal'
+OPAL-X[3]> * Sum of per-distribution NPARTDIST over all emission sources = 32768, BEAM::NPART = 32768
+PartBunch::PartBunch[4]> PartBunch Constructor
+PartBunch::PartBunch[5]> * FieldContainer set to isAllPeriodic = 0
+OPAL-X[3]> * Container 0: 32771 particles created and destroyed. Bunch allocated.
+PartBunch::setSolver[2]> Initializing solver: OPEN
+FieldContainer::initializeFields[3]> Mesh spacing = ( 0.1875 , 0.1875 , 0.1875 )
+FieldContainer::initializeFields[3]> Origin       = ( -3 , -3 , -3 )
+FieldContainer::initializeFields[3]> FL           = Domain = {[0:31:1],[0:31:1],[0:31:1]}
+FieldContainer::initializeFields[3]> Total number of boxes = 1
+FieldContainer::initializeFields[3]>     Box 0 {[0:31:1],[0:31:1],[0:31:1]}
+FieldContainer::initializeFields[3]> 
+FieldContainer::initializeFields[3]> E_m, rho_m field initialized.
+PartBunch::setBins[2]> Solver FS1 has no binning command attached, not using binning.
+FieldSolver::setPotentialBCs[3]> Potential BCs only need to be set for CG solver. Current solver type: OPEN
+PartBunch::setSolver[4]> Binned field solver set (binned or legacy at runtime).
+FieldSolver::initSolverWithParams[3]> Initialized solver with params: OPEN
+FieldSolver::initSolverWithParams[5]> Set solver RHS.
+FieldSolver::initSolverWithParams[4]> Set solver RHS+LHS.
+PartBunch::setSolver[4]> Field solver initialized.
+PartBunch::setSolver[3]> Solver and Load Balancer set.
+PartBunch::pre_run[2]> Starting pre_run...
+PartBunch::pre_run[4]> Rho initialized to zero.
+FieldSolver::runSolver[3]> Running solver with type: OPEN. Force skip field dump: 1
+PartBunch::pre_run[4]> Field solver ran during pre_run.
+PartBunch::pre_run[4]> Call counter reset. pre_run done.
+PartBunch::PartBunch[5]> * PartBunch constructor done.
+OPAL-X[2]> * BCHandler<3>: [OPEN, OPEN, OPEN]
+OPAL-X[5]> sysconf(_SC_NPROCESSORS_ONLN)= 10
+OPAL-X[5]> MPI_Comm_size= 1
+OPAL-X[2]> * Particle sampling / sampler setup for all emission sources done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00328963 , -0.00326818 , -0.00328556 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000205746 , 0.000204836 , 0.000206071 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+OPAL-X> 
+OPAL-X> * ************** B U N C H ********************************************************* 
+OPAL-X> * CONTAINER       = 0
+OPAL-X> * PARTICLES       = 32768
+OPAL-X> * CHARGE          = -1.000000e-11 (Cb) 
+OPAL-X> * QM STORAGE MODE = SINGLE
+OPAL-X> * <EKIN>          = 1.000 [eV]
+OPAL-X> * <dEKIN>         = 0.000 [eV]
+OPAL-X> * INTEGRATOR      = LF2
+OPAL-X> * MIN R (origin)  = (     -2.99037 ,     -2.97023 ,     -2.98583 ) [mm]
+OPAL-X> * MAX R (max ext) = (      2.99497 ,      2.98864 ,      3.00895 ) [mm]
+OPAL-X> * RMS R           = (    985.07250 ,    994.09241 ,    987.62600 ) [um]
+OPAL-X> * RMS P           = ( 9.971268e-10 , 9.967558e-10 , 1.003360e-09 ) [beta gamma]
+OPAL-X> * Mean R          = ( -5.293956e-20 , 1.821452e-21 , -9.026857e-20 ) [m]
+OPAL-X> * Mean P          = ( -3.505941e-12 , 5.337695e-12 , 1.978359e-03 ) [beta gamma]
+OPAL-X> * MESH SPACING    = (    205.74581 ,    204.83612 ,    206.07056 ) [um]
+OPAL-X> * COMPDOM INCR    = 5.000000e+00 (%) 
+OPAL-X> * FIELD LAYOUT    = Domain = {[0:31:1],[0:31:1],[0:31:1]}
+OPAL-X> Total number of boxes = 1
+OPAL-X>     Box 0 {[0:31:1],[0:31:1],[0:31:1]}
+OPAL-X> 
+OPAL-X> * Centroid : 
+OPAL-X> * -1.734723e-15 -1.148827e-07 5.968533e-17 1.749056e-07 -2.957920e-15 6.482688e+01 
+OPAL-X> * Cov Matrix : 
+OPAL-X> * 9.703678e-07 2.370598e-15 9.321539e-09 -3.229410e-15 1.295832e-08 -1.337483e-16 
+OPAL-X> * 2.370598e-15 9.942618e-19 -9.499070e-15 -7.532501e-21 1.764664e-15 -6.773932e-22 
+OPAL-X> * 9.321539e-09 -9.499070e-15 9.882197e-07 1.871621e-15 7.528638e-09 7.514154e-16 
+OPAL-X> * -3.229410e-15 -7.532501e-21 1.871621e-15 9.935222e-19 -4.726361e-15 -2.505067e-21 
+OPAL-X> * 1.295832e-08 1.764664e-15 7.528638e-09 -4.726361e-15 9.754051e-07 5.372373e-15 
+OPAL-X> * -1.337483e-16 -6.773932e-22 7.514154e-16 -2.505067e-21 5.372373e-15 1.006732e-18 
+OPAL-X> * * ********************************************************************************** 
+OPAL-X> 
+ParallelTracker::execute[3]> Initialized Boris pusher.
+ParallelTracker::execute[3]> Selected minimum time step from configuration: 5e-11
+OPAL-X> * D1 gone live
+ParallelTracker::execute[3]> Activated all beamline elements.
+ParallelTracker::execute[4]> Transformed reference particle position and momentum to lab frame (all containers).
+ParallelTracker::execute[4]> Initial bunch bounds:
+ParallelTracker::execute[4]>   rmin = ( -0.00299037 , -0.00297023 , -0.00298583 )
+ParallelTracker::execute[4]>   rmax = ( 0.00299497 , 0.00298864 , 0.00300895 )
+ParallelTracker::execute[3]> ParallelTrack (container 0): momentum z = 0.00197836
+ParallelTracker::execute[3]> RefPartR (container 0) = ( 0 , 0 , 0 )
+ParallelTracker::execute[3]> RefPartP (container 0) = ( -3.50594e-12 , 5.3377e-12 , 0.00197836 )
+ParallelTracker::writePhaseSpace[5]> Bunch bounds in REFERENCE frame: rmin = ( -3 , -3 , -3 ), rmax = ( 3 , 3 , 3 )
+ParallelTracker::execute[2]> Dump initial phase space done.
+OPAL-X> * OrbitThreader dt_m= 5e-11
+OPAL-X> * OrbitThreader maxDistance= 10
+OPAL-X> * OrbitThreader #elements  = 1
+OPAL-X> 
+OPAL-X> * Size of map 1 sections 
+OPAL-X> * Key: (0.000000 - 1.250009) number of overlapping elements 1
+OPAL-X> *                            D1
+OPAL-X> 
+OPAL-X> * Creating new file for data: 'data/Drift-open_ElementPositions.sdds'
+ParallelTracker::execute[4]> Orbit threader execution done.
+ParallelTracker::execute[4]> Set time view of particle bunch.
+ParallelTracker::execute[4]> Reset bunch time to 0.
+OPAL-X> * Track start at: 11:04:20, t= 0.000 [fs]; zstart at: 0.000 [um]
+OPAL-X> * Initial dt = 50.000 [ps]
+OPAL-X> * Max integration steps = 20, next step = 0
+OPAL-X>                dt [ns]           zStop [m]        num Steps [1]
+OPAL-X> ->         5.000000e-11        1.250000e+00                  20
+PartBunch::performBunchSanityChecks[4]> ========== Performing sanity checks on PartBunch... ==========
+PartBunch::performBunchSanityChecks[4]> BC Handler initialized properly.
+PartBunch::performBunchSanityChecks[4]> Field Solver object was initialized.
+PartBunch::performBunchSanityChecks[4]> FieldSolver internal field pointers are set.
+PartBunch::performBunchSanityChecks[4]> FieldSolver fields match FieldContainer.
+PartBunch::performBunchSanityChecks[4]> FieldSolver type: OPEN
+PartBunch::performBunchSanityChecks[4]> E-field layout initialized.
+PartBunch::performBunchSanityChecks[2]> ========= Done performing PartBunch sanity checks... =========
+ParallelTracker::execute[5]> >>>>>>>>>>>>>>>>>> Starting Tracking Loop >>>>>>>>>>>>>>>>>>
+ParallelTracker::changeDT[5]> Changed particle container time step to 5e-11.
+ParallelTracker::execute[2]> Starting track with dt = 50.000 [ps], track steps = 0 to 20.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration1[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration1 done at step 0.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00328963 , -0.00326818 , -0.00327074 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000205746 , 0.000204836 , 0.000206071 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration1.
+ParallelTracker::execute[4]> E and B fields reset at step 0.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+ParallelTracker::computeSpaceChargeFields[4]> Calculate beam parameters done.
+ParallelTracker::computeSpaceChargeFields[4]> Transform particle positions to beam coordinate system done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00328963 , -0.00326818 , -0.00327074 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000205746 , 0.000204836 , 0.000206071 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in beam coordinate system.
+BinnedFieldSolver::computeSelfFields[4]> Entry: rank=0, localParticles=32768, totalParticles=32768, hasBins=0, stype=OPEN
+BinnedFieldSolver::computeSelfFields[4]> Dispatching to computeLegacySelfFields() (legacy path).
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode entry: localP=32768, totalP=32768, stype=OPEN
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: runSolver() start
+FieldSolver::runSolver[3]> Running solver with type: OPEN. Force skip field dump: 0
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: gather E->particles
+ParallelTracker::computeSpaceChargeFields[3]> Compute self fields done.
+ParallelTracker::computeSpaceChargeFields[5]> Transform particle positions back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate E fields back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate B fields back to reference coordinate system done. ComputeSelfFields done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00328963 , -0.00326818 , -0.00327074 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000205746 , 0.000204836 , 0.000206071 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in reference coordinate system.
+ParallelTracker::execute[4]> Space charge field computation done at step 0.
+ParallelTracker::execute[4]> External field computation done at step 0.
+ParallelTracker::kickParticles[5]> Got particle views for kick operation.
+ParallelTracker::kickParticles[5]> Completed parallel kick operation.
+ParallelTracker::timeIntegration2[4]> Kick particles done.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration2[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration2 done at step 0.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00329184 , -0.00326996 , -0.00325718 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000205884 , 0.000204946 , 0.00020618 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration2.
+ParallelTracker::execute[4]> Emit particles from emission sources done at step 0.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00329184 , -0.00326996 , -0.00325718 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000205884 , 0.000204946 , 0.00020618 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after emission.
+ParallelTracker::execute[5]> Set time view of particle bunch to dt = 50.000 [ps].
+ParallelTracker::execute[5]> Selected new time step for next iteration, back_track = 0.
+ParallelTracker::execute[5]> Incremented bunch time to 50.000 [ps].
+ParallelTracker::updateReference[5]> Updated reference particles.
+ParallelTracker::execute[4]> Updated reference particle at step 0.
+ParallelTracker::execute[4]> Current path length is 2.96548e-05.
+OPAL-X> * 11:04:20 Step      0 at 29.655 [um], t= 50.000 [ps], E=1.059 [eV]
+ParallelTracker::writePhaseSpace[5]> Bunch bounds in REFERENCE frame: rmin = ( -0.00299037 , -0.00297023 , -0.002971 ), rmax = ( 0.00299497 , 0.00298864 , 0.00302378 )
+ParallelTracker::writePhaseSpace[5]> External fields in REFERENCE frame: externalE = ( 0 , 0 , 0 ), externalB = ( 0 , 0 , 0 )
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[2]> * Wrote beam statistics.
+ParallelTracker::execute[5]> Track steps incremented.
+ParallelTracker::execute[4]> Calculated drift per time step: 29.655 [um].
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration1[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration1 done at step 1.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00329405 , -0.00327174 , -0.00327328 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000206022 , 0.000205056 , 0.000206289 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration1.
+ParallelTracker::execute[4]> E and B fields reset at step 1.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+ParallelTracker::computeSpaceChargeFields[4]> Calculate beam parameters done.
+ParallelTracker::computeSpaceChargeFields[4]> Transform particle positions to beam coordinate system done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00329405 , -0.00327174 , -0.00324362 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000206022 , 0.000205056 , 0.000206289 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in beam coordinate system.
+BinnedFieldSolver::computeSelfFields[4]> Entry: rank=0, localParticles=32768, totalParticles=32768, hasBins=0, stype=OPEN
+BinnedFieldSolver::computeSelfFields[4]> Dispatching to computeLegacySelfFields() (legacy path).
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode entry: localP=32768, totalP=32768, stype=OPEN
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: runSolver() start
+FieldSolver::runSolver[3]> Running solver with type: OPEN. Force skip field dump: 0
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: gather E->particles
+ParallelTracker::computeSpaceChargeFields[3]> Compute self fields done.
+ParallelTracker::computeSpaceChargeFields[5]> Transform particle positions back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate E fields back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate B fields back to reference coordinate system done. ComputeSelfFields done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00329405 , -0.00327174 , -0.00327328 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000206022 , 0.000205056 , 0.000206289 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in reference coordinate system.
+ParallelTracker::execute[4]> Space charge field computation done at step 1.
+ParallelTracker::execute[4]> External field computation done at step 1.
+ParallelTracker::kickParticles[5]> Got particle views for kick operation.
+ParallelTracker::kickParticles[5]> Completed parallel kick operation.
+ParallelTracker::timeIntegration2[4]> Kick particles done.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration2[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration2 done at step 1.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00329846 , -0.0032753 , -0.00326099 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000206298 , 0.000205276 , 0.000206507 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration2.
+ParallelTracker::execute[4]> Emit particles from emission sources done at step 1.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00329846 , -0.0032753 , -0.00326099 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000206298 , 0.000205276 , 0.000206507 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after emission.
+ParallelTracker::execute[5]> Set time view of particle bunch to dt = 50.000 [ps].
+ParallelTracker::execute[5]> Selected new time step for next iteration, back_track = 0.
+ParallelTracker::execute[5]> Incremented bunch time to 100.000 [ps].
+ParallelTracker::updateReference[5]> Updated reference particles.
+ParallelTracker::execute[4]> Updated reference particle at step 1.
+ParallelTracker::execute[4]> Current path length is 5.93096e-05.
+OPAL-X> * 11:04:20 Step      1 at 59.310 [um], t= 100.000 [ps], E=1.232 [eV]
+ParallelTracker::writePhaseSpace[5]> Bunch bounds in REFERENCE frame: rmin = ( -0.00299438 , -0.00297348 , -0.00297322 ), rmax = ( 0.00299899 , 0.00299179 , 0.00302791 )
+ParallelTracker::writePhaseSpace[5]> External fields in REFERENCE frame: externalE = ( 0 , 0 , 0 ), externalB = ( 0 , 0 , 0 )
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[2]> * Wrote beam statistics.
+ParallelTracker::execute[5]> Track steps incremented.
+ParallelTracker::execute[4]> Calculated drift per time step: 29.655 [um].
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration1[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration1 done at step 2.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00330287 , -0.00327886 , -0.00327835 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000206574 , 0.000205495 , 0.000206725 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration1.
+ParallelTracker::execute[4]> E and B fields reset at step 2.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+ParallelTracker::computeSpaceChargeFields[4]> Calculate beam parameters done.
+ParallelTracker::computeSpaceChargeFields[4]> Transform particle positions to beam coordinate system done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00330287 , -0.00327886 , -0.00321904 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000206574 , 0.000205495 , 0.000206725 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in beam coordinate system.
+BinnedFieldSolver::computeSelfFields[4]> Entry: rank=0, localParticles=32768, totalParticles=32768, hasBins=0, stype=OPEN
+BinnedFieldSolver::computeSelfFields[4]> Dispatching to computeLegacySelfFields() (legacy path).
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode entry: localP=32768, totalP=32768, stype=OPEN
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: runSolver() start
+FieldSolver::runSolver[3]> Running solver with type: OPEN. Force skip field dump: 0
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: gather E->particles
+ParallelTracker::computeSpaceChargeFields[3]> Compute self fields done.
+ParallelTracker::computeSpaceChargeFields[5]> Transform particle positions back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate E fields back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate B fields back to reference coordinate system done. ComputeSelfFields done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00330287 , -0.00327886 , -0.00327835 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000206574 , 0.000205495 , 0.000206725 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in reference coordinate system.
+ParallelTracker::execute[4]> Space charge field computation done at step 2.
+ParallelTracker::execute[4]> External field computation done at step 2.
+ParallelTracker::kickParticles[5]> Got particle views for kick operation.
+ParallelTracker::kickParticles[5]> Completed parallel kick operation.
+ParallelTracker::timeIntegration2[4]> Kick particles done.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration2[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration2 done at step 2.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00330948 , -0.00328419 , -0.00326733 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000206987 , 0.000205824 , 0.000207052 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration2.
+ParallelTracker::execute[4]> Emit particles from emission sources done at step 2.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00330948 , -0.00328419 , -0.00326733 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000206987 , 0.000205824 , 0.000207052 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after emission.
+ParallelTracker::execute[5]> Set time view of particle bunch to dt = 50.000 [ps].
+ParallelTracker::execute[5]> Selected new time step for next iteration, back_track = 0.
+ParallelTracker::execute[5]> Incremented bunch time to 150.000 [ps].
+ParallelTracker::updateReference[5]> Updated reference particles.
+ParallelTracker::execute[4]> Updated reference particle at step 2.
+ParallelTracker::execute[4]> Current path length is 8.89644e-05.
+OPAL-X> * 11:04:20 Step      2 at 88.964 [um], t= 150.000 [ps], E=1.512 [eV]
+ParallelTracker::writePhaseSpace[5]> Bunch bounds in REFERENCE frame: rmin = ( -0.0030024 , -0.00297996 , -0.00297766 ), rmax = ( 0.00300703 , 0.00299808 , 0.00303616 )
+ParallelTracker::writePhaseSpace[5]> External fields in REFERENCE frame: externalE = ( 0 , 0 , 0 ), externalB = ( 0 , 0 , 0 )
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[2]> * Wrote beam statistics.
+ParallelTracker::execute[5]> Track steps incremented.
+ParallelTracker::execute[4]> Calculated drift per time step: 29.655 [um].
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration1[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration1 done at step 3.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00331608 , -0.00328952 , -0.00328665 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.0002074 , 0.000206153 , 0.000207401 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration1.
+ParallelTracker::execute[4]> E and B fields reset at step 3.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+ParallelTracker::computeSpaceChargeFields[4]> Calculate beam parameters done.
+ParallelTracker::computeSpaceChargeFields[4]> Transform particle positions to beam coordinate system done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00331608 , -0.00328952 , -0.00319769 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.0002074 , 0.000206153 , 0.000207401 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in beam coordinate system.
+BinnedFieldSolver::computeSelfFields[4]> Entry: rank=0, localParticles=32768, totalParticles=32768, hasBins=0, stype=OPEN
+BinnedFieldSolver::computeSelfFields[4]> Dispatching to computeLegacySelfFields() (legacy path).
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode entry: localP=32768, totalP=32768, stype=OPEN
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: runSolver() start
+FieldSolver::runSolver[3]> Running solver with type: OPEN. Force skip field dump: 0
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: gather E->particles
+ParallelTracker::computeSpaceChargeFields[3]> Compute self fields done.
+ParallelTracker::computeSpaceChargeFields[5]> Transform particle positions back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate E fields back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate B fields back to reference coordinate system done. ComputeSelfFields done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00331608 , -0.00328952 , -0.00328665 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.0002074 , 0.000206153 , 0.000207401 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in reference coordinate system.
+ParallelTracker::execute[4]> Space charge field computation done at step 3.
+ParallelTracker::execute[4]> External field computation done at step 3.
+ParallelTracker::kickParticles[5]> Got particle views for kick operation.
+ParallelTracker::kickParticles[5]> Completed parallel kick operation.
+ParallelTracker::timeIntegration2[4]> Kick particles done.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration2[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration2 done at step 3.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00332485 , -0.00329661 , -0.00327813 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000207949 , 0.00020659 , 0.000207876 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration2.
+ParallelTracker::execute[4]> Emit particles from emission sources done at step 3.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00332485 , -0.00329661 , -0.00327813 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000207949 , 0.00020659 , 0.000207876 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after emission.
+ParallelTracker::execute[5]> Set time view of particle bunch to dt = 50.000 [ps].
+ParallelTracker::execute[5]> Selected new time step for next iteration, back_track = 0.
+ParallelTracker::execute[5]> Incremented bunch time to 200.000 [ps].
+ParallelTracker::updateReference[5]> Updated reference particles.
+ParallelTracker::execute[4]> Updated reference particle at step 3.
+ParallelTracker::execute[4]> Current path length is 0.000118619.
+OPAL-X> * 11:04:20 Step      3 at 118.619 [um], t= 200.000 [ps], E=1.889 [eV]
+ParallelTracker::writePhaseSpace[5]> Bunch bounds in REFERENCE frame: rmin = ( -0.0030144 , -0.00298966 , -0.00298498 ), rmax = ( 0.00301905 , 0.00300751 , 0.0030485 )
+ParallelTracker::writePhaseSpace[5]> External fields in REFERENCE frame: externalE = ( 0 , 0 , 0 ), externalB = ( 0 , 0 , 0 )
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[2]> * Wrote beam statistics.
+ParallelTracker::execute[5]> Track steps incremented.
+ParallelTracker::execute[4]> Calculated drift per time step: 29.655 [um].
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration1[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration1 done at step 4.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00333363 , -0.0033037 , -0.00329926 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000208498 , 0.000207027 , 0.000208351 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration1.
+ParallelTracker::execute[4]> E and B fields reset at step 4.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+ParallelTracker::computeSpaceChargeFields[4]> Calculate beam parameters done.
+ParallelTracker::computeSpaceChargeFields[4]> Transform particle positions to beam coordinate system done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00333363 , -0.0033037 , -0.00318064 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000208498 , 0.000207027 , 0.000208351 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in beam coordinate system.
+BinnedFieldSolver::computeSelfFields[4]> Entry: rank=0, localParticles=32768, totalParticles=32768, hasBins=0, stype=OPEN
+BinnedFieldSolver::computeSelfFields[4]> Dispatching to computeLegacySelfFields() (legacy path).
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode entry: localP=32768, totalP=32768, stype=OPEN
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: runSolver() start
+FieldSolver::runSolver[3]> Running solver with type: OPEN. Force skip field dump: 0
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: gather E->particles
+ParallelTracker::computeSpaceChargeFields[3]> Compute self fields done.
+ParallelTracker::computeSpaceChargeFields[5]> Transform particle positions back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate E fields back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate B fields back to reference coordinate system done. ComputeSelfFields done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00333363 , -0.0033037 , -0.00329926 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000208498 , 0.000207027 , 0.000208351 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in reference coordinate system.
+ParallelTracker::execute[4]> Space charge field computation done at step 4.
+ParallelTracker::execute[4]> External field computation done at step 4.
+ParallelTracker::kickParticles[5]> Got particle views for kick operation.
+ParallelTracker::kickParticles[5]> Completed parallel kick operation.
+ParallelTracker::timeIntegration2[4]> Kick particles done.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration2[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration2 done at step 4.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00334455 , -0.00331385 , -0.00329228 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000209182 , 0.000207616 , 0.000208942 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration2.
+ParallelTracker::execute[4]> Emit particles from emission sources done at step 4.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00334455 , -0.00331385 , -0.00329228 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000209182 , 0.000207616 , 0.000208942 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after emission.
+ParallelTracker::execute[5]> Set time view of particle bunch to dt = 50.000 [ps].
+ParallelTracker::execute[5]> Selected new time step for next iteration, back_track = 0.
+ParallelTracker::execute[5]> Incremented bunch time to 250.000 [ps].
+ParallelTracker::updateReference[5]> Updated reference particles.
+ParallelTracker::execute[4]> Updated reference particle at step 4.
+ParallelTracker::execute[4]> Current path length is 0.000148274.
+OPAL-X> * 11:04:20 Step      4 at 148.274 [um], t= 250.000 [ps], E=2.349 [eV]
+ParallelTracker::writePhaseSpace[5]> Bunch bounds in REFERENCE frame: rmin = ( -0.00303036 , -0.00300257 , -0.0029962 ), rmax = ( 0.00303504 , 0.00302005 , 0.00306491 )
+ParallelTracker::writePhaseSpace[5]> External fields in REFERENCE frame: externalE = ( 0 , 0 , 0 ), externalB = ( 0 , 0 , 0 )
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[2]> * Wrote beam statistics.
+ParallelTracker::execute[5]> Track steps incremented.
+ParallelTracker::execute[4]> Calculated drift per time step: 29.655 [um].
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration1[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration1 done at step 5.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00335548 , -0.00332541 , -0.00331496 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000209865 , 0.000208292 , 0.000209533 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration1.
+ParallelTracker::execute[4]> E and B fields reset at step 5.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+ParallelTracker::computeSpaceChargeFields[4]> Calculate beam parameters done.
+ParallelTracker::computeSpaceChargeFields[4]> Transform particle positions to beam coordinate system done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00335548 , -0.00332541 , -0.00316669 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000209865 , 0.000208292 , 0.000209533 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in beam coordinate system.
+BinnedFieldSolver::computeSelfFields[4]> Entry: rank=0, localParticles=32768, totalParticles=32768, hasBins=0, stype=OPEN
+BinnedFieldSolver::computeSelfFields[4]> Dispatching to computeLegacySelfFields() (legacy path).
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode entry: localP=32768, totalP=32768, stype=OPEN
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: runSolver() start
+FieldSolver::runSolver[3]> Running solver with type: OPEN. Force skip field dump: 0
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: gather E->particles
+ParallelTracker::computeSpaceChargeFields[3]> Compute self fields done.
+ParallelTracker::computeSpaceChargeFields[5]> Transform particle positions back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate E fields back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate B fields back to reference coordinate system done. ComputeSelfFields done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00335548 , -0.00332541 , -0.00331496 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000209865 , 0.000208292 , 0.000209533 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in reference coordinate system.
+ParallelTracker::execute[4]> Space charge field computation done at step 5.
+ParallelTracker::execute[4]> External field computation done at step 5.
+ParallelTracker::kickParticles[5]> Got particle views for kick operation.
+ParallelTracker::kickParticles[5]> Completed parallel kick operation.
+ParallelTracker::timeIntegration2[4]> Kick particles done.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration2[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration2 done at step 5.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00336853 , -0.00333948 , -0.00330953 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000210681 , 0.000209122 , 0.00021024 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration2.
+ParallelTracker::execute[4]> Emit particles from emission sources done at step 5.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00336853 , -0.00333948 , -0.00330953 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000210681 , 0.000209122 , 0.00021024 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after emission.
+ParallelTracker::execute[5]> Set time view of particle bunch to dt = 50.000 [ps].
+ParallelTracker::execute[5]> Selected new time step for next iteration, back_track = 0.
+ParallelTracker::execute[5]> Incremented bunch time to 300.000 [ps].
+ParallelTracker::updateReference[5]> Updated reference particles.
+ParallelTracker::execute[4]> Updated reference particle at step 5.
+ParallelTracker::execute[4]> Current path length is 0.000177929.
+OPAL-X> * 11:04:20 Step      5 at 177.929 [um], t= 300.000 [ps], E=2.877 [eV]
+ParallelTracker::writePhaseSpace[5]> Bunch bounds in REFERENCE frame: rmin = ( -0.00305022 , -0.00302244 , -0.00301019 ), rmax = ( 0.00305494 , 0.00303696 , 0.00308533 )
+ParallelTracker::writePhaseSpace[5]> External fields in REFERENCE frame: externalE = ( 0 , 0 , 0 ), externalB = ( 0 , 0 , 0 )
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[2]> * Wrote beam statistics.
+ParallelTracker::execute[5]> Track steps incremented.
+ParallelTracker::execute[4]> Calculated drift per time step: 29.655 [um].
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration1[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration1 done at step 6.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00338158 , -0.00335355 , -0.00333375 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000211498 , 0.000209951 , 0.000210947 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration1.
+ParallelTracker::execute[4]> E and B fields reset at step 6.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+ParallelTracker::computeSpaceChargeFields[4]> Calculate beam parameters done.
+ParallelTracker::computeSpaceChargeFields[4]> Transform particle positions to beam coordinate system done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00338158 , -0.00335355 , -0.00315582 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000211498 , 0.000209951 , 0.000210947 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in beam coordinate system.
+BinnedFieldSolver::computeSelfFields[4]> Entry: rank=0, localParticles=32768, totalParticles=32768, hasBins=0, stype=OPEN
+BinnedFieldSolver::computeSelfFields[4]> Dispatching to computeLegacySelfFields() (legacy path).
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode entry: localP=32768, totalP=32768, stype=OPEN
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: runSolver() start
+FieldSolver::runSolver[3]> Running solver with type: OPEN. Force skip field dump: 0
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: gather E->particles
+ParallelTracker::computeSpaceChargeFields[3]> Compute self fields done.
+ParallelTracker::computeSpaceChargeFields[5]> Transform particle positions back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate E fields back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate B fields back to reference coordinate system done. ComputeSelfFields done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00338158 , -0.00335355 , -0.00333375 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000211498 , 0.000209951 , 0.000210947 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in reference coordinate system.
+ParallelTracker::execute[4]> Space charge field computation done at step 6.
+ParallelTracker::execute[4]> External field computation done at step 6.
+ParallelTracker::kickParticles[5]> Got particle views for kick operation.
+ParallelTracker::kickParticles[5]> Completed parallel kick operation.
+ParallelTracker::timeIntegration2[4]> Kick particles done.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration2[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration2 done at step 6.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00339672 , -0.00336988 , -0.00332983 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000212444 , 0.000210914 , 0.000211767 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration2.
+ParallelTracker::execute[4]> Emit particles from emission sources done at step 6.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00339672 , -0.00336988 , -0.00332983 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000212444 , 0.000210914 , 0.000211767 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after emission.
+ParallelTracker::execute[5]> Set time view of particle bunch to dt = 50.000 [ps].
+ParallelTracker::execute[5]> Selected new time step for next iteration, back_track = 0.
+ParallelTracker::execute[5]> Incremented bunch time to 350.000 [ps].
+ParallelTracker::updateReference[5]> Updated reference particles.
+ParallelTracker::execute[4]> Updated reference particle at step 6.
+ParallelTracker::execute[4]> Current path length is 0.000207584.
+OPAL-X> * 11:04:20 Step      6 at 207.584 [um], t= 350.000 [ps], E=3.457 [eV]
+ParallelTracker::writePhaseSpace[5]> Bunch bounds in REFERENCE frame: rmin = ( -0.00307395 , -0.00304817 , -0.00302692 ), rmax = ( 0.00307871 , 0.00305951 , 0.00310972 )
+ParallelTracker::writePhaseSpace[5]> External fields in REFERENCE frame: externalE = ( 0 , 0 , 0 ), externalB = ( 0 , 0 , 0 )
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[2]> * Wrote beam statistics.
+ParallelTracker::execute[5]> Track steps incremented.
+ParallelTracker::execute[4]> Calculated drift per time step: 29.655 [um].
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration1[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration1 done at step 7.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00341185 , -0.00338621 , -0.00335587 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000213391 , 0.000211877 , 0.000212597 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration1.
+ParallelTracker::execute[4]> E and B fields reset at step 7.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+ParallelTracker::computeSpaceChargeFields[4]> Calculate beam parameters done.
+ParallelTracker::computeSpaceChargeFields[4]> Transform particle positions to beam coordinate system done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00341185 , -0.00338621 , -0.00314829 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000213391 , 0.000211877 , 0.000212597 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in beam coordinate system.
+BinnedFieldSolver::computeSelfFields[4]> Entry: rank=0, localParticles=32768, totalParticles=32768, hasBins=0, stype=OPEN
+BinnedFieldSolver::computeSelfFields[4]> Dispatching to computeLegacySelfFields() (legacy path).
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode entry: localP=32768, totalP=32768, stype=OPEN
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: runSolver() start
+FieldSolver::runSolver[3]> Running solver with type: OPEN. Force skip field dump: 0
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: gather E->particles
+ParallelTracker::computeSpaceChargeFields[3]> Compute self fields done.
+ParallelTracker::computeSpaceChargeFields[5]> Transform particle positions back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate E fields back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate B fields back to reference coordinate system done. ComputeSelfFields done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00341185 , -0.00338621 , -0.00335587 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000213391 , 0.000211877 , 0.000212597 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in reference coordinate system.
+ParallelTracker::execute[4]> Space charge field computation done at step 7.
+ParallelTracker::execute[4]> External field computation done at step 7.
+ParallelTracker::kickParticles[5]> Got particle views for kick operation.
+ParallelTracker::kickParticles[5]> Completed parallel kick operation.
+ParallelTracker::timeIntegration2[4]> Kick particles done.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration2[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration2 done at step 7.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00342905 , -0.00340474 , -0.00335489 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000214466 , 0.000212969 , 0.000213576 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration2.
+ParallelTracker::execute[4]> Emit particles from emission sources done at step 7.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00342905 , -0.00340474 , -0.00335489 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000214466 , 0.000212969 , 0.000213576 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after emission.
+ParallelTracker::execute[5]> Set time view of particle bunch to dt = 50.000 [ps].
+ParallelTracker::execute[5]> Selected new time step for next iteration, back_track = 0.
+ParallelTracker::execute[5]> Incremented bunch time to 400.000 [ps].
+ParallelTracker::updateReference[5]> Updated reference particles.
+ParallelTracker::execute[4]> Updated reference particle at step 7.
+ParallelTracker::execute[4]> Current path length is 0.000237238.
+OPAL-X> * 11:04:21 Step      7 at 237.238 [um], t= 400.000 [ps], E=4.076 [eV]
+ParallelTracker::writePhaseSpace[5]> Bunch bounds in REFERENCE frame: rmin = ( -0.00310147 , -0.00307802 , -0.00304664 ), rmax = ( 0.00310628 , 0.00308566 , 0.003138 )
+ParallelTracker::writePhaseSpace[5]> External fields in REFERENCE frame: externalE = ( 0 , 0 , 0 ), externalB = ( 0 , 0 , 0 )
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[2]> * Wrote beam statistics.
+ParallelTracker::execute[5]> Track steps incremented.
+ParallelTracker::execute[4]> Calculated drift per time step: 29.655 [um].
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration1[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration1 done at step 8.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00344624 , -0.00342327 , -0.00338535 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000215542 , 0.000214062 , 0.000214613 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration1.
+ParallelTracker::execute[4]> E and B fields reset at step 8.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+ParallelTracker::computeSpaceChargeFields[4]> Calculate beam parameters done.
+ParallelTracker::computeSpaceChargeFields[4]> Transform particle positions to beam coordinate system done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00344624 , -0.00342327 , -0.00314811 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000215542 , 0.000214062 , 0.000214613 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in beam coordinate system.
+BinnedFieldSolver::computeSelfFields[4]> Entry: rank=0, localParticles=32768, totalParticles=32768, hasBins=0, stype=OPEN
+BinnedFieldSolver::computeSelfFields[4]> Dispatching to computeLegacySelfFields() (legacy path).
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode entry: localP=32768, totalP=32768, stype=OPEN
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: runSolver() start
+FieldSolver::runSolver[3]> Running solver with type: OPEN. Force skip field dump: 0
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: gather E->particles
+ParallelTracker::computeSpaceChargeFields[3]> Compute self fields done.
+ParallelTracker::computeSpaceChargeFields[5]> Transform particle positions back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate E fields back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate B fields back to reference coordinate system done. ComputeSelfFields done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00344624 , -0.00342327 , -0.00338535 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000215542 , 0.000214062 , 0.000214613 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in reference coordinate system.
+ParallelTracker::execute[4]> Space charge field computation done at step 8.
+ParallelTracker::execute[4]> External field computation done at step 8.
+ParallelTracker::kickParticles[5]> Got particle views for kick operation.
+ParallelTracker::kickParticles[5]> Completed parallel kick operation.
+ParallelTracker::timeIntegration2[4]> Kick particles done.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration2[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration2 done at step 8.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00346544 , -0.00344401 , -0.00339158 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000216742 , 0.000215311 , 0.000215889 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration2.
+ParallelTracker::execute[4]> Emit particles from emission sources done at step 8.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00346544 , -0.00344401 , -0.00339158 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000216742 , 0.000215311 , 0.000215889 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after emission.
+ParallelTracker::execute[5]> Set time view of particle bunch to dt = 50.000 [ps].
+ParallelTracker::execute[5]> Selected new time step for next iteration, back_track = 0.
+ParallelTracker::execute[5]> Incremented bunch time to 450.000 [ps].
+ParallelTracker::updateReference[5]> Updated reference particles.
+ParallelTracker::execute[4]> Updated reference particle at step 8.
+ParallelTracker::execute[4]> Current path length is 0.000266893.
+OPAL-X> * 11:04:21 Step      8 at 266.893 [um], t= 450.000 [ps], E=4.720 [eV]
+ParallelTracker::writePhaseSpace[5]> Bunch bounds in REFERENCE frame: rmin = ( -0.00313272 , -0.00311191 , -0.00307318 ), rmax = ( 0.00313758 , 0.00311536 , 0.00317011 )
+ParallelTracker::writePhaseSpace[5]> External fields in REFERENCE frame: externalE = ( 0 , 0 , 0 ), externalB = ( 0 , 0 , 0 )
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[2]> * Wrote beam statistics.
+ParallelTracker::execute[5]> Track steps incremented.
+ParallelTracker::execute[4]> Calculated drift per time step: 29.655 [um].
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration1[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration1 done at step 9.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00348464 , -0.00346482 , -0.00342747 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000217943 , 0.000216608 , 0.000217166 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration1.
+ParallelTracker::execute[4]> E and B fields reset at step 9.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+ParallelTracker::computeSpaceChargeFields[4]> Calculate beam parameters done.
+ParallelTracker::computeSpaceChargeFields[4]> Transform particle positions to beam coordinate system done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00348464 , -0.00346482 , -0.00316058 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000217943 , 0.000216608 , 0.000217166 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in beam coordinate system.
+BinnedFieldSolver::computeSelfFields[4]> Entry: rank=0, localParticles=32768, totalParticles=32768, hasBins=0, stype=OPEN
+BinnedFieldSolver::computeSelfFields[4]> Dispatching to computeLegacySelfFields() (legacy path).
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode entry: localP=32768, totalP=32768, stype=OPEN
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: runSolver() start
+FieldSolver::runSolver[3]> Running solver with type: OPEN. Force skip field dump: 0
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: gather E->particles
+ParallelTracker::computeSpaceChargeFields[3]> Compute self fields done.
+ParallelTracker::computeSpaceChargeFields[5]> Transform particle positions back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate E fields back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate B fields back to reference coordinate system done. ComputeSelfFields done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00348464 , -0.00346482 , -0.00342747 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000217943 , 0.000216608 , 0.000217166 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in reference coordinate system.
+ParallelTracker::execute[4]> Space charge field computation done at step 9.
+ParallelTracker::execute[4]> External field computation done at step 9.
+ParallelTracker::kickParticles[5]> Got particle views for kick operation.
+ParallelTracker::kickParticles[5]> Completed parallel kick operation.
+ParallelTracker::timeIntegration2[4]> Kick particles done.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration2[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration2 done at step 9.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.0035058 , -0.00348774 , -0.00343584 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000219267 , 0.000218036 , 0.000218572 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration2.
+ParallelTracker::execute[4]> Emit particles from emission sources done at step 9.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.0035058 , -0.00348774 , -0.00343584 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000219267 , 0.000218036 , 0.000218572 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after emission.
+ParallelTracker::execute[5]> Set time view of particle bunch to dt = 50.000 [ps].
+ParallelTracker::execute[5]> Selected new time step for next iteration, back_track = 0.
+ParallelTracker::execute[5]> Incremented bunch time to 500.000 [ps].
+ParallelTracker::updateReference[5]> Updated reference particles.
+ParallelTracker::execute[4]> Updated reference particle at step 9.
+ParallelTracker::execute[4]> Current path length is 0.000296548.
+OPAL-X> * 11:04:21 Step      9 at 296.548 [um], t= 500.000 [ps], E=5.378 [eV]
+ParallelTracker::writePhaseSpace[5]> Bunch bounds in REFERENCE frame: rmin = ( -0.00316763 , -0.00314975 , -0.00311159 ), rmax = ( 0.00317253 , 0.00315157 , 0.00320596 )
+ParallelTracker::writePhaseSpace[5]> External fields in REFERENCE frame: externalE = ( 0 , 0 , 0 ), externalB = ( 0 , 0 , 0 )
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[2]> * Wrote beam statistics.
+ParallelTracker::execute[5]> Track steps incremented.
+ParallelTracker::execute[4]> Calculated drift per time step: 29.655 [um].
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration1[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration1 done at step 10.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00352697 , -0.00351067 , -0.00347386 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.00022059 , 0.000219465 , 0.000219978 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration1.
+ParallelTracker::execute[4]> E and B fields reset at step 10.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+ParallelTracker::computeSpaceChargeFields[4]> Calculate beam parameters done.
+ParallelTracker::computeSpaceChargeFields[4]> Transform particle positions to beam coordinate system done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00352697 , -0.00351067 , -0.00317731 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.00022059 , 0.000219465 , 0.000219978 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in beam coordinate system.
+BinnedFieldSolver::computeSelfFields[4]> Entry: rank=0, localParticles=32768, totalParticles=32768, hasBins=0, stype=OPEN
+BinnedFieldSolver::computeSelfFields[4]> Dispatching to computeLegacySelfFields() (legacy path).
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode entry: localP=32768, totalP=32768, stype=OPEN
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: runSolver() start
+FieldSolver::runSolver[3]> Running solver with type: OPEN. Force skip field dump: 0
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: gather E->particles
+ParallelTracker::computeSpaceChargeFields[3]> Compute self fields done.
+ParallelTracker::computeSpaceChargeFields[5]> Transform particle positions back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate E fields back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate B fields back to reference coordinate system done. ComputeSelfFields done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00352697 , -0.00351067 , -0.00347386 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.00022059 , 0.000219465 , 0.000219978 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in reference coordinate system.
+ParallelTracker::execute[4]> Space charge field computation done at step 10.
+ParallelTracker::execute[4]> External field computation done at step 10.
+ParallelTracker::kickParticles[5]> Got particle views for kick operation.
+ParallelTracker::kickParticles[5]> Completed parallel kick operation.
+ParallelTracker::timeIntegration2[4]> Kick particles done.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration2[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration2 done at step 10.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00355005 , -0.00353566 , -0.00348429 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000222033 , 0.000221023 , 0.000221509 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration2.
+ParallelTracker::execute[4]> Emit particles from emission sources done at step 10.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00355005 , -0.00353566 , -0.00348429 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000222033 , 0.000221023 , 0.000221509 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after emission.
+ParallelTracker::execute[5]> Set time view of particle bunch to dt = 50.000 [ps].
+ParallelTracker::execute[5]> Selected new time step for next iteration, back_track = 0.
+ParallelTracker::execute[5]> Incremented bunch time to 550.000 [ps].
+ParallelTracker::updateReference[5]> Updated reference particles.
+ParallelTracker::execute[4]> Updated reference particle at step 10.
+ParallelTracker::execute[4]> Current path length is 0.000326203.
+OPAL-X> * 11:04:21 Step     10 at 326.203 [um], t= 550.000 [ps], E=6.041 [eV]
+ParallelTracker::writePhaseSpace[5]> Bunch bounds in REFERENCE frame: rmin = ( -0.00320611 , -0.00319145 , -0.00315389 ), rmax = ( 0.00321105 , 0.00319299 , 0.00324546 )
+ParallelTracker::writePhaseSpace[5]> External fields in REFERENCE frame: externalE = ( 0 , 0 , 0 ), externalB = ( 0 , 0 , 0 )
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[2]> * Wrote beam statistics.
+ParallelTracker::execute[5]> Track steps incremented.
+ParallelTracker::execute[4]> Calculated drift per time step: 29.655 [um].
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration1[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration1 done at step 11.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00357314 , -0.00356066 , -0.00352437 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000223476 , 0.00022258 , 0.000223041 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration1.
+ParallelTracker::execute[4]> E and B fields reset at step 11.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+ParallelTracker::computeSpaceChargeFields[4]> Calculate beam parameters done.
+ParallelTracker::computeSpaceChargeFields[4]> Transform particle positions to beam coordinate system done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00357314 , -0.00356066 , -0.00319817 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000223476 , 0.00022258 , 0.000223041 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in beam coordinate system.
+BinnedFieldSolver::computeSelfFields[4]> Entry: rank=0, localParticles=32768, totalParticles=32768, hasBins=0, stype=OPEN
+BinnedFieldSolver::computeSelfFields[4]> Dispatching to computeLegacySelfFields() (legacy path).
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode entry: localP=32768, totalP=32768, stype=OPEN
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: runSolver() start
+FieldSolver::runSolver[3]> Running solver with type: OPEN. Force skip field dump: 0
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: gather E->particles
+ParallelTracker::computeSpaceChargeFields[3]> Compute self fields done.
+ParallelTracker::computeSpaceChargeFields[5]> Transform particle positions back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate E fields back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate B fields back to reference coordinate system done. ComputeSelfFields done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00357314 , -0.00356066 , -0.00352437 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000223476 , 0.00022258 , 0.000223041 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in reference coordinate system.
+ParallelTracker::execute[4]> Space charge field computation done at step 11.
+ParallelTracker::execute[4]> External field computation done at step 11.
+ParallelTracker::kickParticles[5]> Got particle views for kick operation.
+ParallelTracker::kickParticles[5]> Completed parallel kick operation.
+ParallelTracker::timeIntegration2[4]> Kick particles done.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration2[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration2 done at step 11.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00359808 , -0.00358765 , -0.00353681 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000225036 , 0.000224262 , 0.000224696 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration2.
+ParallelTracker::execute[4]> Emit particles from emission sources done at step 11.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00359808 , -0.00358765 , -0.00353681 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000225036 , 0.000224262 , 0.000224696 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after emission.
+ParallelTracker::execute[5]> Set time view of particle bunch to dt = 50.000 [ps].
+ParallelTracker::execute[5]> Selected new time step for next iteration, back_track = 0.
+ParallelTracker::execute[5]> Incremented bunch time to 600.000 [ps].
+ParallelTracker::updateReference[5]> Updated reference particles.
+ParallelTracker::execute[4]> Updated reference particle at step 11.
+ParallelTracker::execute[4]> Current path length is 0.000355858.
+OPAL-X> * 11:04:21 Step     11 at 355.858 [um], t= 600.000 [ps], E=6.700 [eV]
+ParallelTracker::writePhaseSpace[5]> Bunch bounds in REFERENCE frame: rmin = ( -0.00324808 , -0.0032369 , -0.00319995 ), rmax = ( 0.00325305 , 0.00323815 , 0.00328852 )
+ParallelTracker::writePhaseSpace[5]> External fields in REFERENCE frame: externalE = ( 0 , 0 , 0 ), externalB = ( 0 , 0 , 0 )
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[2]> * Wrote beam statistics.
+ParallelTracker::execute[5]> Track steps incremented.
+ParallelTracker::execute[4]> Calculated drift per time step: 29.655 [um].
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration1[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration1 done at step 12.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00362303 , -0.00361465 , -0.0035789 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000226596 , 0.000225944 , 0.00022635 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration1.
+ParallelTracker::execute[4]> E and B fields reset at step 12.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+ParallelTracker::computeSpaceChargeFields[4]> Calculate beam parameters done.
+ParallelTracker::computeSpaceChargeFields[4]> Transform particle positions to beam coordinate system done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00362303 , -0.00361465 , -0.00322305 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000226596 , 0.000225944 , 0.00022635 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in beam coordinate system.
+BinnedFieldSolver::computeSelfFields[4]> Entry: rank=0, localParticles=32768, totalParticles=32768, hasBins=0, stype=OPEN
+BinnedFieldSolver::computeSelfFields[4]> Dispatching to computeLegacySelfFields() (legacy path).
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode entry: localP=32768, totalP=32768, stype=OPEN
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: runSolver() start
+FieldSolver::runSolver[3]> Running solver with type: OPEN. Force skip field dump: 0
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: gather E->particles
+ParallelTracker::computeSpaceChargeFields[3]> Compute self fields done.
+ParallelTracker::computeSpaceChargeFields[5]> Transform particle positions back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate E fields back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate B fields back to reference coordinate system done. ComputeSelfFields done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00362303 , -0.00361465 , -0.0035789 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000226596 , 0.000225944 , 0.00022635 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in reference coordinate system.
+ParallelTracker::execute[4]> Space charge field computation done at step 12.
+ParallelTracker::execute[4]> External field computation done at step 12.
+ParallelTracker::kickParticles[5]> Got particle views for kick operation.
+ParallelTracker::kickParticles[5]> Completed parallel kick operation.
+ParallelTracker::timeIntegration2[4]> Kick particles done.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration2[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration2 done at step 12.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00364978 , -0.00364358 , -0.00359329 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000228268 , 0.000227748 , 0.000228123 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration2.
+ParallelTracker::execute[4]> Emit particles from emission sources done at step 12.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00364978 , -0.00364358 , -0.00359329 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000228268 , 0.000227748 , 0.000228123 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after emission.
+ParallelTracker::execute[5]> Set time view of particle bunch to dt = 50.000 [ps].
+ParallelTracker::execute[5]> Selected new time step for next iteration, back_track = 0.
+ParallelTracker::execute[5]> Incremented bunch time to 650.000 [ps].
+ParallelTracker::updateReference[5]> Updated reference particles.
+ParallelTracker::execute[4]> Updated reference particle at step 12.
+ParallelTracker::execute[4]> Current path length is 0.000385512.
+OPAL-X> * 11:04:21 Step     12 at 385.512 [um], t= 650.000 [ps], E=7.350 [eV]
+ParallelTracker::writePhaseSpace[5]> Bunch bounds in REFERENCE frame: rmin = ( -0.00329343 , -0.003286 , -0.00324967 ), rmax = ( 0.00329844 , 0.00328693 , 0.00333506 )
+ParallelTracker::writePhaseSpace[5]> External fields in REFERENCE frame: externalE = ( 0 , 0 , 0 ), externalB = ( 0 , 0 , 0 )
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[2]> * Wrote beam statistics.
+ParallelTracker::execute[5]> Track steps incremented.
+ParallelTracker::execute[4]> Calculated drift per time step: 29.655 [um].
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration1[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration1 done at step 13.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00367654 , -0.00367252 , -0.00363732 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000229941 , 0.000229551 , 0.000229897 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration1.
+ParallelTracker::execute[4]> E and B fields reset at step 13.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+ParallelTracker::computeSpaceChargeFields[4]> Calculate beam parameters done.
+ParallelTracker::computeSpaceChargeFields[4]> Transform particle positions to beam coordinate system done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00367654 , -0.00367252 , -0.00325181 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000229941 , 0.000229551 , 0.000229897 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in beam coordinate system.
+BinnedFieldSolver::computeSelfFields[4]> Entry: rank=0, localParticles=32768, totalParticles=32768, hasBins=0, stype=OPEN
+BinnedFieldSolver::computeSelfFields[4]> Dispatching to computeLegacySelfFields() (legacy path).
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode entry: localP=32768, totalP=32768, stype=OPEN
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: runSolver() start
+FieldSolver::runSolver[3]> Running solver with type: OPEN. Force skip field dump: 0
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: gather E->particles
+ParallelTracker::computeSpaceChargeFields[3]> Compute self fields done.
+ParallelTracker::computeSpaceChargeFields[5]> Transform particle positions back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate E fields back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate B fields back to reference coordinate system done. ComputeSelfFields done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00367654 , -0.00367252 , -0.00363732 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000229941 , 0.000229551 , 0.000229897 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in reference coordinate system.
+ParallelTracker::execute[4]> Space charge field computation done at step 13.
+ParallelTracker::execute[4]> External field computation done at step 13.
+ParallelTracker::kickParticles[5]> Got particle views for kick operation.
+ParallelTracker::kickParticles[5]> Completed parallel kick operation.
+ParallelTracker::timeIntegration2[4]> Kick particles done.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration2[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration2 done at step 13.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00370505 , -0.00370333 , -0.00365358 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000231724 , 0.000231471 , 0.000231785 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration2.
+ParallelTracker::execute[4]> Emit particles from emission sources done at step 13.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00370505 , -0.00370333 , -0.00365358 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000231724 , 0.000231471 , 0.000231785 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after emission.
+ParallelTracker::execute[5]> Set time view of particle bunch to dt = 50.000 [ps].
+ParallelTracker::execute[5]> Selected new time step for next iteration, back_track = 0.
+ParallelTracker::execute[5]> Incremented bunch time to 700.000 [ps].
+ParallelTracker::updateReference[5]> Updated reference particles.
+ParallelTracker::execute[4]> Updated reference particle at step 13.
+ParallelTracker::execute[4]> Current path length is 0.000415167.
+OPAL-X> * 11:04:21 Step     13 at 415.167 [um], t= 700.000 [ps], E=7.985 [eV]
+ParallelTracker::writePhaseSpace[5]> Bunch bounds in REFERENCE frame: rmin = ( -0.00334208 , -0.00333863 , -0.00330293 ), rmax = ( 0.00334712 , 0.00333922 , 0.00338497 )
+ParallelTracker::writePhaseSpace[5]> External fields in REFERENCE frame: externalE = ( 0 , 0 , 0 ), externalB = ( 0 , 0 , 0 )
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[2]> * Wrote beam statistics.
+ParallelTracker::execute[5]> Track steps incremented.
+ParallelTracker::execute[4]> Calculated drift per time step: 29.655 [um].
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration1[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration1 done at step 14.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00373357 , -0.00373415 , -0.00369949 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000233507 , 0.000233392 , 0.000233673 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration1.
+ParallelTracker::execute[4]> E and B fields reset at step 14.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+ParallelTracker::computeSpaceChargeFields[4]> Calculate beam parameters done.
+ParallelTracker::computeSpaceChargeFields[4]> Transform particle positions to beam coordinate system done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00373357 , -0.00373415 , -0.00328433 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000233507 , 0.000233392 , 0.000233673 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in beam coordinate system.
+BinnedFieldSolver::computeSelfFields[4]> Entry: rank=0, localParticles=32768, totalParticles=32768, hasBins=0, stype=OPEN
+BinnedFieldSolver::computeSelfFields[4]> Dispatching to computeLegacySelfFields() (legacy path).
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode entry: localP=32768, totalP=32768, stype=OPEN
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: runSolver() start
+FieldSolver::runSolver[3]> Running solver with type: OPEN. Force skip field dump: 0
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: gather E->particles
+ParallelTracker::computeSpaceChargeFields[3]> Compute self fields done.
+ParallelTracker::computeSpaceChargeFields[5]> Transform particle positions back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate E fields back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate B fields back to reference coordinate system done. ComputeSelfFields done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00373357 , -0.00373415 , -0.00369949 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000233507 , 0.000233392 , 0.000233673 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in reference coordinate system.
+ParallelTracker::execute[4]> Space charge field computation done at step 14.
+ParallelTracker::execute[4]> External field computation done at step 14.
+ParallelTracker::kickParticles[5]> Got particle views for kick operation.
+ParallelTracker::kickParticles[5]> Completed parallel kick operation.
+ParallelTracker::timeIntegration2[4]> Kick particles done.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration2[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration2 done at step 14.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00376378 , -0.00376677 , -0.00371757 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000235396 , 0.000235425 , 0.000235673 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration2.
+ParallelTracker::execute[4]> Emit particles from emission sources done at step 14.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00376378 , -0.00376677 , -0.00371757 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000235396 , 0.000235425 , 0.000235673 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after emission.
+ParallelTracker::execute[5]> Set time view of particle bunch to dt = 50.000 [ps].
+ParallelTracker::execute[5]> Selected new time step for next iteration, back_track = 0.
+ParallelTracker::execute[5]> Incremented bunch time to 750.000 [ps].
+ParallelTracker::updateReference[5]> Updated reference particles.
+ParallelTracker::execute[4]> Updated reference particle at step 14.
+ParallelTracker::execute[4]> Current path length is 0.000444822.
+OPAL-X> * 11:04:21 Step     14 at 444.822 [um], t= 750.000 [ps], E=8.604 [eV]
+ParallelTracker::writePhaseSpace[5]> Bunch bounds in REFERENCE frame: rmin = ( -0.00339392 , -0.00339467 , -0.00335961 ), rmax = ( 0.003399 , 0.00339491 , 0.00343817 )
+ParallelTracker::writePhaseSpace[5]> External fields in REFERENCE frame: externalE = ( 0 , 0 , 0 ), externalB = ( 0 , 0 , 0 )
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[2]> * Wrote beam statistics.
+ParallelTracker::execute[5]> Track steps incremented.
+ParallelTracker::execute[4]> Calculated drift per time step: 29.655 [um].
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration1[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration1 done at step 15.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.003794 , -0.0037994 , -0.0037653 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000237285 , 0.000237459 , 0.000237673 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration1.
+ParallelTracker::execute[4]> E and B fields reset at step 15.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+ParallelTracker::computeSpaceChargeFields[4]> Calculate beam parameters done.
+ParallelTracker::computeSpaceChargeFields[4]> Transform particle positions to beam coordinate system done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.003794 , -0.0037994 , -0.00332048 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000237285 , 0.000237459 , 0.000237673 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in beam coordinate system.
+BinnedFieldSolver::computeSelfFields[4]> Entry: rank=0, localParticles=32768, totalParticles=32768, hasBins=0, stype=OPEN
+BinnedFieldSolver::computeSelfFields[4]> Dispatching to computeLegacySelfFields() (legacy path).
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode entry: localP=32768, totalP=32768, stype=OPEN
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: runSolver() start
+FieldSolver::runSolver[3]> Running solver with type: OPEN. Force skip field dump: 0
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: gather E->particles
+ParallelTracker::computeSpaceChargeFields[3]> Compute self fields done.
+ParallelTracker::computeSpaceChargeFields[5]> Transform particle positions back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate E fields back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate B fields back to reference coordinate system done. ComputeSelfFields done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.003794 , -0.0037994 , -0.0037653 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000237285 , 0.000237459 , 0.000237673 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in reference coordinate system.
+ParallelTracker::execute[4]> Space charge field computation done at step 15.
+ParallelTracker::execute[4]> External field computation done at step 15.
+ParallelTracker::kickParticles[5]> Got particle views for kick operation.
+ParallelTracker::kickParticles[5]> Completed parallel kick operation.
+ParallelTracker::timeIntegration2[4]> Kick particles done.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration2[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration2 done at step 15.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00382587 , -0.00383377 , -0.00378513 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000239277 , 0.000239602 , 0.000239781 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration2.
+ParallelTracker::execute[4]> Emit particles from emission sources done at step 15.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00382587 , -0.00383377 , -0.00378513 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000239277 , 0.000239602 , 0.000239781 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after emission.
+ParallelTracker::execute[5]> Set time view of particle bunch to dt = 50.000 [ps].
+ParallelTracker::execute[5]> Selected new time step for next iteration, back_track = 0.
+ParallelTracker::execute[5]> Incremented bunch time to 800.000 [ps].
+ParallelTracker::updateReference[5]> Updated reference particles.
+ParallelTracker::execute[4]> Updated reference particle at step 15.
+ParallelTracker::execute[4]> Current path length is 0.000474477.
+OPAL-X> * 11:04:21 Step     15 at 474.477 [um], t= 800.000 [ps], E=9.202 [eV]
+ParallelTracker::writePhaseSpace[5]> Bunch bounds in REFERENCE frame: rmin = ( -0.00344886 , -0.003454 , -0.0034196 ), rmax = ( 0.00345397 , 0.00345389 , 0.00349453 )
+ParallelTracker::writePhaseSpace[5]> External fields in REFERENCE frame: externalE = ( 0 , 0 , 0 ), externalB = ( 0 , 0 , 0 )
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[2]> * Wrote beam statistics.
+ParallelTracker::execute[5]> Track steps incremented.
+ParallelTracker::execute[4]> Calculated drift per time step: 29.655 [um].
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration1[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration1 done at step 16.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00385774 , -0.00386814 , -0.00383462 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000241269 , 0.000241745 , 0.000241888 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration1.
+ParallelTracker::execute[4]> E and B fields reset at step 16.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+ParallelTracker::computeSpaceChargeFields[4]> Calculate beam parameters done.
+ParallelTracker::computeSpaceChargeFields[4]> Transform particle positions to beam coordinate system done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00385774 , -0.00386814 , -0.00336014 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000241269 , 0.000241745 , 0.000241888 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in beam coordinate system.
+BinnedFieldSolver::computeSelfFields[4]> Entry: rank=0, localParticles=32768, totalParticles=32768, hasBins=0, stype=OPEN
+BinnedFieldSolver::computeSelfFields[4]> Dispatching to computeLegacySelfFields() (legacy path).
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode entry: localP=32768, totalP=32768, stype=OPEN
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: runSolver() start
+FieldSolver::runSolver[3]> Running solver with type: OPEN. Force skip field dump: 0
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: gather E->particles
+ParallelTracker::computeSpaceChargeFields[3]> Compute self fields done.
+ParallelTracker::computeSpaceChargeFields[5]> Transform particle positions back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate E fields back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate B fields back to reference coordinate system done. ComputeSelfFields done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00385774 , -0.00386814 , -0.00383462 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000241269 , 0.000241745 , 0.000241888 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in reference coordinate system.
+ParallelTracker::execute[4]> Space charge field computation done at step 16.
+ParallelTracker::execute[4]> External field computation done at step 16.
+ParallelTracker::kickParticles[5]> Got particle views for kick operation.
+ParallelTracker::kickParticles[5]> Completed parallel kick operation.
+ParallelTracker::timeIntegration2[4]> Kick particles done.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration2[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration2 done at step 16.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00389286 , -0.00390419 , -0.00385614 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000243415 , 0.000243993 , 0.0002441 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration2.
+ParallelTracker::execute[4]> Emit particles from emission sources done at step 16.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00389286 , -0.00390419 , -0.00385614 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000243415 , 0.000243993 , 0.0002441 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after emission.
+ParallelTracker::execute[5]> Set time view of particle bunch to dt = 50.000 [ps].
+ParallelTracker::execute[5]> Selected new time step for next iteration, back_track = 0.
+ParallelTracker::execute[5]> Incremented bunch time to 850.000 [ps].
+ParallelTracker::updateReference[5]> Updated reference particles.
+ParallelTracker::execute[4]> Updated reference particle at step 16.
+ParallelTracker::execute[4]> Current path length is 0.000504132.
+OPAL-X> * 11:04:21 Step     16 at 504.132 [um], t= 850.000 [ps], E=9.779 [eV]
+ParallelTracker::writePhaseSpace[5]> Bunch bounds in REFERENCE frame: rmin = ( -0.00350681 , -0.00351651 , -0.00348278 ), rmax = ( 0.00351194 , 0.00351606 , 0.00355398 )
+ParallelTracker::writePhaseSpace[5]> External fields in REFERENCE frame: externalE = ( 0 , 0 , 0 ), externalB = ( 0 , 0 , 0 )
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[2]> * Wrote beam statistics.
+ParallelTracker::execute[5]> Track steps incremented.
+ParallelTracker::execute[4]> Calculated drift per time step: 29.655 [um].
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration1[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration1 done at step 17.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00392926 , -0.00394025 , -0.00390731 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000245603 , 0.000246241 , 0.000246312 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration1.
+ParallelTracker::execute[4]> E and B fields reset at step 17.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+ParallelTracker::computeSpaceChargeFields[4]> Calculate beam parameters done.
+ParallelTracker::computeSpaceChargeFields[4]> Transform particle positions to beam coordinate system done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00392926 , -0.00394025 , -0.00340318 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000245603 , 0.000246241 , 0.000246312 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in beam coordinate system.
+BinnedFieldSolver::computeSelfFields[4]> Entry: rank=0, localParticles=32768, totalParticles=32768, hasBins=0, stype=OPEN
+BinnedFieldSolver::computeSelfFields[4]> Dispatching to computeLegacySelfFields() (legacy path).
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode entry: localP=32768, totalP=32768, stype=OPEN
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: runSolver() start
+FieldSolver::runSolver[3]> Running solver with type: OPEN. Force skip field dump: 0
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: gather E->particles
+ParallelTracker::computeSpaceChargeFields[3]> Compute self fields done.
+ParallelTracker::computeSpaceChargeFields[5]> Transform particle positions back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate E fields back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate B fields back to reference coordinate system done. ComputeSelfFields done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00392926 , -0.00394025 , -0.00390731 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000245603 , 0.000246241 , 0.000246312 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in reference coordinate system.
+ParallelTracker::execute[4]> Space charge field computation done at step 17.
+ParallelTracker::execute[4]> External field computation done at step 17.
+ParallelTracker::kickParticles[5]> Got particle views for kick operation.
+ParallelTracker::kickParticles[5]> Completed parallel kick operation.
+ParallelTracker::timeIntegration2[4]> Kick particles done.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration2[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration2 done at step 17.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.0039673 , -0.00397792 , -0.00393046 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000247891 , 0.000248592 , 0.000248623 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration2.
+ParallelTracker::execute[4]> Emit particles from emission sources done at step 17.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.0039673 , -0.00397792 , -0.00393046 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000247891 , 0.000248592 , 0.000248623 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after emission.
+ParallelTracker::execute[5]> Set time view of particle bunch to dt = 50.000 [ps].
+ParallelTracker::execute[5]> Selected new time step for next iteration, back_track = 0.
+ParallelTracker::execute[5]> Incremented bunch time to 900.000 [ps].
+ParallelTracker::updateReference[5]> Updated reference particles.
+ParallelTracker::execute[4]> Updated reference particle at step 17.
+ParallelTracker::execute[4]> Current path length is 0.000533786.
+OPAL-X> * 11:04:21 Step     17 at 533.786 [um], t= 900.000 [ps], E=10.334 [eV]
+ParallelTracker::writePhaseSpace[5]> Bunch bounds in REFERENCE frame: rmin = ( -0.00357202 , -0.00358208 , -0.00354904 ), rmax = ( 0.0035728 , 0.00358131 , 0.00361639 )
+ParallelTracker::writePhaseSpace[5]> External fields in REFERENCE frame: externalE = ( 0 , 0 , 0 ), externalB = ( 0 , 0 , 0 )
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[2]> * Wrote beam statistics.
+ParallelTracker::execute[5]> Track steps incremented.
+ParallelTracker::execute[4]> Calculated drift per time step: 29.655 [um].
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration1[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration1 done at step 18.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00400534 , -0.0040156 , -0.00398326 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000250178 , 0.000250942 , 0.000250935 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration1.
+ParallelTracker::execute[4]> E and B fields reset at step 18.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+ParallelTracker::computeSpaceChargeFields[4]> Calculate beam parameters done.
+ParallelTracker::computeSpaceChargeFields[4]> Transform particle positions to beam coordinate system done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00400534 , -0.0040156 , -0.00344948 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000250178 , 0.000250942 , 0.000250935 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in beam coordinate system.
+BinnedFieldSolver::computeSelfFields[4]> Entry: rank=0, localParticles=32768, totalParticles=32768, hasBins=0, stype=OPEN
+BinnedFieldSolver::computeSelfFields[4]> Dispatching to computeLegacySelfFields() (legacy path).
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode entry: localP=32768, totalP=32768, stype=OPEN
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: runSolver() start
+FieldSolver::runSolver[3]> Running solver with type: OPEN. Force skip field dump: 0
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: gather E->particles
+ParallelTracker::computeSpaceChargeFields[3]> Compute self fields done.
+ParallelTracker::computeSpaceChargeFields[5]> Transform particle positions back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate E fields back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate B fields back to reference coordinate system done. ComputeSelfFields done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00400534 , -0.0040156 , -0.00398326 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000250178 , 0.000250942 , 0.000250935 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in reference coordinate system.
+ParallelTracker::execute[4]> Space charge field computation done at step 18.
+ParallelTracker::execute[4]> External field computation done at step 18.
+ParallelTracker::kickParticles[5]> Got particle views for kick operation.
+ParallelTracker::kickParticles[5]> Completed parallel kick operation.
+ParallelTracker::timeIntegration2[4]> Kick particles done.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration2[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration2 done at step 18.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00404493 , -0.00405483 , -0.00400798 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000252561 , 0.000253389 , 0.000253344 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration2.
+ParallelTracker::execute[4]> Emit particles from emission sources done at step 18.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00404493 , -0.00405483 , -0.00400798 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000252561 , 0.000253389 , 0.000253344 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after emission.
+ParallelTracker::execute[5]> Set time view of particle bunch to dt = 50.000 [ps].
+ParallelTracker::execute[5]> Selected new time step for next iteration, back_track = 0.
+ParallelTracker::execute[5]> Incremented bunch time to 950.000 [ps].
+ParallelTracker::updateReference[5]> Updated reference particles.
+ParallelTracker::execute[4]> Updated reference particle at step 18.
+ParallelTracker::execute[4]> Current path length is 0.000563441.
+OPAL-X> * 11:04:21 Step     18 at 563.441 [um], t= 950.000 [ps], E=10.866 [eV]
+ParallelTracker::writePhaseSpace[5]> Bunch bounds in REFERENCE frame: rmin = ( -0.00364144 , -0.00365059 , -0.00361827 ), rmax = ( 0.00363646 , 0.00364953 , 0.00368167 )
+ParallelTracker::writePhaseSpace[5]> External fields in REFERENCE frame: externalE = ( 0 , 0 , 0 ), externalB = ( 0 , 0 , 0 )
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[2]> * Wrote beam statistics.
+ParallelTracker::execute[5]> Track steps incremented.
+ParallelTracker::execute[4]> Calculated drift per time step: 29.655 [um].
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration1[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration1 done at step 19.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00408453 , -0.00409406 , -0.00406235 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000254943 , 0.000255837 , 0.000255752 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration1.
+ParallelTracker::execute[4]> E and B fields reset at step 19.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+ParallelTracker::computeSpaceChargeFields[4]> Calculate beam parameters done.
+ParallelTracker::computeSpaceChargeFields[4]> Transform particle positions to beam coordinate system done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00408453 , -0.00409406 , -0.00349891 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000254943 , 0.000255837 , 0.000255752 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in beam coordinate system.
+BinnedFieldSolver::computeSelfFields[4]> Entry: rank=0, localParticles=32768, totalParticles=32768, hasBins=0, stype=OPEN
+BinnedFieldSolver::computeSelfFields[4]> Dispatching to computeLegacySelfFields() (legacy path).
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode entry: localP=32768, totalP=32768, stype=OPEN
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: runSolver() start
+FieldSolver::runSolver[3]> Running solver with type: OPEN. Force skip field dump: 0
+BinnedFieldSolver::computeLegacySelfFields[4]> Legacy mode: gather E->particles
+ParallelTracker::computeSpaceChargeFields[3]> Compute self fields done.
+ParallelTracker::computeSpaceChargeFields[5]> Transform particle positions back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate E fields back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate B fields back to reference coordinate system done. ComputeSelfFields done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00408453 , -0.00409406 , -0.00406235 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000254943 , 0.000255837 , 0.000255752 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in reference coordinate system.
+ParallelTracker::execute[4]> Space charge field computation done at step 19.
+ParallelTracker::execute[4]> External field computation done at step 19.
+ParallelTracker::kickParticles[5]> Got particle views for kick operation.
+ParallelTracker::kickParticles[5]> Completed parallel kick operation.
+ParallelTracker::timeIntegration2[4]> Kick particles done.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration2[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration2 done at step 19.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00412574 , -0.00413478 , -0.00408856 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000257488 , 0.000258378 , 0.000258253 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration2.
+ParallelTracker::execute[4]> Emit particles from emission sources done at step 19.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00412574 , -0.00413478 , -0.00408856 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000257488 , 0.000258378 , 0.000258253 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after emission.
+ParallelTracker::execute[5]> Set time view of particle bunch to dt = 50.000 [ps].
+ParallelTracker::execute[5]> Selected new time step for next iteration, back_track = 0.
+ParallelTracker::execute[5]> Incremented bunch time to 1.000 [ns].
+ParallelTracker::updateReference[5]> Updated reference particles.
+ParallelTracker::execute[4]> Updated reference particle at step 19.
+ParallelTracker::execute[4]> Current path length is 0.000593096.
+OPAL-X> * 11:04:21 Step     19 at 593.096 [um], t= 1.000 [ns], E=11.375 [eV]
+ParallelTracker::writePhaseSpace[5]> Bunch bounds in REFERENCE frame: rmin = ( -0.00371371 , -0.00372193 , -0.00369034 ), rmax = ( 0.00370282 , 0.0037206 , 0.00374971 )
+ParallelTracker::writePhaseSpace[5]> External fields in REFERENCE frame: externalE = ( 0 , 0 , 0 ), externalB = ( 0 , 0 , 0 )
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[2]> * Wrote beam statistics.
+ParallelTracker::execute[5]> Track steps incremented.
+ParallelTracker::execute[4]> Calculated drift per time step: 29.655 [um].
+ParallelTracker::writePhaseSpace[5]> Bunch bounds in REFERENCE frame: rmin = ( -0.00375121 , -0.00375895 , -0.00374258 ), rmax = ( 0.00373935 , 0.0037575 , 0.00377023 )
+ParallelTracker::writePhaseSpace[5]> External fields in REFERENCE frame: externalE = ( 0 , 0 , 0 ), externalB = ( 0 , 0 , 0 )
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[3]> * Wrote beam phase space.
+OPAL-X[2]> * Dump phase space of last step
+OPAL-X> * D1 gone off
+OPAL-X> 
+OPAL-X> * Done executing ParallelTracker at 11:04:21
+OPAL-X> 
+OPAL-X> * End of input stream 'Drift-open.in'
+Timings> ---------------------------------------------
+Timings>      Timing results for 1 rank(s):
+Timings> ---------------------------------------------
+Timings> mainTimer........... Wall tot =   0.953845
+Timings> 
+Timings> Write Stat.......... Wall max =   0.002857
+Timings>                      Wall avg =   0.002857
+Timings>                      Wall min =   0.002857
+Timings> 
+Timings> Write H5-File....... Wall max =   0.002904
+Timings>                      Wall avg =   0.002904
+Timings>                      Wall min =   0.002904
+Timings> 
+Timings> Initialize.......... Wall max =   0.013456
+Timings>                      Wall avg =   0.013456
+Timings>                      Wall min =   0.013456
+Timings> 
+Timings> Initialize: extra H. Wall max =   0.000446
+Timings>                      Wall avg =   0.000446
+Timings>                      Wall min =   0.000446
+Timings> 
+Timings> Warmup.............. Wall max =   0.007815
+Timings>                      Wall avg =   0.007815
+Timings>                      Wall min =   0.007815
+Timings> 
+Timings> Green Init.......... Wall max =   0.004365
+Timings>                      Wall avg =   0.004365
+Timings>                      Wall min =   0.004365
+Timings> 
+Timings> FFT: Green.......... Wall max =   0.079594
+Timings>                      Wall avg =   0.079594
+Timings>                      Wall min =   0.079594
+Timings> 
+Timings> Solve............... Wall max =    0.53764
+Timings>                      Wall avg =    0.53764
+Timings>                      Wall min =    0.53764
+Timings> 
+Timings> Solve: Physical to . Wall max =   0.000325
+Timings>                      Wall avg =   0.000325
+Timings>                      Wall min =   0.000325
+Timings> 
+Timings> FFT: Rho............ Wall max =   0.081521
+Timings>                      Wall avg =   0.081521
+Timings>                      Wall min =   0.081521
+Timings> 
+Timings> FFT: Convolution.... Wall max =   0.079517
+Timings>                      Wall avg =   0.079517
+Timings>                      Wall min =   0.079517
+Timings> 
+Timings> Solve: Double to ph. Wall max =   0.000336
+Timings>                      Wall avg =   0.000336
+Timings>                      Wall min =   0.000336
+Timings> 
+Timings> Solve: Electric fie. Wall max =   0.282689
+Timings>                      Wall avg =   0.282689
+Timings>                      Wall min =   0.282689
+Timings> 
+Timings> FFT: Efield......... Wall max =   0.257865
+Timings>                      Wall avg =   0.257865
+Timings>                      Wall min =   0.257865
+Timings> 
+Timings> Efield: double to p. Wall max =    0.00157
+Timings>                      Wall avg =    0.00157
+Timings>                      Wall min =    0.00157
+Timings> 
+Timings> samplingTime........ Wall max =   0.013243
+Timings>                      Wall avg =   0.013243
+Timings>                      Wall min =   0.013243
+Timings> 
+Timings> Sampling............ Wall max =   0.013221
+Timings>                      Wall avg =   0.013221
+Timings>                      Wall min =   0.013221
+Timings> 
+Timings> particleBC.......... Wall max =   0.004853
+Timings>                      Wall avg =   0.004853
+Timings>                      Wall min =   0.004853
+Timings> 
+Timings> updateParticle...... Wall max =          0
+Timings>                      Wall avg =          0
+Timings>                      Wall min =          0
+Timings> 
+Timings> TIntegration1....... Wall max =   0.001622
+Timings>                      Wall avg =   0.001622
+Timings>                      Wall min =   0.001622
+Timings> 
+Timings> TIntegration2....... Wall max =   0.004382
+Timings>                      Wall avg =   0.004382
+Timings>                      Wall min =   0.004382
+Timings> 
+Timings> External field eval. Wall max =   0.003112
+Timings>                      Wall avg =   0.003112
+Timings>                      Wall min =   0.003112
+Timings> 
+Timings> Binaryrepart........ Wall max =          0
+Timings>                      Wall avg =          0
+Timings>                      Wall min =          0
+Timings> 
+Timings> OrbThreader......... Wall max =   0.116854
+Timings>                      Wall avg =   0.116854
+Timings>                      Wall min =   0.116854
+Timings> 
+Timings> scatter............. Wall max =   0.008374
+Timings>                      Wall avg =   0.008374
+Timings>                      Wall min =   0.008374
+Timings> 
+Timings> accumulateHalo...... Wall max =      3e-06
+Timings>                      Wall avg =      3e-06
+Timings>                      Wall min =      3e-06
+Timings> 
+Timings> fillHalo............ Wall max =      1e-06
+Timings>                      Wall avg =      1e-06
+Timings>                      Wall min =      1e-06
+Timings> 
+Timings> gather.............. Wall max =   0.004837
+Timings>                      Wall avg =   0.004837
+Timings>                      Wall min =   0.004837
+Timings> 
+Timings> ---------------------------------------------

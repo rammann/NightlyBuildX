@@ -29,7 +29,7 @@ die() {
 usage() {
   cat 1>&2 <<'EOF'
 Usage:
-  run_tests --build <path/to/build> --tests <path/to/RegressionTests> [--unittests on|off] [--] [test1 test2 ...]
+  run_tests --build <path/to/build> --tests <path/to/RegressionTests> [--unittests on|off] [--save] [--] [test1 test2 ...]
 
 Runs OPALX regression tests using an existing build.
 
@@ -37,7 +37,7 @@ What it does:
   1) Optionally runs unit tests (`ctest -L unit`) in the build directory (default: on; use --unittests off to skip)
   2) Runs all regression tests in the given tests folder (or a subset if test names are provided)
   3) Generates matplotlib plots (reference vs generated + difference) for .rt stat quantities
-  4) Writes a static HTML report under NightlyBuildX/report/
+  4) Writes a static HTML report under NightlyBuildX/report/ (under runs/, or runs_remote/ if --save)
 
 Required:
   --build <dir>   Build directory containing the OPALX executable at <dir>/src/opalx
@@ -45,6 +45,7 @@ Required:
 
 Options:
   --unittests on|off   Run or skip unit tests (default: on).
+  --save               Write the run under report/runs_remote/ (for syncing to another checkout) instead of report/runs/.
 
 Notes:
   - Any args after -- are treated as regression test names to run.
@@ -63,15 +64,11 @@ declare -r bindir="${abs_scriptname%/*}"
 declare -r nightlybuildx_dir="${bindir%/*}"
 
 declare -r report_root="${nightlybuildx_dir}/report"
-declare -r run_dir="${report_root}/runs/${timestamp}"
-declare -r run_logs_dir="${run_dir}/logs"
-declare -r run_plots_dir="${run_dir}/plots"
-declare -r unit_log_file="${run_logs_dir}/unit-tests.out"
-declare -r unit_summary_file="${run_dir}/unit-tests-summary.json"
 
 declare build_dir=""
 declare tests_dir=""
 declare do_unittests=on
+declare run_subdir="runs"
 declare -a tests=()
 
 while (( $# > 0 )); do
@@ -102,6 +99,9 @@ while (( $# > 0 )); do
         off ) do_unittests=off ;;
         * ) die ${EC_ARG_ERROR} "ERROR: --unittests must be on or off, got: ${ut_val}" ;;
       esac
+      ;;
+    --save )
+      run_subdir="runs_remote"
       ;;
     -h|-\?|--help )
       usage
@@ -141,6 +141,12 @@ fi
 declare -r opalx_exe="${build_dir}/src/opalx"
 [[ -f "${opalx_exe}" ]] || die ${EC_ARG_ERROR} "ERROR: OPALX executable not found at: ${opalx_exe}"
 [[ -x "${opalx_exe}" ]] || die ${EC_ARG_ERROR} "ERROR: OPALX executable is not executable: ${opalx_exe}"
+
+declare -r run_dir="${report_root}/${run_subdir}/${timestamp}"
+declare -r run_logs_dir="${run_dir}/logs"
+declare -r run_plots_dir="${run_dir}/plots"
+declare -r unit_log_file="${run_logs_dir}/unit-tests.out"
+declare -r unit_summary_file="${run_dir}/unit-tests-summary.json"
 
 mkdir -p "${report_root}" "${run_logs_dir}" "${run_plots_dir}"
 

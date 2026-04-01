@@ -8,6 +8,7 @@ bash NightlyBuildX/scripts/run_tests --build <path-to-build> --tests <path-to-re
 - `--build` specifies the build folder, can be `CPU` or `GPU`
 - `--tests` specifies the path to the regression tests
 - `--unittests` switches unit tests on (default) and off
+- `--save` writes the report under `NightlyBuildX/report/runs_remote/<timestamp>/` instead of `report/runs/…` (see **Remote runs** below)
 
 To run regression test inputs only (no compare/report):
 ```
@@ -40,5 +41,13 @@ regression-tests-x/
 
 
 ## Output
-This will generate a `NightlyBuildX/report/index.html` file which can be opened
-and contains an overview of all the tests.
+This generates `NightlyBuildX/report/index.html`, which lists **local** runs (from `report/runs/`) and **remote** runs (from `report/runs_remote/`) in two columns. Each run links to its detailed HTML report. Static assets are under `report/assets/`.
+
+### Remote runs
+Use this when you run tests on another machine but want the summary in your local checkout.
+
+1. On the remote machine, run the same `run_tests` command with **`--save`**. Output goes to `report/runs_remote/<timestamp>/` (logs, plots, `results.json`, per-run `index.html`).
+2. Copy or commit that timestamped folder into your local repo’s `NightlyBuildX/report/runs_remote/`.
+3. Locally, run `run_tests` once (any successful run regenerates the overview), or rely on the next run to refresh `report/index.html`. Open `report/index.html` to see both columns.
+
+The `report/runs/` tree stays git-ignored (large local history). The `report/runs_remote/` tree is intended to be **tracked** so you can push remote summaries; only that subtree is meant for version control under `report/`.

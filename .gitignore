@@ -2,7 +2,9 @@
 results/
 workspace/
 .DS_Store
-report/
+report/runs/
+report/assets/
+report/index.html
 runs/
 scripts/__pycache__/
 regression-tests-x/

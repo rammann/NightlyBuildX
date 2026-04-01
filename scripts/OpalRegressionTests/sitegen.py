@@ -92,6 +92,25 @@ a:hover{ text-decoration:underline; }
   margin-top: 14px;
 }
 @media (max-width: 900px){ .grid{ grid-template-columns:1fr; } }
+.landing-cols{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 12px;
+  align-items: start;
+}
+@media (max-width: 900px){ .landing-cols{ grid-template-columns: 1fr; } }
+.landing-col .coltitle{
+  font-size: 14px;
+  font-weight: 650;
+  margin: 0 0 10px 0;
+  color: var(--text);
+}
+.landing-col .runlist{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
 .p{ padding: 16px; }
 .kpis{
   display:grid;
@@ -527,18 +546,24 @@ def write_run_report(report_root: str, run_dir: str, results: dict) -> None:
     _write_text(os.path.join(run_dir, "index.html"), html_doc)
 
 
-def update_overview(report_root: str) -> None:
-    runs_dir = os.path.join(report_root, "runs")
-    pathlib.Path(runs_dir).mkdir(parents=True, exist_ok=True)
-    run_names = []
-    for entry in sorted(os.listdir(runs_dir), reverse=True):
-        p = os.path.join(runs_dir, entry)
-        if os.path.isdir(p) and os.path.isfile(os.path.join(p, "results.json")):
-            run_names.append(entry)
+def _list_run_entries(report_root: str, subdir: str) -> list[str]:
+    d = os.path.join(report_root, subdir)
+    pathlib.Path(d).mkdir(parents=True, exist_ok=True)
+    names: list[str] = []
+    try:
+        for entry in sorted(os.listdir(d), reverse=True):
+            p = os.path.join(d, entry)
+            if os.path.isdir(p) and os.path.isfile(os.path.join(p, "results.json")):
+                names.append(entry)
+    except OSError:
+        return []
+    return names
 
-    # Build overview cards by reading summary only
-    cards = []
-    for run in run_names[:200]:
+
+def _build_run_cards(report_root: str, subdir: str, href_prefix: str) -> list[str]:
+    runs_dir = os.path.join(report_root, subdir)
+    cards: list[str] = []
+    for run in _list_run_entries(report_root, subdir)[:200]:
         rpath = os.path.join(runs_dir, run, "results.json")
         try:
             with open(rpath, "r", encoding="utf-8") as f:
@@ -551,7 +576,7 @@ def update_overview(report_root: str) -> None:
         badge = "ok" if (s.get("failed", 0) == 0 and s.get("broken", 0) == 0) else ("broken" if s.get("broken", 0) else "bad")
         unit_badge = _unit_badge(unit)
         cards.append(
-            f"<a class='cardlink' href='runs/{_escape(run)}/index.html'>"
+            f"<a class='cardlink' href='{_escape(href_prefix)}{_escape(run)}/index.html'>"
             f"<div class='card p runstatus {badge}' style='display:flex; align-items:center; justify-content:space-between; gap:12px;'>"
             f"<div><div class='simname'>{_escape(run_disp or run)}</div></div>"
             f"<div style='display:flex; gap:10px; align-items:center;'><span class='badge {badge}'>reg</span>"
@@ -559,6 +584,23 @@ def update_overview(report_root: str) -> None:
             "</div>"
             "</a>"
         )
+    return cards
+
+
+def update_overview(report_root: str) -> None:
+    local_cards = _build_run_cards(report_root, "runs", "runs/")
+    remote_cards = _build_run_cards(report_root, "runs_remote", "runs_remote/")
+
+    local_body = (
+        "".join(local_cards)
+        if local_cards
+        else '<div class="subtitle">No runs yet. Execute `run_tests --build &lt;...&gt;` to generate one.</div>'
+    )
+    remote_body = (
+        "".join(remote_cards)
+        if remote_cards
+        else '<div class="subtitle">No remote runs yet. On another machine run <span class="simname">run_tests ... --save</span>, then copy or commit the timestamped folder under <span class="simname">runs_remote/</span>.</div>'
+    )
 
     index = f"""<!doctype html>
 <html lang="en">
@@ -576,12 +618,22 @@ def update_overview(report_root: str) -> None:
         <div class="title">OPALX regression report</div>
         <div class="subtitle">Report root: <span class="simname">{_escape(report_root)}</span></div>
       </div>
-      <div class="pill"><span class="dot ok"></span><a href="runs/">runs/</a></div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:flex-end;">
+        <div class="pill"><span class="dot ok"></span><a href="runs/">runs/</a></div>
+        <div class="pill"><span class="dot ok"></span><a href="runs_remote/">runs_remote/</a></div>
+      </div>
     </div>
     <div class="card p">
-      <div class="subtitle">Most recent runs</div>
-      <div style="margin-top:12px; display:grid; grid-template-columns: 1fr; gap: 10px;">
-        {''.join(cards) if cards else '<div class="subtitle">No runs yet. Execute `run_tests --build <...>` to generate one.</div>'}
+      <div class="subtitle">Runs overview</div>
+      <div class="landing-cols">
+        <div class="landing-col">
+          <div class="coltitle">Local runs</div>
+          <div class="runlist">{local_body}</div>
+        </div>
+        <div class="landing-col">
+          <div class="coltitle">Remote runs</div>
+          <div class="runlist">{remote_body}</div>
+        </div>
       </div>
       <div class="footer">Updated {html.escape(datetime.datetime.now().isoformat(timespec='seconds'))}</div>
     </div>

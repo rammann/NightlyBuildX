@@ -1,0 +1,346 @@
+OPAL-X[5]> Couldn't find startup file '/Users/rammann/init.opal'
+OPAL-X[5]> Note: this is not mandatory for an OPAL simulation!
+OPAL-X[5]> 
+OPAL-X>               ____  _____        _       __   __
+OPAL-X> [1;32m
+OPAL-X> 
+OPAL-X>   ██████  ██████   █████  ██      ██   ██
+OPAL-X>  ██    ██ ██   ██ ██   ██ ██       ██ ██
+OPAL-X>  ██    ██ ██████  ███████ ██        ███
+OPAL-X>  ██    ██ ██      ██   ██ ██       ██ ██
+OPAL-X>   ██████  ██      ██   ██ ███████ ██   ██
+OPAL-X> 
+OPAL-X>          This is OPALX (Object Oriented Parallel Accelerator Library for Exascale)
+OPAL-X> 
+OPAL-X> [0m
+OPAL-X> 
+OPAL-X> OPALX is the performance portable version of OPAL :: Version 0.9
+OPAL-X>             git rev. 9688c9ef687d1f3fff87c3d7a338293d024d3198
+OPAL-X> 
+OPAL-X> 
+OPAL-X>              (c) PSI, https://github.com/OPALX-project/OPALX
+OPAL-X> 
+OPAL-X> 
+OPAL-X> Please send cookies, goodies or other motivations (wine and beer ... ) 
+OPAL-X> to the OPAL developers https://github.com/OPALX-project/OPALX/issues
+OPAL-X> 
+OPAL-X> Time: 11:04:09 date: 01/04/2026
+OPAL-X> 
+OPAL-X> * Host:   Serial
+OPAL-X> * Device: Serial execution
+OPAL-X> 
+OPAL-X> * Reading input stream 'Dist-gauss.in'
+OPAL-X> 
+OPAL-X> value: {OPALVERSION} = {900}
+OPAL-X> 
+OPAL-X> 
+OPAL-X> value: {EDES,P0} = {0.01, 0.0104986}
+OPAL-X> 
+OPAL-X> * ************* F I E L D S O L V E R ********************************************** 
+OPAL-X> * FIELDSOLVER  FS1
+OPAL-X> * BINS         NONE
+OPAL-X> * TYPE         NONE
+OPAL-X> * RANKS        1
+OPAL-X> * NX           32
+OPAL-X> * NY           32
+OPAL-X> * NZ           32
+OPAL-X> * BBOXINCR     5
+OPAL-X> * GREENSF      STANDARD
+OPAL-X> * XDIM         parallel  
+OPAL-X> * YDIM         parallel  
+OPAL-X> * ZDIM         serial  
+OPAL-X> * ********************************************************************************** 
+OPAL-X> 
+OPAL-X> * RUN resolved beams: BEAM1
+OPAL-X> * ************* B E A M ************************************************************ 
+OPAL-X> * BEAM        BEAM1
+OPAL-X> * PARTICLE    ELECTRON
+OPAL-X> * REST MASS   0.000510999 [GeV]
+OPAL-X> * CHARGE      -e * 1 
+OPAL-X> * MOMENTUM    1.04986e+07 [eV/c]
+OPAL-X> * MOMENTUM    0.0104986 [GeV/c]
+OPAL-X> * CURRENT     1.3 [A]
+OPAL-X> * FREQUENCY   1.3e+09 [MHz]
+OPAL-X> * NPART       100000
+OPAL-X> * ********************************************************************************** 
+OPAL-X> 
+OPAL-X[2]> * Beam[0] BEAM1 macro charge per particle [C]: -1e-20
+OPAL-X[2]> * Beam[0] BEAM1 macro mass per particle [GeV/c^2]: 3.1894e-05
+OPAL-X[2]> * Beam[0] BEAM1 particles per macro particle: 0.0624151
+OPAL-X> 
+OPAL-X> * Creating new file for data: 'Dist-gauss.stat'
+OPAL-X> * Creating new file for data: 'Dist-gauss.lbal'
+OPAL-X[3]> * Sum of per-distribution NPARTDIST over all emission sources = 100000, BEAM::NPART = 100000
+PartBunch::PartBunch[4]> PartBunch Constructor
+PartBunch::PartBunch[5]> * FieldContainer set to isAllPeriodic = 0
+OPAL-X[3]> * Container 0: 100003 particles created and destroyed. Bunch allocated.
+PartBunch::setSolver[2]> Initializing solver: NONE
+FieldContainer::initializeFields[3]> Mesh spacing = ( 0.1875 , 0.1875 , 0.1875 )
+FieldContainer::initializeFields[3]> Origin       = ( -3 , -3 , -3 )
+FieldContainer::initializeFields[3]> FL           = Domain = {[0:31:1],[0:31:1],[0:31:1]}
+FieldContainer::initializeFields[3]> Total number of boxes = 1
+FieldContainer::initializeFields[3]>     Box 0 {[0:31:1],[0:31:1],[0:31:1]}
+FieldContainer::initializeFields[3]> 
+FieldContainer::initializeFields[3]> E_m, rho_m field initialized.
+PartBunch::setBins[2]> Solver FS1 has no binning command attached, not using binning.
+FieldSolver::setPotentialBCs[3]> Potential BCs only need to be set for CG solver. Current solver type: NONE
+PartBunch::setSolver[4]> Binned field solver set (binned or legacy at runtime).
+FieldSolver::initSolverWithParams[3]> Initialized solver with params: NONE
+FieldSolver::initSolverWithParams[5]> Set solver RHS.
+FieldSolver::initSolverWithParams[4]> Set solver RHS+LHS.
+PartBunch::setSolver[4]> Field solver initialized.
+PartBunch::setSolver[3]> Solver and Load Balancer set.
+PartBunch::pre_run[2]> Starting pre_run...
+PartBunch::pre_run[4]> Rho initialized to zero.
+FieldSolver::runSolver[3]> Running solver with type: NONE. Force skip field dump: 1
+PartBunch::pre_run[4]> Field solver ran during pre_run.
+PartBunch::pre_run[4]> Call counter reset. pre_run done.
+PartBunch::PartBunch[5]> * PartBunch constructor done.
+OPAL-X[2]> * BCHandler<3>: [OPEN, OPEN, OPEN]
+OPAL-X[5]> sysconf(_SC_NPROCESSORS_ONLN)= 10
+OPAL-X[5]> MPI_Comm_size= 1
+OPAL-X[2]> * Particle sampling / sampler setup for all emission sources done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00329404 , -0.0164645 , -0.0329878 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000206071 , 0.00103007 , 0.00206111 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+OPAL-X> 
+OPAL-X> * ************** B U N C H ********************************************************* 
+OPAL-X> * CONTAINER       = 0
+OPAL-X> * PARTICLES       = 100000
+OPAL-X> * CHARGE          = -1.000000e-15 (Cb) 
+OPAL-X> * QM STORAGE MODE = SINGLE
+OPAL-X> * <EKIN>          = 10.000 [MeV]
+OPAL-X> * <dEKIN>         = 161.113 [eV]
+OPAL-X> * INTEGRATOR      = LF2
+OPAL-X> * MIN R (origin)  = (     -2.99430 ,    -14.96617 ,    -29.98979 ) [mm]
+OPAL-X> * MAX R (max ext) = (      3.00048 ,     14.99957 ,     29.96972 ) [mm]
+OPAL-X> * RMS R           = (      0.98867 ,      4.95020 ,      9.86188 ) [mm]
+OPAL-X> * RMS P           = ( 1.004750e-06 , 9.949962e-07 , 9.982187e-07 ) [beta gamma]
+OPAL-X> * Mean R          = ( 2.018134e-20 , 4.513057e-19 , 1.556567e-19 ) [m]
+OPAL-X> * Mean P          = ( -9.378422e-10 , -1.362059e-09 , 2.054519e+01 ) [beta gamma]
+OPAL-X> * MESH SPACING    = (      0.20607 ,      1.03007 ,      2.06111 ) [mm]
+OPAL-X> * COMPDOM INCR    = 5.000000e+00 (%) 
+OPAL-X> * FIELD LAYOUT    = Domain = {[0:31:1],[0:31:1],[0:31:1]}
+OPAL-X> Total number of boxes = 1
+OPAL-X>     Box 0 {[0:31:1],[0:31:1],[0:31:1]}
+OPAL-X> 
+OPAL-X> * Centroid : 
+OPAL-X> * 2.018134e-15 -9.378422e-05 4.513057e-14 -1.362059e-04 1.556567e-14 2.054519e+06 
+OPAL-X> * Cov Matrix : 
+OPAL-X> * 9.774728e-07 -1.796674e-12 -2.184526e-10 2.516900e-12 -8.284270e-08 -6.670684e-12 
+OPAL-X> * -1.796674e-12 1.009522e-12 -1.725733e-11 -6.088719e-16 -5.258092e-11 3.483443e-15 
+OPAL-X> * -2.184526e-10 -1.725733e-11 2.450452e-05 4.067032e-12 -3.937397e-08 -1.998788e-11 
+OPAL-X> * 2.516900e-12 -6.088719e-16 4.067032e-12 9.900173e-13 2.678484e-11 -4.076246e-15 
+OPAL-X> * -8.284270e-08 -5.258092e-11 -3.937397e-08 2.678484e-11 9.725676e-05 -4.194559e-11 
+OPAL-X> * -6.670684e-12 3.483443e-15 -1.998788e-11 -4.076246e-15 -4.194559e-11 9.964406e-13 
+OPAL-X> * * ********************************************************************************** 
+OPAL-X> 
+ParallelTracker::execute[3]> Initialized Boris pusher.
+ParallelTracker::execute[3]> Selected minimum time step from configuration: 5e-11
+OPAL-X> * D1 gone live
+ParallelTracker::execute[3]> Activated all beamline elements.
+ParallelTracker::execute[4]> Transformed reference particle position and momentum to lab frame (all containers).
+ParallelTracker::execute[4]> Initial bunch bounds:
+ParallelTracker::execute[4]>   rmin = ( -0.0029943 , -0.0149662 , -0.0299898 )
+ParallelTracker::execute[4]>   rmax = ( 0.00300048 , 0.0149996 , 0.0299697 )
+ParallelTracker::execute[3]> ParallelTrack (container 0): momentum z = 20.5452
+ParallelTracker::execute[3]> RefPartR (container 0) = ( 0 , 0 , 0 )
+ParallelTracker::execute[3]> RefPartP (container 0) = ( -9.37842e-10 , -1.36206e-09 , 20.5452 )
+ParallelTracker::writePhaseSpace[5]> Bunch bounds in REFERENCE frame: rmin = ( -3 , -3 , -3 ), rmax = ( 3 , 3 , 3 )
+ParallelTracker::execute[2]> Dump initial phase space done.
+OPAL-X> * OrbitThreader dt_m= 5e-11
+OPAL-X> * OrbitThreader maxDistance= 1.14972
+OPAL-X> * OrbitThreader #elements  = 1
+OPAL-X> 
+OPAL-X> * Size of map 1 sections 
+OPAL-X> * Key: (0.000000 - 1.003117) number of overlapping elements 1
+OPAL-X> *                            D1
+OPAL-X> 
+OPAL-X> * Creating new file for data: 'data/Dist-gauss_ElementPositions.sdds'
+ParallelTracker::execute[4]> Orbit threader execution done.
+ParallelTracker::execute[4]> Set time view of particle bunch.
+ParallelTracker::execute[4]> Reset bunch time to 0.
+OPAL-X> * Track start at: 11:04:09, t= 0.000 [fs]; zstart at: 0.000 [um]
+OPAL-X> * Initial dt = 50.000 [ps]
+OPAL-X> * Max integration steps = 1, next step = 0
+OPAL-X>                dt [ns]           zStop [m]        num Steps [1]
+OPAL-X> ->         5.000000e-11        1.000000e+00                   1
+PartBunch::performBunchSanityChecks[4]> ========== Performing sanity checks on PartBunch... ==========
+PartBunch::performBunchSanityChecks[4]> BC Handler initialized properly.
+PartBunch::performBunchSanityChecks[4]> Field Solver object was initialized.
+PartBunch::performBunchSanityChecks[4]> FieldSolver internal field pointers are set.
+PartBunch::performBunchSanityChecks[4]> FieldSolver fields match FieldContainer.
+PartBunch::performBunchSanityChecks[4]> FieldSolver type: NONE
+PartBunch::performBunchSanityChecks[4]> E-field layout initialized.
+PartBunch::performBunchSanityChecks[2]> ========= Done performing PartBunch sanity checks... =========
+ParallelTracker::execute[5]> >>>>>>>>>>>>>>>>>> Starting Tracking Loop >>>>>>>>>>>>>>>>>>
+ParallelTracker::changeDT[5]> Changed particle container time step to 5e-11.
+ParallelTracker::execute[2]> Starting track with dt = 50.000 [ps], track steps = 0 to 1.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration1[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration1 done at step 0.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00329404 , -0.0164645 , -0.0255018 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000206071 , 0.00103007 , 0.00206111 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration1.
+ParallelTracker::execute[4]> E and B fields reset at step 0.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+ParallelTracker::computeSpaceChargeFields[4]> Calculate beam parameters done.
+ParallelTracker::computeSpaceChargeFields[4]> Transform particle positions to beam coordinate system done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00329404 , -0.0164645 , -0.0255018 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000206071 , 0.00103007 , 0.00206111 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in beam coordinate system.
+BinnedFieldSolver::computeSelfFields[5]> Skipping scatter/gather and self-field computation for NONE solver.
+ParallelTracker::computeSpaceChargeFields[3]> Compute self fields done.
+ParallelTracker::computeSpaceChargeFields[5]> Transform particle positions back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate E fields back to reference coordinate system done.
+ParallelTracker::computeSpaceChargeFields[5]> Rotate B fields back to reference coordinate system done. ComputeSelfFields done.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00329404 , -0.0164645 , -0.0255018 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000206071 , 0.00103007 , 0.00206111 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::computeSpaceChargeFields[5]> Bunch updated for positions in reference coordinate system.
+ParallelTracker::execute[4]> Space charge field computation done at step 0.
+ParallelTracker::execute[4]> External field computation done at step 0.
+ParallelTracker::kickParticles[5]> Got particle views for kick operation.
+ParallelTracker::kickParticles[5]> Completed parallel kick operation.
+ParallelTracker::timeIntegration2[4]> Kick particles done.
+OPAL-X[4]> * Switched to unitless positions.
+OPAL-X[4]> * Switched to physical positions.
+ParallelTracker::timeIntegration2[4]> Push particles done.
+ParallelTracker::execute[4]> timeIntegration2 done at step 0.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00329404 , -0.0164645 , -0.0180159 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000206071 , 0.00103007 , 0.00206111 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after timeIntegration2.
+ParallelTracker::execute[4]> Emit particles from emission sources done at step 0.
+PartBunch::bunchUpdate[4]> Updating bunch and doing repartitioning if needed.
+PartBunch::bunchUpdate[3]> Field Container updated with new mesh boundaries and spacing:
+PartBunch::bunchUpdate[3]> 		> Mesh origin:   ( -0.00329404 , -0.0164645 , -0.0180159 )
+PartBunch::bunchUpdate[3]> 		> Mesh spacing:  ( 0.000206071 , 0.00103007 , 0.00206111 )
+PartBunch::bunchUpdate[3]> 		> Box increment: 5%
+PartBunch::bunchUpdate[5]> Particle container 0 updated with new layout.
+PartBunch::bunchUpdate[5]> Load balancer repartitioning done.
+PartBunch::bunchUpdate[5]> Moments updated for all particle containers.
+ParallelTracker::execute[5]> Bunch updated after emission.
+ParallelTracker::execute[5]> Set time view of particle bunch to dt = 50.000 [ps].
+ParallelTracker::execute[5]> Selected new time step for next iteration, back_track = 0.
+ParallelTracker::execute[5]> Incremented bunch time to 50.000 [ps].
+ParallelTracker::updateReference[5]> Updated reference particles.
+ParallelTracker::execute[4]> Updated reference particle at step 0.
+ParallelTracker::execute[4]> Current path length is 0.0149719.
+OPAL-X> * 11:04:09 Step      0 at 14.972 [mm], t= 50.000 [ps], E=10.000 [MeV]
+ParallelTracker::writePhaseSpace[5]> Bunch bounds in REFERENCE frame: rmin = ( -0.0029943 , -0.0149662 , -0.0225038 ), rmax = ( 0.00300048 , 0.0149996 , 0.0374557 )
+ParallelTracker::writePhaseSpace[5]> External fields in REFERENCE frame: externalE = ( 0 , 0 , 0 ), externalB = ( 0 , 0 , 0 )
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[2]> * Wrote beam statistics.
+ParallelTracker::execute[5]> Track steps incremented.
+ParallelTracker::execute[4]> Calculated drift per time step: 14.972 [mm].
+ParallelTracker::writePhaseSpace[5]> Bunch bounds in REFERENCE frame: rmin = ( -0.0029943 , -0.0149662 , -0.0299898 ), rmax = ( 0.00300048 , 0.0149996 , 0.0299697 )
+ParallelTracker::writePhaseSpace[5]> External fields in REFERENCE frame: externalE = ( 0 , 0 , 0 ), externalB = ( 0 , 0 , 0 )
+PartBunch::calcBeamParameters[5]> Moments updated.
+PartBunch::calcBeamParameters[5]> Local moments calculated.
+PartBunch::calcBeamParameters[5]> Global moments calculated.
+PartBunch::calcBeamParameters[5]> Local min/max calculated.
+PartBunch::calcBeamParameters[5]> Global min/max calculated.
+OPAL-X[3]> * Wrote beam phase space.
+OPAL-X[2]> * Dump phase space of last step
+OPAL-X> * D1 gone off
+OPAL-X> 
+OPAL-X> * Done executing ParallelTracker at 11:04:09
+OPAL-X> 
+OPAL-X> * End of input stream 'Dist-gauss.in'
+Timings> ---------------------------------------------
+Timings>      Timing results for 1 rank(s):
+Timings> ---------------------------------------------
+Timings> mainTimer........... Wall tot =   0.090779
+Timings> 
+Timings> Write Stat.......... Wall max =   0.000241
+Timings>                      Wall avg =   0.000241
+Timings>                      Wall min =   0.000241
+Timings> 
+Timings> Write H5-File....... Wall max =   0.006738
+Timings>                      Wall avg =   0.006738
+Timings>                      Wall min =   0.006738
+Timings> 
+Timings> samplingTime........ Wall max =   0.038799
+Timings>                      Wall avg =   0.038799
+Timings>                      Wall min =   0.038799
+Timings> 
+Timings> Sampling............ Wall max =   0.038756
+Timings>                      Wall avg =   0.038756
+Timings>                      Wall min =   0.038756
+Timings> 
+Timings> particleBC.......... Wall max =   0.000805
+Timings>                      Wall avg =   0.000805
+Timings>                      Wall min =   0.000805
+Timings> 
+Timings> updateParticle...... Wall max =          0
+Timings>                      Wall avg =          0
+Timings>                      Wall min =          0
+Timings> 
+Timings> TIntegration1....... Wall max =   0.000237
+Timings>                      Wall avg =   0.000237
+Timings>                      Wall min =   0.000237
+Timings> 
+Timings> TIntegration2....... Wall max =   0.000616
+Timings>                      Wall avg =   0.000616
+Timings>                      Wall min =   0.000616
+Timings> 
+Timings> External field eval. Wall max =    0.00042
+Timings>                      Wall avg =    0.00042
+Timings>                      Wall min =    0.00042
+Timings> 
+Timings> Binaryrepart........ Wall max =          0
+Timings>                      Wall avg =          0
+Timings>                      Wall min =          0
+Timings> 
+Timings> OrbThreader......... Wall max =   0.000583
+Timings>                      Wall avg =   0.000583
+Timings>                      Wall min =   0.000583
+Timings> 
+Timings> ---------------------------------------------
