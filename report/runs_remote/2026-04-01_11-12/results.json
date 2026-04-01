@@ -1,0 +1,1234 @@
+{
+  "timestamp": "2026-04-01_11-12",
+  "started_at": "2026-04-01T11:12:15.590619",
+  "opalx_exe": "/capstor/store/cscs/pasc/c41/rammann/build/src/opalx",
+  "build": {
+    "build_dir": "/capstor/store/cscs/pasc/c41/rammann/build",
+    "cmake_cache": "/capstor/store/cscs/pasc/c41/rammann/build/CMakeCache.txt",
+    "info": {
+      "Build Type": "Release",
+      "Kokkos Architecture": "HOPPER90",
+      "Device": "GPU",
+      "Compiler": "/user-environment/linux-neoverse_v2/gcc-13.4.0-gye6nshxnkc3yolrei76qvsw6uamemxu/bin/g++"
+    }
+  },
+  "revisions": {
+    "code_full": "",
+    "tests_full": "bf9a6a380d6a0962dffea9f37b8e6d08df6ec55c"
+  },
+  "summary": {
+    "total": 120,
+    "passed": 0,
+    "failed": 0,
+    "broken": 120
+  },
+  "simulations": [
+    {
+      "name": "Dist-fromfile",
+      "date": "2026-04-01",
+      "description": "Dist-fromfile: 1 step FROMFILE distribution read-in sanity check without BINNING element.",
+      "tests": [
+        {
+          "type": "stat",
+          "var": "rms_x",
+          "mode": "last",
+          "eps": "1e-12",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_y",
+          "mode": "last",
+          "eps": "1e-12",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_s",
+          "mode": "last",
+          "eps": "1e-12",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_px",
+          "mode": "last",
+          "eps": "1e-12",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_py",
+          "mode": "last",
+          "eps": "1e-12",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_ps",
+          "mode": "last",
+          "eps": "1e-12",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "emit_x",
+          "mode": "last",
+          "eps": "1e-12",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "emit_y",
+          "mode": "last",
+          "eps": "1e-12",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "emit_s",
+          "mode": "last",
+          "eps": "1e-12",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "mean_x",
+          "mode": "last",
+          "eps": "1e-12",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "mean_y",
+          "mode": "last",
+          "eps": "1e-12",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "mean_s",
+          "mode": "last",
+          "eps": "1e-12",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "energy",
+          "mode": "last",
+          "eps": "1e-10",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "nBins",
+          "mode": "last",
+          "eps": "1e-12",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "numParticles",
+          "mode": "last",
+          "eps": "1e-12",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        }
+      ],
+      "log_relpath": "logs/Dist-fromfile.out",
+      "data_path": "/capstor/store/cscs/pasc/c41/rammann/regression-tests-x/RegressionTests/Dist-fromfile/data",
+      "data_url": "file:///capstor/store/cscs/pasc/c41/rammann/regression-tests-x/RegressionTests/Dist-fromfile/data"
+    },
+    {
+      "name": "Dist-gauss",
+      "date": "2026-04-01",
+      "description": "Dist-gauss: 1 step Gaussian distribution sanity without BINNING element.",
+      "tests": [
+        {
+          "type": "stat",
+          "var": "rms_x",
+          "mode": "last",
+          "eps": "0.0001",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_y",
+          "mode": "last",
+          "eps": "0.0001",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_s",
+          "mode": "last",
+          "eps": "0.0001",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_px",
+          "mode": "last",
+          "eps": "1e-05",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_py",
+          "mode": "last",
+          "eps": "1e-05",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_ps",
+          "mode": "last",
+          "eps": "1e-05",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "emit_x",
+          "mode": "last",
+          "eps": "1e-09",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "emit_y",
+          "mode": "last",
+          "eps": "1e-09",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "emit_s",
+          "mode": "last",
+          "eps": "1e-09",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "mean_x",
+          "mode": "last",
+          "eps": "1e-09",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "mean_y",
+          "mode": "last",
+          "eps": "1e-09",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "mean_s",
+          "mode": "last",
+          "eps": "1e-09",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "energy",
+          "mode": "last",
+          "eps": "1e-09",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "nBins",
+          "mode": "last",
+          "eps": "1e-12",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "numParticles",
+          "mode": "last",
+          "eps": "1e-12",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        }
+      ],
+      "log_relpath": "logs/Dist-gauss.out",
+      "data_path": "/capstor/store/cscs/pasc/c41/rammann/regression-tests-x/RegressionTests/Dist-gauss/data",
+      "data_url": "file:///capstor/store/cscs/pasc/c41/rammann/regression-tests-x/RegressionTests/Dist-gauss/data"
+    },
+    {
+      "name": "Dist-gauss-bins",
+      "date": "2026-04-01",
+      "description": "Dist-gauss-bins: 1 step Gaussian distribution sanity check with BINNING element.",
+      "tests": [
+        {
+          "type": "stat",
+          "var": "rms_x",
+          "mode": "last",
+          "eps": "0.0001",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_y",
+          "mode": "last",
+          "eps": "0.0001",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_s",
+          "mode": "last",
+          "eps": "0.0001",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_px",
+          "mode": "last",
+          "eps": "1e-09",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_py",
+          "mode": "last",
+          "eps": "1e-09",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_ps",
+          "mode": "last",
+          "eps": "1e-09",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "emit_x",
+          "mode": "last",
+          "eps": "1e-09",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "emit_y",
+          "mode": "last",
+          "eps": "1e-09",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "emit_s",
+          "mode": "last",
+          "eps": "1e-09",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "mean_x",
+          "mode": "last",
+          "eps": "1e-05",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "mean_y",
+          "mode": "last",
+          "eps": "1e-09",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "mean_s",
+          "mode": "last",
+          "eps": "1e-09",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "energy",
+          "mode": "last",
+          "eps": "1e-09",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "nBins",
+          "mode": "last",
+          "eps": "1e-12",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "numParticles",
+          "mode": "last",
+          "eps": "1e-12",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        }
+      ],
+      "log_relpath": "logs/Dist-gauss-bins.out",
+      "data_path": "/capstor/store/cscs/pasc/c41/rammann/regression-tests-x/RegressionTests/Dist-gauss-bins/data",
+      "data_url": "file:///capstor/store/cscs/pasc/c41/rammann/regression-tests-x/RegressionTests/Dist-gauss-bins/data"
+    },
+    {
+      "name": "Dist-multivariate",
+      "date": "2026-04-01",
+      "description": "Dist-multivariate: 1 step Multivariate Gaussian distribution sanity check.",
+      "tests": [
+        {
+          "type": "stat",
+          "var": "rms_x",
+          "mode": "last",
+          "eps": "0.0001",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_y",
+          "mode": "last",
+          "eps": "0.0001",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_s",
+          "mode": "last",
+          "eps": "0.0001",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_px",
+          "mode": "last",
+          "eps": "1e-09",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_py",
+          "mode": "last",
+          "eps": "1e-09",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_ps",
+          "mode": "last",
+          "eps": "1e-09",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "emit_x",
+          "mode": "last",
+          "eps": "1e-09",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "emit_y",
+          "mode": "last",
+          "eps": "1e-09",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "emit_s",
+          "mode": "last",
+          "eps": "1e-09",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "mean_x",
+          "mode": "last",
+          "eps": "1e-09",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "mean_y",
+          "mode": "last",
+          "eps": "1e-09",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "mean_s",
+          "mode": "last",
+          "eps": "1e-09",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "numParticles",
+          "mode": "last",
+          "eps": "1e-12",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        }
+      ],
+      "log_relpath": "logs/Dist-multivariate.out",
+      "data_path": "/capstor/store/cscs/pasc/c41/rammann/regression-tests-x/RegressionTests/Dist-multivariate/data",
+      "data_url": "file:///capstor/store/cscs/pasc/c41/rammann/regression-tests-x/RegressionTests/Dist-multivariate/data"
+    },
+    {
+      "name": "Drift-long-open",
+      "date": "2026-04-01",
+      "description": "Minimal larger scale drift with one bin, open field solver, low resolution and four empty drift elements. Adapted from previous awa-... tests. Exists to test a big drift with space charge.",
+      "tests": [
+        {
+          "type": "stat",
+          "var": "rms_x",
+          "mode": "last",
+          "eps": "0.001",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_y",
+          "mode": "last",
+          "eps": "0.001",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_s",
+          "mode": "last",
+          "eps": "0.01",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_px",
+          "mode": "last",
+          "eps": "0.001",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_py",
+          "mode": "last",
+          "eps": "0.001",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_ps",
+          "mode": "last",
+          "eps": "0.01",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "energy",
+          "mode": "last",
+          "eps": "1000.0",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "nBins",
+          "mode": "avg",
+          "eps": "1e-12",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        }
+      ],
+      "log_relpath": "logs/Drift-long-open.out",
+      "data_path": "/capstor/store/cscs/pasc/c41/rammann/regression-tests-x/RegressionTests/Drift-long-open/data",
+      "data_url": "file:///capstor/store/cscs/pasc/c41/rammann/regression-tests-x/RegressionTests/Drift-long-open/data"
+    },
+    {
+      "name": "Drift-open",
+      "date": "2026-04-01",
+      "description": "Drift with open space charge solver, 20 steps. Simulates pure space charge expansion, very small initial P0.",
+      "tests": [
+        {
+          "type": "stat",
+          "var": "rms_x",
+          "mode": "last",
+          "eps": "0.0001",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_y",
+          "mode": "last",
+          "eps": "0.0001",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_s",
+          "mode": "last",
+          "eps": "0.0001",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "emit_x",
+          "mode": "last",
+          "eps": "1e-05",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "emit_y",
+          "mode": "last",
+          "eps": "1e-05",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "emit_s",
+          "mode": "last",
+          "eps": "1e-05",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "energy",
+          "mode": "last",
+          "eps": "0.001",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "s",
+          "mode": "last",
+          "eps": "1e-05",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        }
+      ],
+      "log_relpath": "logs/Drift-open.out",
+      "data_path": "/capstor/store/cscs/pasc/c41/rammann/regression-tests-x/RegressionTests/Drift-open/data",
+      "data_url": "file:///capstor/store/cscs/pasc/c41/rammann/regression-tests-x/RegressionTests/Drift-open/data"
+    },
+    {
+      "name": "Drift-open-bins",
+      "date": "2026-04-01",
+      "description": "Drift with bins in accelerating cavity: create significant energy spread that leads to multiple bins. When particles are close to c, bin number decreases.",
+      "tests": [
+        {
+          "type": "stat",
+          "var": "rms_x",
+          "mode": "last",
+          "eps": "0.001",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_y",
+          "mode": "last",
+          "eps": "0.001",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_s",
+          "mode": "last",
+          "eps": "0.01",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_px",
+          "mode": "last",
+          "eps": "0.001",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_py",
+          "mode": "last",
+          "eps": "0.001",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_ps",
+          "mode": "last",
+          "eps": "0.01",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "energy",
+          "mode": "last",
+          "eps": "1000.0",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "nBins",
+          "mode": "avg",
+          "eps": "0.2",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        }
+      ],
+      "log_relpath": "logs/Drift-open-bins.out",
+      "data_path": "/capstor/store/cscs/pasc/c41/rammann/regression-tests-x/RegressionTests/Drift-open-bins/data",
+      "data_url": "file:///capstor/store/cscs/pasc/c41/rammann/regression-tests-x/RegressionTests/Drift-open-bins/data"
+    },
+    {
+      "name": "Drift-periodic",
+      "date": "2026-04-01",
+      "description": "Drift with periodic FFT space charge solver, 20 steps. Simulates pure space charge expansion, very small initial P0.",
+      "tests": [
+        {
+          "type": "stat",
+          "var": "rms_x",
+          "mode": "last",
+          "eps": "1e-05",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_y",
+          "mode": "last",
+          "eps": "1e-05",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_s",
+          "mode": "last",
+          "eps": "1e-05",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "emit_x",
+          "mode": "last",
+          "eps": "1e-05",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "emit_y",
+          "mode": "last",
+          "eps": "1e-05",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "emit_s",
+          "mode": "last",
+          "eps": "1e-05",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "energy",
+          "mode": "last",
+          "eps": "0.001",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "s",
+          "mode": "last",
+          "eps": "1e-05",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        }
+      ],
+      "log_relpath": "logs/Drift-periodic.out",
+      "data_path": "/capstor/store/cscs/pasc/c41/rammann/regression-tests-x/RegressionTests/Drift-periodic/data",
+      "data_url": "file:///capstor/store/cscs/pasc/c41/rammann/regression-tests-x/RegressionTests/Drift-periodic/data"
+    },
+    {
+      "name": "Fodo-long",
+      "date": "2026-04-01",
+      "description": "FodoCell without Space Charge",
+      "tests": [
+        {
+          "type": "stat",
+          "var": "rms_x",
+          "mode": "avg",
+          "eps": "1e-05",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_y",
+          "mode": "avg",
+          "eps": "1e-05",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_s",
+          "mode": "avg",
+          "eps": "1e-05",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "emit_x",
+          "mode": "avg",
+          "eps": "1e-05",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "emit_y",
+          "mode": "avg",
+          "eps": "1e-05",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "emit_s",
+          "mode": "avg",
+          "eps": "1e-05",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "energy",
+          "mode": "avg",
+          "eps": "1e-05",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        }
+      ],
+      "log_relpath": "logs/Fodo-long.out",
+      "data_path": "/capstor/store/cscs/pasc/c41/rammann/regression-tests-x/RegressionTests/Fodo-long/data",
+      "data_url": "file:///capstor/store/cscs/pasc/c41/rammann/regression-tests-x/RegressionTests/Fodo-long/data"
+    },
+    {
+      "name": "Fodo-long-qm",
+      "date": "2026-04-01",
+      "description": "FodoCell without Space Charge",
+      "tests": [
+        {
+          "type": "stat",
+          "var": "rms_x",
+          "mode": "avg",
+          "eps": "1e-05",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_y",
+          "mode": "avg",
+          "eps": "1e-05",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_s",
+          "mode": "avg",
+          "eps": "1e-05",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "emit_x",
+          "mode": "avg",
+          "eps": "1e-05",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "emit_y",
+          "mode": "avg",
+          "eps": "1e-05",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "emit_s",
+          "mode": "avg",
+          "eps": "1e-05",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "energy",
+          "mode": "avg",
+          "eps": "1e-05",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        }
+      ],
+      "log_relpath": "logs/Fodo-long-qm.out",
+      "data_path": "/capstor/store/cscs/pasc/c41/rammann/regression-tests-x/RegressionTests/Fodo-long-qm/data",
+      "data_url": "file:///capstor/store/cscs/pasc/c41/rammann/regression-tests-x/RegressionTests/Fodo-long-qm/data"
+    },
+    {
+      "name": "Qpole-short",
+      "date": "2026-04-01",
+      "description": "FODO channel no space charge 7 MeV e",
+      "tests": [
+        {
+          "type": "stat",
+          "var": "rms_x",
+          "mode": "last",
+          "eps": "2e-08",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_y",
+          "mode": "last",
+          "eps": "2e-08",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_s",
+          "mode": "last",
+          "eps": "2e-08",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "emit_x",
+          "mode": "last",
+          "eps": "2e-08",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "emit_y",
+          "mode": "last",
+          "eps": "2e-08",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "emit_s",
+          "mode": "last",
+          "eps": "2e-08",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        }
+      ],
+      "log_relpath": "logs/Qpole-short.out",
+      "data_path": "/capstor/store/cscs/pasc/c41/rammann/regression-tests-x/RegressionTests/Qpole-short/data",
+      "data_url": "file:///capstor/store/cscs/pasc/c41/rammann/regression-tests-x/RegressionTests/Qpole-short/data"
+    },
+    {
+      "name": "Sol-fm",
+      "date": "2026-04-01",
+      "description": "Solenoid fieldmaptest without Space Charge",
+      "tests": [
+        {
+          "type": "stat",
+          "var": "rms_x",
+          "mode": "avg",
+          "eps": "1e-05",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_y",
+          "mode": "avg",
+          "eps": "1e-05",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_s",
+          "mode": "avg",
+          "eps": "1e-05",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_px",
+          "mode": "avg",
+          "eps": "0.001",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_py",
+          "mode": "avg",
+          "eps": "0.001",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "rms_ps",
+          "mode": "avg",
+          "eps": "0.001",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "emit_x",
+          "mode": "avg",
+          "eps": "1e-05",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "emit_y",
+          "mode": "avg",
+          "eps": "1e-05",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "emit_s",
+          "mode": "avg",
+          "eps": "1e-05",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        },
+        {
+          "type": "stat",
+          "var": "energy",
+          "mode": "avg",
+          "eps": "0.001",
+          "delta": "-",
+          "state": "broken",
+          "plot": null
+        }
+      ],
+      "log_relpath": "logs/Sol-fm.out",
+      "data_path": "/capstor/store/cscs/pasc/c41/rammann/regression-tests-x/RegressionTests/Sol-fm/data",
+      "data_url": "file:///capstor/store/cscs/pasc/c41/rammann/regression-tests-x/RegressionTests/Sol-fm/data"
+    }
+  ],
+  "unit_tests": {
+    "state": "passed",
+    "total": 0,
+    "passed": 0,
+    "failed": 0,
+    "log_relpath": "logs/unit-tests.out"
+  }
+}
