@@ -6,6 +6,7 @@ import shutil
 import argparse
 
 import OpalRegressionTests
+from OpalRegressionTests.regressiontest import discover_stat_stems
 
 """
 Scan given directory for regression tests. Regression tests are stored
@@ -16,7 +17,8 @@ Regression tests must follow the following directory-layouts:
 
     DIR Structure:
     name/name.in
-         reference/name.stat
+         reference/name.stat   (single container)
+         and/or reference/name_c0.stat, name_c1.stat, ... (multi-container)
 
 """
 def scan_for_tests (dir):
@@ -37,10 +39,11 @@ def scan_for_tests (dir):
 
             # A valid test requires:
             # 1. An input file (<name>.in)
-            # 3. A 'reference' subdirectory
-            if not (os.path.isfile(basename + ".in") and
-                    os.path.isdir(os.path.join (test, "reference")) and
-                    os.path.isfile(os.path.join (test, "reference", test + ".stat"))):
+            # 2. A 'reference' subdirectory with at least one matching *.stat
+            ref_dir = os.path.join(test, "reference")
+            if not (os.path.isfile(basename + ".in") and os.path.isdir(ref_dir)):
+                continue
+            if not discover_stat_stems(os.path.abspath(ref_dir), test):
                 continue
 
             # Check if a 'disabled' file exists to skip this test

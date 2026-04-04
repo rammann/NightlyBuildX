@@ -17,6 +17,39 @@ from OpalRegressionTests.reporter import TempXMLElement
 import OpalRegressionTests.stattest as stattest
 from OpalRegressionTests.sitegen import write_report_assets, write_run_report, update_overview
 
+
+def discover_stat_stems(reference_dir: str, simname: str) -> list:
+    """
+    Stems S for reference/*.stat where S == simname or S matches simname + "_c" + digits.
+    Order: simname first if present, then _c0, _c1, ... by numeric suffix.
+    """
+    if not reference_dir or not os.path.isdir(reference_dir):
+        return []
+    stat_suffix = ".stat"
+    try:
+        names = os.listdir(reference_dir)
+    except OSError:
+        return []
+    stems = []
+    seen = set()
+    main_path = os.path.join(reference_dir, simname + stat_suffix)
+    if os.path.isfile(main_path):
+        stems.append(simname)
+        seen.add(simname)
+    pat = re.compile("^" + re.escape(simname) + r"_c(\d+)" + re.escape(stat_suffix) + "$")
+    numbered = []
+    for n in names:
+        m = pat.match(n)
+        if m:
+            numbered.append((int(m.group(1)), n[: -len(stat_suffix)]))
+    numbered.sort(key=lambda x: x[0])
+    for _n, stem in numbered:
+        if stem not in seen:
+            stems.append(stem)
+            seen.add(stem)
+    return stems
+
+
 def _parse_cmake_cache(cache_path: str) -> dict:
     """
     Parse a CMakeCache.txt into a simple key/value dict.
@@ -315,22 +348,27 @@ class RegressionTest:
         """
         rep = Reporter()
         os.chdir(self.dirname)
-        os.chdir("reference")
+        ref_abs = os.path.join(self.dirname, "reference")
         allok = True
-
-        for suffix in  [".stat"]:
-            fname = self.simname + suffix
+        stems = discover_stat_stems(ref_abs, self.simname)
+        if not stems:
+            rep.appendReport(
+                "\t No reference .stat for this test (expected %s.stat and/or %s_cN.stat)\n"
+                % (self.simname, self.simname)
+            )
+            return False
+        os.chdir("reference")
+        for stem in stems:
+            fname = stem + ".stat"
             fname_md5 = fname + ".md5"
             if not os.path.isfile(fname):
-                rep_string = "\t Reference file %s is missing!\n % (fname)"
+                rep.appendReport("\t Reference file %s is missing!\n" % fname)
                 allok = False
             if os.path.islink(fname_md5):
                 continue
             if not os.path.isfile(fname_md5):
-                rep_string = "\t Reference file %s is missing!\n % (fname_md5)"
-                allok = False
                 continue
-            chksum_ok =  self._reportReferenceFiles(fname_md5)
+            chksum_ok = self._reportReferenceFiles(fname_md5)
             allok = allok and chksum_ok
 
         return allok
@@ -343,15 +381,16 @@ class RegressionTest:
         """
         rep = Reporter()
         allok = True
-
-        for suffix in ['.stat']:
-            outFiles = [x for x in os.listdir(".") if x.endswith(suffix)]
-            refFiles = [x for x in os.listdir("reference") if x.endswith(suffix)]
-            if bool(refFiles):
-                if not bool(outFiles):
-                    allok = False
-                    rep.appendReport("\t ERROR: Reference output file %s %s \n" % (
-                        refFiles, 'FAILED'))
+        os.chdir(self.dirname)
+        ref_abs = os.path.join(self.dirname, "reference")
+        stems = discover_stat_stems(ref_abs, self.simname)
+        if not stems:
+            return True
+        for stem in stems:
+            out = stem + ".stat"
+            if not os.path.isfile(out):
+                allok = False
+                rep.appendReport("\t ERROR: Expected output file %s missing\n" % out)
 
         return allok
 
@@ -379,8 +418,10 @@ class RegressionTest:
         for p in pathlib.Path(".").glob("*.smb"):
             p.unlink()
 
-        if os.path.isfile(self.simname + ".stat"):
-            os.remove (self.simname + ".stat")
+        for p in pathlib.Path(".").glob(self.simname + ".stat"):
+            p.unlink()
+        for p in pathlib.Path(".").glob(self.simname + "_c*.stat"):
+            p.unlink()
 
         if os.path.isfile (self.simname + ".lbal"):
             os.remove (self.simname + ".lbal")
@@ -443,20 +484,44 @@ class RegressionTest:
 
             rep.appendChild(simulation_report)
             # loop over all tests in rt file, first line is a comment, skip this line
+            ref_dir = os.path.join(self.dirname, "reference")
+            stat_stems = discover_stat_stems(ref_dir, self.simname)
             for i, test in enumerate(tests[1::]):
                 try:
-                    test_root = TempXMLElement("Test")
-                    passed = self.checkResult(test, test_root)
-                    if passed is not None:
-                        self.totalNrTests += 1
-                        if passed:
-                            self.totalNrPassed += 1
-                        simulation_report.appendChild(test_root)
-
-                        # capture structured info (for report)
-                        r = getattr(self, "_last_check_result", None)
-                        if r is not None:
-                            self.result["tests"].append(r)
+                    if "stat" in test:
+                        if not stat_stems:
+                            test_root = TempXMLElement("Test")
+                            nameparams = str.split(test, "\"")
+                            var = nameparams[1] if len(nameparams) > 1 else "?"
+                            self._report_stat_stem_discovery_failure(test, test_root, var)
+                            self.totalNrTests += 1
+                            simulation_report.appendChild(test_root)
+                            r = getattr(self, "_last_check_result", None)
+                            if r is not None:
+                                self.result["tests"].append(r)
+                            continue
+                        for stem in stat_stems:
+                            test_root = TempXMLElement("Test")
+                            passed = self.checkResult(test, test_root, stat_stem=stem)
+                            if passed is not None:
+                                self.totalNrTests += 1
+                                if passed:
+                                    self.totalNrPassed += 1
+                                simulation_report.appendChild(test_root)
+                                r = getattr(self, "_last_check_result", None)
+                                if r is not None:
+                                    self.result["tests"].append(r)
+                    else:
+                        test_root = TempXMLElement("Test")
+                        passed = self.checkResult(test, test_root)
+                        if passed is not None:
+                            self.totalNrTests += 1
+                            if passed:
+                                self.totalNrPassed += 1
+                            simulation_report.appendChild(test_root)
+                            r = getattr(self, "_last_check_result", None)
+                            if r is not None:
+                                self.result["tests"].append(r)
                 except Exception:
                     exc_info = sys.exc_info()
                     sys.excepthook(*exc_info)
@@ -561,7 +626,40 @@ class RegressionTest:
             time.sleep(30)
             qstatout = subprocess.getoutput("qstat -u " + username + " | grep \"" + self.jobnr + "\"")
 
-    def checkResult(self, test, root):
+    def _report_stat_stem_discovery_failure(self, test, test_root, var):
+        nameparams = str.split(test, "\"")
+        quant = "-"
+        eps = "-"
+        if len(nameparams) >= 3:
+            params = str.split(nameparams[2].lstrip(), " ")
+            if len(params) >= 2:
+                quant = params[0]
+                eps = str(params[1])
+        test_root.addAttribute("type", "stat")
+        test_root.addAttribute("var", var)
+        test_root.addAttribute("mode", quant)
+        st = TempXMLElement("state")
+        st.appendTextNode("broken")
+        test_root.appendChild(st)
+        ep = TempXMLElement("eps")
+        ep.appendTextNode(eps)
+        test_root.appendChild(ep)
+        dlt = TempXMLElement("delta")
+        dlt.appendTextNode("-")
+        test_root.appendChild(dlt)
+        self._last_check_result = {
+            "type": "stat",
+            "var": var,
+            "mode": quant,
+            "eps": eps,
+            "delta": "-",
+            "state": "broken",
+            "plot": None,
+            "stat_stem": "-",
+        }
+        return False
+
+    def checkResult(self, test, root, stat_stem=None):
         """
         handler for comparison of various output files with reference files
 
@@ -575,8 +673,10 @@ class RegressionTest:
         params = str.split(nameparams[2].lstrip(), " ")
         rtest = 0
         if "stat" in test:
-            rtest = stattest.StatTest(var, params[0], float(params[1]),
-                                      self.dirname, self.simname)
+            stem = stat_stem if stat_stem is not None else self.simname
+            rtest = stattest.StatTest(
+                var, params[0], float(params[1]),
+                self.dirname, stem, plot_dirname=self.simname)
         else:
             return None
 

@@ -37,7 +37,7 @@ regression-tests-x/
 - `*.local` contains the run command
 - `*.rt` contains the tracked stats and thresholds
 - `reference/*.out` contains the reference output file
-- `reference/*.stat` contains the reference stat file
+- `reference/*.stat` holds reference beam statistics. Use `reference/<name>.stat` for a single container, or `reference/<name>_c0.stat`, `reference/<name>_c1.stat`, … for multi-container runs. Every `stat` line in `<name>.rt` is checked against **each** discovered `*.stat` stem (same variable list for all containers).
 
 
 ## Output

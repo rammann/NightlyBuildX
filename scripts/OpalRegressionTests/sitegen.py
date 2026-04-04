@@ -3,6 +3,7 @@ import json
 import os
 import pathlib
 import datetime
+from collections import OrderedDict
 
 
 ASSETS_DIRNAME = "assets"
@@ -286,6 +287,13 @@ tr:last-child td{ border-bottom:none; }
 .state.passed{ color: var(--ok); }
 .state.failed{ color: var(--bad); }
 .state.broken{ color: var(--broken); }
+.containerhdr{
+  margin: 16px 0 8px 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  font-family: var(--mono);
+}
 .plots{
   display:grid;
   grid-template-columns: 1fr;
@@ -426,32 +434,67 @@ def write_run_report(report_root: str, run_dir: str, results: dict) -> None:
         counts = _count_states(sim)
         badge = "ok" if (counts["failed"] == 0 and counts["broken"] == 0) else ("broken" if counts["broken"] else "bad")
 
-        rows = []
-        plot_cards = []
+        def _stat_group_key(t):
+            ss = t.get("stat_stem")
+            if not ss or ss == "-":
+                return simname
+            return ss
+
+        groups = OrderedDict()
         for t in sim.get("tests", []):
-            var = t.get("var", "")
-            mode = t.get("mode", "")
-            eps = t.get("eps", "")
-            delta = t.get("delta", "")
-            state = t.get("state", "")
-            plot = t.get("plot")
-            rows.append(
-                "<tr>"
-                f"<td class='simname'>{_escape(var)}</td>"
-                f"<td class='simname'>{_escape(mode)}</td>"
-                f"<td class='simname'>{_escape(eps)}</td>"
-                f"<td class='simname'>{_escape(delta)}</td>"
-                f"<td class='state {state}'>{_escape(state)}</td>"
-                "</tr>"
-            )
-            if plot:
-                plot_rel = _escape(plot)
-                plot_cards.append(
-                    "<div class='plotcard'>"
-                    f"<a href='{plot_rel}'><img loading='lazy' src='{plot_rel}' alt='plot'></a>"
-                    f"<div class='plotcap'>{_escape(simname)} · {_escape(var)}</div>"
-                    "</div>"
+            gk = _stat_group_key(t)
+            groups.setdefault(gk, []).append(t)
+
+        inner_blocks = []
+        for stem_key, group_tests in groups.items():
+            need_hdr = len(groups) > 1 or stem_key != simname
+            if need_hdr:
+                inner_blocks.append(
+                    f"<h4 class='containerhdr'>Statistics: {_escape(stem_key)}</h4>"
                 )
+            rows = []
+            plot_cards = []
+            for t in group_tests:
+                var = t.get("var", "")
+                mode = t.get("mode", "")
+                eps = t.get("eps", "")
+                delta = t.get("delta", "")
+                state = t.get("state", "")
+                plot = t.get("plot")
+                cap_stem = t.get("stat_stem") or simname
+                if cap_stem == "-":
+                    cap_stem = simname
+                rows.append(
+                    "<tr>"
+                    f"<td class='simname'>{_escape(var)}</td>"
+                    f"<td class='simname'>{_escape(mode)}</td>"
+                    f"<td class='simname'>{_escape(eps)}</td>"
+                    f"<td class='simname'>{_escape(delta)}</td>"
+                    f"<td class='state {state}'>{_escape(state)}</td>"
+                    "</tr>"
+                )
+                if plot:
+                    plot_rel = _escape(plot)
+                    cap_line = (
+                        f"{simname} · {cap_stem} · {var}"
+                        if cap_stem != simname
+                        else f"{simname} · {var}"
+                    )
+                    plot_cards.append(
+                        "<div class='plotcard'>"
+                        f"<a href='{plot_rel}'><img loading='lazy' src='{plot_rel}' alt='plot'></a>"
+                        f"<div class='plotcap'>{_escape(cap_line)}</div>"
+                        "</div>"
+                    )
+            inner_blocks.append(
+                "<table>"
+                "<thead><tr><th>Variable</th><th>Mode</th><th>Eps</th><th>Delta</th><th>State</th></tr></thead>"
+                "<tbody>"
+                + "".join(rows) +
+                "</tbody></table>"
+            )
+            if plot_cards:
+                inner_blocks.append("<div class='plots'>" + "".join(plot_cards) + "</div>")
 
         log_link = ""
         if sim.get("log_relpath"):
@@ -474,12 +517,7 @@ def write_run_report(report_root: str, run_dir: str, results: dict) -> None:
             "</div>"
             "</summary>"
             "<div class='inner'>"
-            "<table>"
-            "<thead><tr><th>Variable</th><th>Mode</th><th>Eps</th><th>Delta</th><th>State</th></tr></thead>"
-            "<tbody>"
-            + "".join(rows) +
-            "</tbody></table>"
-            + (("<div class='plots'>" + "".join(plot_cards) + "</div>") if plot_cards else "") +
+            + "".join(inner_blocks) +
             "</div>"
             "</details>"
         )

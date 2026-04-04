@@ -21,12 +21,13 @@ class StatTest:
         - name: name of the smb file to be checked
     """
 
-    def __init__(self, var, quant, eps, prefix, name, suffix = ".stat"):
+    def __init__(self, var, quant, eps, prefix, name, suffix = ".stat", plot_dirname=None):
         self.var = var
         self.quant = quant
         self.eps = eps
         self.prefix = prefix
         self.name = name
+        self.plot_dirname = plot_dirname if plot_dirname is not None else name
         self.fname = os.path.join(self.prefix, self.name) + suffix
         self.reference_fname = os.path.join(self.prefix, "reference", self.name) + suffix
         
@@ -50,6 +51,7 @@ class StatTest:
             "delta": "-",
             "state": "broken",
             "plot": None,
+            "stat_stem": self.name,
         }
         return False
         
@@ -143,7 +145,8 @@ class StatTest:
             "eps": str(self.eps),
             "delta": str(val),
             "state": ("passed" if passed else "failed"),
-            "plot": (plot_rel.format(self.name) if plot_rel else None),
+            "plot": (plot_rel.format(self.plot_dirname) if plot_rel else None),
+            "stat_stem": self.name,
         }
 
         return passed
