@@ -283,6 +283,7 @@ class StatTest:
             import matplotlib
             matplotlib.use("Agg")
             import matplotlib.pyplot as plt
+            plt.style.use("bmh")
         except Exception as e:
             rep = Reporter()
             rep.appendReport(f"ERROR: matplotlib not available ({e})\n")
@@ -303,6 +304,9 @@ class StatTest:
 
         output_fname = os.path.join(self.prefix, self.name + "_" + self.var + ".png")
 
+        var_unit = getattr(self, "var_unit", "").strip()
+        s_unit = getattr(self, "s_unit", "").strip()
+
         # Use constrained layout to avoid tight_layout warnings with shared axes/gridspec.
         fig = plt.figure(figsize=(10.5, 6.5), dpi=140, constrained_layout=True)
         gs = fig.add_gridspec(2, 1, height_ratios=[3, 1], hspace=0.12)
@@ -311,18 +315,14 @@ class StatTest:
 
         ax.plot(s1, y1, lw=1.8, label="simulation")
         ax.plot(s2, y2, lw=1.8, label="reference")
-        ax.set_ylabel(f"{prettyVar} [{getattr(self, 'var_unit', '').strip()}]".strip())
-        ax.grid(True, alpha=0.25)
+        ax.set_ylabel(f"{prettyVar} [{var_unit}]" if var_unit else prettyVar)
         ax.legend(loc="upper right", fontsize=8)
         ax.set_title(self.name)
 
-        ax2.plot(s1, diff, lw=1.6, color="#ef4444", label="difference")
+        ax2.plot(s1, diff, lw=1.6, label="difference")
         ax2.axhline(0.0, lw=1.0, color="black", alpha=0.4)
-        s_unit = getattr(self, "s_unit", "").strip()
         ax2.set_xlabel(f"s [{s_unit}]" if s_unit else "s")
-        var_unit = getattr(self, "var_unit", "").strip()
-        ax2.set_ylabel(f"Δ [{var_unit}]" if var_unit else "Δ")
-        ax2.grid(True, alpha=0.25)
+        ax2.set_ylabel(f"delta [{var_unit}]" if var_unit else "delta")
 
         fig.savefig(output_fname)
         plt.close(fig)

@@ -1,0 +1,188 @@
+#!/usr/bin/env bash
+#
+# Run a single OPALX input file and generate stat plots.
+#
+# Usage:
+#   bash NightlyBuildX/scripts/run --build <dir> --input <file.in> [--mpi <ranks>]
+#
+# Output goes to NightlyBuildX/runs/<stem>/ where <stem> is the input file
+# name without extension.
+#
+
+set -o errexit
+set -o pipefail
+
+declare -ri EC_ARG_ERROR=1
+declare -ri EC_RUNTIME_ERROR=20
+
+die() {
+  (( $1 > 0 )) && exec 1>&2
+  echo -e "$2\n"
+  exit "$1"
+}
+
+usage() {
+  cat 1>&2 <<'EOF'
+Usage:
+  run --build <dir> --input <file.in> [--mpi <ranks>]
+
+Runs a single OPALX input file, saves all outputs, and generates stat plots.
+
+Required:
+  --build <dir>    Build directory containing opalx at <dir>/src/opalx
+  --input <file>   Path to the OPALX .in input file
+
+Optional:
+  --mpi <ranks>    Run with "mpirun -n <ranks>" (default: run directly, no MPI)
+
+Output:
+  NightlyBuildX/runs/<stem>/
+    work/          Copy of the input directory + simulation outputs
+    logs/run.out   Captured stdout/stderr
+    plots/*.png    One plot per tracked stat column
+    run_report.pdf PDF assembling all plots
+EOF
+  exit ${EC_ARG_ERROR}
+}
+
+# Portable absolute path (macOS lacks readlink -f)
+abspath() {
+  python3 -c "import os, sys; print(os.path.abspath(sys.argv[1]))" "$1"
+}
+
+if [[ "$(uname)" == "Darwin" ]]; then
+  declare -r abs_scriptname="$(abspath "$0")"
+else
+  declare -r abs_scriptname="$(readlink -f "$0")"
+fi
+
+declare -r bindir="${abs_scriptname%/*}"
+declare -r nightlybuildx_dir="${bindir%/*}"
+declare -r run_root="${nightlybuildx_dir}/runs"
+declare -r plot_py="${bindir}/plot_stat.py"
+
+declare build_dir=""
+declare input_file=""
+declare mpi_ranks=""
+
+while (( $# > 0 )); do
+  case "$1" in
+    --build )
+      build_dir="${2:-}"; shift 2 ;;
+    --build=* )
+      build_dir="${1#*=}"; shift 1 ;;
+    --input )
+      input_file="${2:-}"; shift 2 ;;
+    --input=* )
+      input_file="${1#*=}"; shift 1 ;;
+    --mpi )
+      mpi_ranks="${2:-}"; shift 2 ;;
+    --mpi=* )
+      mpi_ranks="${1#*=}"; shift 1 ;;
+    -h|-\?|--help )
+      usage ;;
+    * )
+      die ${EC_ARG_ERROR} "Unknown option: $1" ;;
+  esac
+done
+
+[[ -n "${build_dir}" ]]  || usage
+[[ -n "${input_file}" ]] || usage
+
+build_dir="$(abspath "${build_dir}")"
+input_file="$(abspath "${input_file}")"
+
+[[ -d "${build_dir}" ]]  || die ${EC_ARG_ERROR} "ERROR: --build is not a directory: ${build_dir}"
+[[ -f "${input_file}" ]] || die ${EC_ARG_ERROR} "ERROR: --input file not found: ${input_file}"
+
+declare -r opalx_exe="${build_dir}/src/opalx"
+[[ -f "${opalx_exe}" ]] || die ${EC_ARG_ERROR} "ERROR: opalx not found at: ${opalx_exe}"
+[[ -x "${opalx_exe}" ]] || die ${EC_ARG_ERROR} "ERROR: opalx not executable: ${opalx_exe}"
+
+[[ -f "${plot_py}" ]] || die ${EC_ARG_ERROR} "ERROR: plot helper not found: ${plot_py}"
+
+if [[ -n "${mpi_ranks}" ]]; then
+  [[ "${mpi_ranks}" =~ ^[1-9][0-9]*$ ]] \
+    || die ${EC_ARG_ERROR} "ERROR: --mpi must be a positive integer, got: ${mpi_ranks}"
+  command -v mpirun &>/dev/null \
+    || die ${EC_ARG_ERROR} "ERROR: --mpi requested but mpirun not found in PATH"
+fi
+
+# Derive stem and run directory from the input file name
+declare -r input_basename="$(basename "${input_file}")"
+declare -r stem="${input_basename%.in}"
+declare -r input_dir="$(dirname "${input_file}")"
+
+declare -r run_dir="${run_root}/${stem}"
+declare -r work_dir="${run_dir}/work"
+declare -r logs_dir="${run_dir}/logs"
+declare -r plots_dir="${run_dir}/plots"
+
+echo "=== OPALX run ==="
+echo "  Build:    ${build_dir}"
+echo "  Input:    ${input_file}"
+echo "  Stem:     ${stem}"
+[[ -n "${mpi_ranks}" ]] && echo "  MPI:      ${mpi_ranks} ranks"
+echo "  Run dir:  ${run_dir}"
+echo ""
+
+# Prepare directories
+rm -rf "${work_dir}" "${logs_dir}" "${plots_dir}"
+mkdir -p "${work_dir}" "${logs_dir}" "${plots_dir}"
+
+# Copy entire input directory into work/
+cp -a "${input_dir}/." "${work_dir}/"
+
+# Build the command
+declare -a cmd=()
+if [[ -n "${mpi_ranks}" ]]; then
+  cmd=( mpirun -n "${mpi_ranks}" "${opalx_exe}" )
+else
+  cmd=( "${opalx_exe}" )
+fi
+cmd+=( "${input_basename}" )
+
+declare -r log_file="${logs_dir}/run.out"
+
+echo "Running: ${cmd[*]}"
+echo "Log:     ${log_file}"
+echo ""
+
+set +e
+(
+  cd "${work_dir}"
+  "${cmd[@]}" > "${log_file}" 2>&1
+)
+run_exit=$?
+set -e
+
+if (( run_exit != 0 )); then
+  echo "WARN: opalx exited with code ${run_exit} (see ${log_file})"
+fi
+
+# Discover .stat files (stem.stat and stem_cN.stat)
+declare -a stat_files=()
+shopt -s nullglob
+for f in "${work_dir}/${stem}.stat" "${work_dir}/${stem}"_c*.stat; do
+  [[ -f "${f}" ]] && stat_files+=( "${f}" )
+done
+shopt -u nullglob
+
+if [[ "${#stat_files[@]}" -eq 0 ]]; then
+  echo "WARN: no .stat files found in ${work_dir}; skipping plots"
+else
+  echo "Generating plots for: ${stat_files[*]}"
+  python3 "${plot_py}" \
+    --output "${plots_dir}" \
+    --pdf    "${run_dir}/run_report.pdf" \
+    "${stat_files[@]}" || true
+  echo "Plots:  ${plots_dir}"
+  echo "PDF:    ${run_dir}/run_report.pdf"
+fi
+
+echo ""
+echo "Done. Outputs in: ${run_dir}"
+
+if (( run_exit != 0 )); then
+  exit ${EC_RUNTIME_ERROR}
+fi

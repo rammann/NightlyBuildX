@@ -1,5 +1,6 @@
 import html
 import json
+import math
 import os
 import pathlib
 import datetime
@@ -268,7 +269,7 @@ summary::-webkit-details-marker{ display:none; }
 @media (max-width: 560px){ .kv{ grid-template-columns: 1fr; } }
 .kv .k{ color: var(--muted); font-family: var(--mono); }
 .kv .v{ font-family: var(--mono); overflow-wrap:anywhere; }
-.inner{ padding: 0 16px 14px; }
+.inner{ padding: 0 16px 14px; min-width: 0; }
 table{
   width:100%;
   border-collapse: collapse;
@@ -287,6 +288,36 @@ tr:last-child td{ border-bottom:none; }
 .state.passed{ color: var(--ok); }
 .state.failed{ color: var(--bad); }
 .state.broken{ color: var(--broken); }
+.beammeta-wrap{
+  margin-bottom: 16px;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.beammeta-warn{
+  font-size: 12px;
+  color: var(--bad);
+  margin-bottom: 8px;
+  font-family: var(--mono);
+}
+table.beammeta{
+  font-size: 12px;
+  margin-top: 4px;
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+table.beammeta th, table.beammeta td{
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  padding: 6px 8px;
+  vertical-align: top;
+}
+table.beammeta th{
+  color: var(--muted);
+  font-weight: 600;
+}
 .containerhdr{
   margin: 16px 0 8px 0;
   font-size: 13px;
@@ -339,6 +370,29 @@ def _count_states(sim):
 
 def _escape(s):
     return html.escape(s if s is not None else "")
+
+
+def _beam_cell_display(raw) -> tuple[str, str]:
+    """
+    Shorten wide numeric strings for table layout; return (display, title_tooltip).
+    """
+    if raw is None:
+        return "—", ""
+    s = str(raw).strip()
+    if s == "—":
+        return "—", ""
+    try:
+        x = float(s.replace(",", ""))
+        if not math.isfinite(x):
+            return s, s
+        if x == int(x) and abs(x) <= 1e15:
+            disp = str(int(x))
+            return disp, s
+        disp = f"{x:.6g}"
+        return disp, s
+    except ValueError:
+        return s, s
+
 
 def _unit_badge(unit: dict) -> str:
     state = (unit or {}).get("state", "")
@@ -445,6 +499,51 @@ def write_run_report(report_root: str, run_dir: str, results: dict) -> None:
             gk = _stat_group_key(t)
             groups.setdefault(gk, []).append(t)
 
+        beam_meta_html = ""
+        bcontainers = sim.get("beam_containers") or []
+        if bcontainers:
+            bwarn = sim.get("beam_metadata_warning")
+            warn_line = ""
+            if bwarn:
+                warn_line = (
+                    f"<div class='beammeta-warn'>{_escape(str(bwarn))}</div>"
+                )
+            bcols = [
+                ("stat_stem", "Container"),
+                ("beam_name", "Beam"),
+                ("species", "Species"),
+                ("momentum_GeV_c", "p [GeV/c]"),
+                ("starting_energy_GeV", "E [GeV]"),
+                ("beam_current_A", "I [A]"),
+                ("macro_charge_per_particle_C", "q_macro [C]"),
+                ("n_macroparticles", "NPART"),
+                ("particles_per_macroparticle", "N_real / N_macro"),
+                ("rf_frequency_MHz", "f_RF [MHz]"),
+                ("total_macro_bunch_charge_C", "Q_macro,tot [C]"),
+            ]
+            bh = "".join(f"<th>{_escape(lbl)}</th>" for _k, lbl in bcols)
+            brs = []
+            for row in bcontainers:
+                cells = []
+                for key, _lbl in bcols:
+                    v = row.get(key)
+                    disp, tip = _beam_cell_display(v)
+                    title_attr = f" title='{_escape(tip)}'" if tip and tip != disp else ""
+                    cells.append(
+                        f"<td class='simname'{title_attr}>{_escape(disp)}</td>"
+                    )
+                brs.append("<tr>" + "".join(cells) + "</tr>")
+            beam_meta_html = (
+                "<div class='beammeta-wrap'>"
+                "<h4 class='containerhdr'>Beam / container parameters</h4>"
+                + warn_line +
+                "<table class='beammeta'>"
+                "<thead><tr>" + bh + "</tr></thead>"
+                "<tbody>" + "".join(brs) + "</tbody>"
+                "</table>"
+                "</div>"
+            )
+
         inner_blocks = []
         for stem_key, group_tests in groups.items():
             need_hdr = len(groups) > 1 or stem_key != simname
@@ -517,7 +616,8 @@ def write_run_report(report_root: str, run_dir: str, results: dict) -> None:
             "</div>"
             "</summary>"
             "<div class='inner'>"
-            + "".join(inner_blocks) +
+            + beam_meta_html +
+            "".join(inner_blocks) +
             "</div>"
             "</details>"
         )
@@ -610,14 +710,34 @@ def _build_run_cards(report_root: str, subdir: str, href_prefix: str) -> list[st
             continue
         s = (data.get("summary") or {})
         unit = (data.get("unit_tests") or {})
+        build_info = (data.get("build") or {}).get("info") or {}
         run_disp = _format_ts_for_display(run)
         badge = "ok" if (s.get("failed", 0) == 0 and s.get("broken", 0) == 0) else ("broken" if s.get("broken", 0) else "bad")
         unit_badge = _unit_badge(unit)
+
+        # Build architecture pills: Device, Build Type, Kokkos Architecture
+        build_parts = []
+        device = (build_info.get("Device") or "").strip()
+        build_type = (build_info.get("Build Type") or "").strip()
+        kokkos_arch = (build_info.get("Kokkos Architecture") or "").strip()
+        if device and device != "-":
+            build_parts.append(device)
+        if build_type and build_type != "-":
+            build_parts.append(build_type)
+        if kokkos_arch and kokkos_arch != "-":
+            build_parts.append(kokkos_arch)
+        arch_pill = (
+            f"<span class='badge'>{_escape(' · '.join(build_parts))}</span>"
+            if build_parts else ""
+        )
+
         cards.append(
             f"<a class='cardlink' href='{_escape(href_prefix)}{_escape(run)}/index.html'>"
             f"<div class='card p runstatus {badge}' style='display:flex; align-items:center; justify-content:space-between; gap:12px;'>"
             f"<div><div class='simname'>{_escape(run_disp or run)}</div></div>"
-            f"<div style='display:flex; gap:10px; align-items:center;'><span class='badge {badge}'>reg</span>"
+            f"<div style='display:flex; gap:10px; align-items:center; flex-wrap:wrap;'>"
+            f"{arch_pill}"
+            f"<span class='badge {badge}'>reg</span>"
             f"<span class='badge {unit_badge}'>unit</span></div>"
             "</div>"
             "</a>"

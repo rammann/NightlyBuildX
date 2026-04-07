@@ -16,6 +16,7 @@ from OpalRegressionTests.reporter import Reporter
 from OpalRegressionTests.reporter import TempXMLElement
 import OpalRegressionTests.stattest as stattest
 from OpalRegressionTests.sitegen import write_report_assets, write_run_report, update_overview
+from OpalRegressionTests.beam_meta import load_beam_containers_from_out
 
 
 def discover_stat_stems(reference_dir: str, simname: str) -> list:
@@ -469,7 +470,17 @@ class RegressionTest:
             "description": "",
             "tests": [],
             "log_relpath": None,
+            "beam_containers": [],
         }
+        ref_dir_meta = os.path.join(self.dirname, "reference")
+        stat_stems_meta = discover_stat_stems(ref_dir_meta, self.simname)
+        out_path_meta = os.path.join(self.dirname, self.simname + ".out")
+        beam_containers, beam_meta_warn = load_beam_containers_from_out(
+            out_path_meta, stat_stems_meta, self.simname
+        )
+        self.result["beam_containers"] = beam_containers
+        if beam_meta_warn:
+            self.result["beam_metadata_warning"] = beam_meta_warn
 
         rt_filename = self.simname + ".rt"
         if os.path.exists(rt_filename):
