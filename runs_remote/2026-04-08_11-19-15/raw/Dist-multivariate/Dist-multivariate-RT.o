@@ -1,0 +1,215 @@
+merlin-g-100.psi.ch:rank0.opalx: Failed to modify UD QP to INIT on mlx5_6: Operation not permitted
+merlin-g-100.psi.ch:rank0.opalx: Failed to modify UD QP to INIT on mlx5_0: Operation not permitted
+merlin-g-100.psi.ch:rank0.opalx: Failed to modify UD QP to INIT on mlx5_1: Operation not permitted
+merlin-g-100.psi.ch:rank0.opalx: Failed to modify UD QP to INIT on mlx5_2: Operation not permitted
+merlin-g-100.psi.ch:rank0.opalx: Failed to modify UD QP to INIT on mlx5_3: Operation not permitted
+merlin-g-100.psi.ch:rank0.opalx: Failed to modify UD QP to INIT on mlx5_4: Operation not permitted
+merlin-g-100.psi.ch:rank0.opalx: Failed to modify UD QP to INIT on mlx5_5: Operation not permitted
+merlin-g-100.psi.ch:rank0.opalx: Failed to modify UD QP to INIT on mlx5_6: Operation not permitted
+merlin-g-100.psi.ch:rank0.opalx: Failed to modify UD QP to INIT on mlx5_7: Operation not permitted
+merlin-g-100.psi.ch:rank0.opalx: Failed to modify UD QP to INIT on mlx5_8: Operation not permitted
+merlin-g-100.psi.ch:rank0.opalx: Failed to modify UD QP to INIT on mlx5_6: Operation not permitted
+merlin-g-100.psi.ch:rank0.opalx: Failed to modify UD QP to INIT on mlx5_0: Operation not permitted
+merlin-g-100.psi.ch:rank0.opalx: Failed to modify UD QP to INIT on mlx5_1: Operation not permitted
+merlin-g-100.psi.ch:rank0.opalx: Failed to modify UD QP to INIT on mlx5_2: Operation not permitted
+merlin-g-100.psi.ch:rank0.opalx: Failed to modify UD QP to INIT on mlx5_3: Operation not permitted
+merlin-g-100.psi.ch:rank0.opalx: Failed to modify UD QP to INIT on mlx5_4: Operation not permitted
+merlin-g-100.psi.ch:rank0.opalx: Failed to modify UD QP to INIT on mlx5_5: Operation not permitted
+merlin-g-100.psi.ch:rank0.opalx: Failed to modify UD QP to INIT on mlx5_6: Operation not permitted
+merlin-g-100.psi.ch:rank0.opalx: Failed to modify UD QP to INIT on mlx5_7: Operation not permitted
+merlin-g-100.psi.ch:rank0.opalx: Failed to modify UD QP to INIT on mlx5_8: Operation not permitted
+merlin-g-100.psi.ch:rank0.opalx: Failed to modify UD QP to INIT on mlx5_6: Operation not permitted
+merlin-g-100.psi.ch:rank0.opalx: Failed to modify UD QP to INIT on mlx5_0: Operation not permitted
+merlin-g-100.psi.ch:rank0.opalx: Failed to modify UD QP to INIT on mlx5_1: Operation not permitted
+merlin-g-100.psi.ch:rank0.opalx: Failed to modify UD QP to INIT on mlx5_2: Operation not permitted
+merlin-g-100.psi.ch:rank0.opalx: Failed to modify UD QP to INIT on mlx5_3: Operation not permitted
+merlin-g-100.psi.ch:rank0.opalx: Failed to modify UD QP to INIT on mlx5_4: Operation not permitted
+merlin-g-100.psi.ch:rank0.opalx: Failed to modify UD QP to INIT on mlx5_5: Operation not permitted
+merlin-g-100.psi.ch:rank0.opalx: Failed to modify UD QP to INIT on mlx5_6: Operation not permitted
+merlin-g-100.psi.ch:rank0.opalx: Failed to modify UD QP to INIT on mlx5_7: Operation not permitted
+merlin-g-100.psi.ch:rank0.opalx: Failed to modify UD QP to INIT on mlx5_8: Operation not permitted
+merlin-g-100.psi.ch:rank0.opalx: Failed to modify UD QP to INIT on mlx5_6: Operation not permitted
+OPAL-X>               ____  _____        _       __   __
+OPAL-X> [1;32m
+OPAL-X> 
+OPAL-X>   ██████  ██████   █████  ██      ██   ██
+OPAL-X>  ██    ██ ██   ██ ██   ██ ██       ██ ██
+OPAL-X>  ██    ██ ██████  ███████ ██        ███
+OPAL-X>  ██    ██ ██      ██   ██ ██       ██ ██
+OPAL-X>   ██████  ██      ██   ██ ███████ ██   ██
+OPAL-X> 
+OPAL-X>          This is OPALX (Object Oriented Parallel Accelerator Library for Exascale)
+OPAL-X> 
+OPAL-X> [0m
+OPAL-X> 
+OPAL-X> OPALX is the performance portable version of OPAL :: Version 0.9
+OPAL-X>             git rev. f8123a3644151ab7fba8f2268e38acc12460e561
+OPAL-X> 
+OPAL-X> 
+OPAL-X>              (c) PSI, https://github.com/OPALX-project/OPALX
+OPAL-X> 
+OPAL-X> 
+OPAL-X> Please send cookies, goodies or other motivations (wine and beer ... ) 
+OPAL-X> to the OPAL developers https://github.com/OPALX-project/OPALX/issues
+OPAL-X> 
+OPAL-X> Time: 11:19:45 date: 08/04/2026
+OPAL-X> 
+OPAL-X> * Host:   Serial
+OPAL-X> * Device: Cuda
+OPAL-X> 
+OPAL-X> * Reading input stream 'Dist-multivariate.in'
+OPAL-X> 
+OPAL-X> value: {OPALVERSION} = {900}
+OPAL-X> 
+OPAL-X> 
+OPAL-X> value: {EDES,P0} = {1e-06, 3.19843e-05}
+OPAL-X> 
+OPAL-X> * Use r to specify correlations
+OPAL-X> * ************* F I E L D S O L V E R ********************************************** 
+OPAL-X> * FIELDSOLVER  FS1
+OPAL-X> * BINS         NONE
+OPAL-X> * TYPE         NONE
+OPAL-X> * RANKS        1
+OPAL-X> * NX           8
+OPAL-X> * NY           8
+OPAL-X> * NZ           8
+OPAL-X> * BBOXINCR     1
+OPAL-X> * GREENSF      INTEGRATED
+OPAL-X> * XDIM         parallel  
+OPAL-X> * YDIM         parallel  
+OPAL-X> * ZDIM         serial  
+OPAL-X> * ********************************************************************************** 
+OPAL-X> 
+OPAL-X> * RUN resolved beams: BEAM1
+OPAL-X> * ************* B E A M ************************************************************ 
+OPAL-X> * BEAM        BEAM1
+OPAL-X> * PARTICLE    ELECTRON
+OPAL-X> * REST MASS   0.000510999 [GeV]
+OPAL-X> * CHARGE      -e * 1 
+OPAL-X> * MOMENTUM    31984.3 [eV/c]
+OPAL-X> * MOMENTUM    3.19843e-05 [GeV/c]
+OPAL-X> * CURRENT     1.3e+06 [A]
+OPAL-X> * FREQUENCY   1.3e+09 [MHz]
+OPAL-X> * NPART       1e+06
+OPAL-X> * ********************************************************************************** 
+OPAL-X> 
+OPAL-X[2]> * Beam[0] BEAM1 macro charge per particle [C]: -1e-15
+OPAL-X[2]> * Beam[0] BEAM1 macro mass per particle [GeV/c^2]: 3.1894
+OPAL-X[2]> * Beam[0] BEAM1 particles per macro particle: 6241.51
+OPAL-X> 
+OPAL-X> * Creating new file for data: 'Dist-multivariate.stat'
+OPAL-X> * Creating new file for data: 'Dist-multivariate.lbal'
+PartBunch::setSolver[2]> Initializing solver: NONE
+PartBunch::setBins[2]> Solver FS1 has no binning command attached, not using binning.
+PartBunch::pre_run[2]> Starting pre_run...
+OPAL-X[2]> * BCHandler<3>: [OPEN, OPEN, OPEN]
+OPAL-X> * Use r to specify correlations
+OPAL-X[2]> * Particle sampling / sampler setup for all emission sources done.
+OPAL-X> 
+OPAL-X> * ************** B U N C H ********************************************************* 
+OPAL-X> * CONTAINER       = 0
+OPAL-X> * PARTICLES       = 1000000
+OPAL-X> * CHARGE          = -1.000000e-09 (Cb) 
+OPAL-X> * QM STORAGE MODE = SINGLE
+OPAL-X> * <EKIN>          = 1.026 [keV]
+OPAL-X> * <dEKIN>         = 71.338 [keV]
+OPAL-X> * INTEGRATOR      = LF2
+OPAL-X> * MIN R (origin)  = (   -299.95466 ,    -37.29735 ,     -3.51235 ) [mm]
+OPAL-X> * MAX R (max ext) = (    299.98717 ,     37.73153 ,      3.52846 ) [mm]
+OPAL-X> * RMS R           = (     98.72380 ,      9.86749 ,      0.98566 ) [mm]
+OPAL-X> * RMS P           = ( 9.867677e-03 , 9.855391e-04 , 1.971495e-03 ) [beta gamma]
+OPAL-X> * Mean R          = ( -1.055595e-04 , -8.288763e-06 , -5.842980e-07 ) [m]
+OPAL-X> * Mean P          = ( -9.029066e-06 , -3.493117e-07 , 6.259120e-02 ) [beta gamma]
+OPAL-X> * MESH SPACING    = (     76.49258 ,      9.56618 ,      0.89770 ) [mm]
+OPAL-X> * COMPDOM INCR    = 1.000000e+00 (%) 
+OPAL-X> * FIELD LAYOUT    = Domain = {[0:7:1],[0:7:1],[0:7:1]}
+OPAL-X> Total number of boxes = 1
+OPAL-X>     Box 0 {[0:7:1],[0:7:1],[0:7:1]}
+OPAL-X> 
+OPAL-X> * Centroid : 
+OPAL-X> * -1.055595e+02 -9.029066e+00 -8.288763e+00 -3.493117e-01 -5.842980e-01 6.259120e+04 
+OPAL-X> * Cov Matrix : 
+OPAL-X> * 9.746389e-03 9.590208e-05 3.898642e-04 8.997884e-06 1.818963e-07 9.717756e-05 
+OPAL-X> * 9.590208e-05 9.737105e-05 3.805052e-06 6.043605e-08 2.325847e-08 2.406600e-07 
+OPAL-X> * 3.898642e-04 3.805052e-06 9.736744e-05 4.250379e-08 4.043101e-08 8.759501e-06 
+OPAL-X> * 8.997884e-06 6.043605e-08 4.250379e-08 9.712874e-07 2.419276e-07 4.210033e-08 
+OPAL-X> * 1.818963e-07 2.325847e-08 4.043101e-08 2.419276e-07 9.715186e-07 8.656911e-09 
+OPAL-X> * 9.717756e-05 2.406600e-07 8.759501e-06 4.210033e-08 8.656911e-09 3.886794e-06 
+OPAL-X> * * ********************************************************************************** 
+OPAL-X> 
+OPAL-X> * D1 gone live
+ParallelTracker::execute[2]> Dump initial phase space done.
+OPAL-X> * OrbitThreader dt_m= 1e-12
+OPAL-X> * OrbitThreader maxDistance= 1.00019
+OPAL-X> * OrbitThreader #elements  = 1
+OPAL-X> 
+OPAL-X> * Size of map 1 sections 
+OPAL-X> * Key: (0.000000 - 1.000004) number of overlapping elements 1
+OPAL-X> *                            D1
+OPAL-X> 
+OPAL-X> * Creating new file for data: 'data/Dist-multivariate_ElementPositions.sdds'
+OPAL-X> * Track start at: 11:19:46, t= 0.000 [fs]; zstart at: 0.000 [um]
+OPAL-X> * Initial dt = 1.000 [ps]
+OPAL-X> * Max integration steps = 1, next step = 0
+OPAL-X>                dt [ns]           zStop [m]        num Steps [1]
+OPAL-X> ->         1.000000e-12        1.000000e+00                   1
+PartBunch::performBunchSanityChecks[2]> ========= Done performing PartBunch sanity checks... =========
+ParallelTracker::execute[2]> Starting track with dt = 1.000 [ps], track steps = 0 to 1.
+OPAL-X> * 11:19:46 Step      0 container[0] at 18.728 [um], t= 1.000 [ps], E=1.026 [keV]
+OPAL-X[2]> * Wrote beam statistics.
+OPAL-X[2]> * Dump phase space of last step
+OPAL-X> * D1 gone off
+OPAL-X> 
+OPAL-X> * Done executing ParallelTracker at 11:19:46
+OPAL-X> 
+OPAL-X> * End of input stream 'Dist-multivariate.in'
+Timings> ---------------------------------------------
+Timings>      Timing results for 1 rank(s):
+Timings> ---------------------------------------------
+Timings> mainTimer........... Wall tot =   0.815888
+Timings> 
+Timings> Write Stat.......... Wall max =  0.0035852
+Timings>                      Wall avg =  0.0035852
+Timings>                      Wall min =  0.0035852
+Timings> 
+Timings> Write H5-File....... Wall max =   0.323226
+Timings>                      Wall avg =   0.323226
+Timings>                      Wall min =   0.323226
+Timings> 
+Timings> samplingTime........ Wall max =  0.0241318
+Timings>                      Wall avg =  0.0241318
+Timings>                      Wall min =  0.0241318
+Timings> 
+Timings> Sampling............ Wall max = 0.00981758
+Timings>                      Wall avg = 0.00981758
+Timings>                      Wall min = 0.00981758
+Timings> 
+Timings> particleBC.......... Wall max = 0.000533609
+Timings>                      Wall avg = 0.000533609
+Timings>                      Wall min = 0.000533609
+Timings> 
+Timings> updateParticle...... Wall max =          0
+Timings>                      Wall avg =          0
+Timings>                      Wall min =          0
+Timings> 
+Timings> TIntegration1....... Wall max = 0.000245515
+Timings>                      Wall avg = 0.000245515
+Timings>                      Wall min = 0.000245515
+Timings> 
+Timings> TIntegration2....... Wall max = 0.00031727
+Timings>                      Wall avg = 0.00031727
+Timings>                      Wall min = 0.00031727
+Timings> 
+Timings> External field eval. Wall max = 0.000440164
+Timings>                      Wall avg = 0.000440164
+Timings>                      Wall min = 0.000440164
+Timings> 
+Timings> Binaryrepart........ Wall max =          0
+Timings>                      Wall avg =          0
+Timings>                      Wall min =          0
+Timings> 
+Timings> OrbThreader......... Wall max =   0.396158
+Timings>                      Wall avg =   0.396158
+Timings>                      Wall min =   0.396158
+Timings> 
+Timings> ---------------------------------------------
