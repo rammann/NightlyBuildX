@@ -1,7 +1,0 @@
-{
-  "timestamp": "2026-04-08_11-19-15",
-  "build_dir": "/psi/home/ammann_r/build",
-  "tests_dir": "/psi/home/ammann_r/regression-tests-x/RegressionTests",
-  "opalx_exe": "/psi/home/ammann_r/build/src/opalx",
-  "selected_tests": []
-}

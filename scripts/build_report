@@ -24,6 +24,79 @@ def _abspath(p: str) -> str:
     return os.path.abspath(p)
 
 
+def _plots_available() -> bool:
+    try:
+        import matplotlib  # noqa: F401
+        return True
+    except Exception:
+        return False
+
+
+def _has_missing_plot_links(results: dict, run_dir: str) -> bool:
+    for sim in (results or {}).get("simulations", []):
+        for t in sim.get("tests", []):
+            if t.get("type") != "stat":
+                continue
+            # Broken checks do not have plottable data.
+            if t.get("state") == "broken":
+                continue
+            plot_rel = t.get("plot")
+            if not plot_rel:
+                return True
+            if not os.path.isfile(os.path.join(run_dir, plot_rel)):
+                return True
+    return False
+
+
+def _read_results(results_path: str) -> Optional[dict]:
+    if not os.path.isfile(results_path):
+        return None
+    try:
+        with open(results_path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return None
+
+
+def _index_stale(index_path: str, results_path: str) -> bool:
+    if not os.path.isfile(index_path):
+        return True
+    try:
+        with open(index_path, "r", encoding="utf-8", errors="replace") as f:
+            idx_txt = f.read()
+        if "No regression simulations executed." in idx_txt:
+            return True
+    except Exception:
+        return True
+    if os.path.isfile(results_path):
+        try:
+            return os.path.getmtime(index_path) < os.path.getmtime(results_path)
+        except OSError:
+            return True
+    return False
+
+
+def _run_state(run_dir: str, generate_plots: bool) -> tuple[str, Optional[dict]]:
+    raw_dir = os.path.join(run_dir, "raw")
+    index_path = os.path.join(run_dir, "index.html")
+    results_path = os.path.join(run_dir, "results.json")
+    results = _read_results(results_path)
+    has_raw = os.path.isdir(raw_dir)
+    has_sims = bool((results or {}).get("simulations"))
+    if results is None:
+        return ("missing_results", None) if has_raw else ("missing_raw_data", None)
+    if not has_sims:
+        return ("missing_results", results) if has_raw else ("results_without_html", results)
+    # Missing plots must be handled before the index.html fast path; otherwise the first
+    # build only re-renders HTML from execution-only results.json (no plot keys) and skips
+    # StatTest/plot generation until a second invocation.
+    if generate_plots and _has_missing_plot_links(results, run_dir):
+        return ("results_without_plots", results) if has_raw else ("results_without_html", results)
+    if _index_stale(index_path, results_path):
+        return ("results_without_html", results)
+    return ("complete", results)
+
+
 def _git_rev(path: str) -> str:
     try:
         res = subprocess.run(
@@ -90,6 +163,55 @@ def _scan_tests(base_dir: str) -> List[str]:
     return sorted(names)
 
 
+def _resolve_tests_dir(
+    tests_dir_override: Optional[str],
+    meta_tests_dir: Optional[str],
+    nightlybuildx_dir: str,
+) -> Optional[str]:
+    candidates: List[str] = []
+    if tests_dir_override:
+        candidates.append(tests_dir_override)
+    if meta_tests_dir:
+        candidates.append(meta_tests_dir)
+
+    env_dir = os.getenv("REGRESSION_TESTS_DIR")
+    if env_dir:
+        candidates.append(env_dir)
+
+    repo_root = os.path.abspath(os.path.join(nightlybuildx_dir, ".."))
+    candidates.extend(
+        [
+            os.path.join(repo_root, "regression-tests-x", "RegressionTests"),
+            os.path.join(repo_root, "regression-tests-x"),
+        ]
+    )
+
+    cwd = os.getcwd()
+    candidates.extend(
+        [
+            os.path.join(cwd, "regression-tests-x", "RegressionTests"),
+            os.path.join(cwd, "regression-tests-x"),
+        ]
+    )
+
+    seen = set()
+    for cand in candidates:
+        if not cand:
+            continue
+        p = os.path.abspath(cand)
+        if p in seen:
+            continue
+        seen.add(p)
+        if not os.path.isdir(p):
+            continue
+        nested = os.path.join(p, "RegressionTests")
+        if os.path.isdir(nested):
+            p = nested
+        if _scan_tests(p):
+            return p
+    return None
+
+
 def _parse_rt_line(line: str) -> Tuple[str, str, float]:
     nameparams = str.split(line, "\"")
     var = nameparams[1]
@@ -105,6 +227,7 @@ def _build_one_sim(
     tmp_root: str,
     run_logs_dir: str,
     run_plots_dir: str,
+    generate_plots: bool,
 ) -> dict:
     sim_test_dir = os.path.join(tests_dir, simname)
     sim_raw_dir = os.path.join(raw_dir, simname)
@@ -207,14 +330,18 @@ def _build_one_sim(
             continue
         for stem in stat_stems:
             root = TempXMLElement("Test")
-            st = StatTest(var, quant, eps, sim_tmp_dir, stem, plot_dirname=simname)
+            st = StatTest(
+                var, quant, eps, sim_tmp_dir, stem,
+                plot_dirname=simname, generate_plot=generate_plots
+            )
             st.checkResult(root)
             sim_result["tests"].append(getattr(st, "last_result", None) or {})
 
     sim_plot_out_dir = os.path.join(run_plots_dir, simname)
     os.makedirs(sim_plot_out_dir, exist_ok=True)
-    for p in pathlib.Path(sim_tmp_dir).glob("*.png"):
-        shutil.copy(str(p), os.path.join(sim_plot_out_dir, p.name))
+    if generate_plots:
+        for p in pathlib.Path(sim_tmp_dir).glob("*.png"):
+            shutil.copy(str(p), os.path.join(sim_plot_out_dir, p.name))
 
     return sim_result
 
@@ -230,21 +357,26 @@ def _load_unit_summary(run_dir: str) -> dict:
         return {}
 
 
-def _build_one_run(run_dir: str, tests_dir_override: Optional[str], report_root: str) -> bool:
+def _build_one_run(
+    run_dir: str,
+    tests_dir_override: Optional[str],
+    report_root: str,
+    nightlybuildx_dir: str,
+    generate_plots: bool,
+) -> bool:
     raw_dir = os.path.join(run_dir, "raw")
+    state, existing_results = _run_state(run_dir, generate_plots)
+    if state == "complete":
+        return False
+    if state == "results_without_html" and existing_results is not None:
+        write_report_assets(report_root)
+        write_run_report(report_root=report_root, run_dir=run_dir, results=existing_results)
+        return True
+    if state == "missing_raw_data":
+        return False
+    # missing_results or results_without_plots -> rebuild from raw
     if not os.path.isdir(raw_dir):
         return False
-    index_path = os.path.join(run_dir, "index.html")
-    results_path = os.path.join(run_dir, "results.json")
-    if os.path.isfile(index_path) and os.path.isfile(results_path):
-        try:
-            with open(results_path, "r", encoding="utf-8") as f:
-                existing = json.load(f)
-            has_sims = bool(existing.get("simulations"))
-        except Exception:
-            has_sims = False
-        if has_sims:
-            return False
 
     meta = {}
     meta_path = os.path.join(run_dir, "run-meta.json")
@@ -255,9 +387,12 @@ def _build_one_run(run_dir: str, tests_dir_override: Optional[str], report_root:
         except Exception:
             meta = {}
 
-    tests_dir = tests_dir_override or meta.get("tests_dir")
-    if not tests_dir or not os.path.isdir(tests_dir):
-        raise RuntimeError(f"tests directory not found for run {run_dir}; pass --tests")
+    tests_dir = _resolve_tests_dir(tests_dir_override, meta.get("tests_dir"), nightlybuildx_dir)
+    if not tests_dir:
+        raise RuntimeError(
+            f"tests directory not found for run {run_dir}; "
+            "checked run metadata, --tests, REGRESSION_TESTS_DIR, and local regression-tests-x"
+        )
 
     selected = meta.get("selected_tests") or []
     if selected:
@@ -305,6 +440,7 @@ def _build_one_run(run_dir: str, tests_dir_override: Optional[str], report_root:
             tmp_root=tmp_root,
             run_logs_dir=run_logs_dir,
             run_plots_dir=run_plots_dir,
+            generate_plots=generate_plots,
         )
         run_results["simulations"].append(sim_result)
         for t in sim_result.get("tests", []):
@@ -350,6 +486,13 @@ def main() -> None:
     report_root = _abspath(args.report_root) if args.report_root else os.path.join(nightlybuildx_dir, "report")
     tests_dir = _abspath(args.tests) if args.tests else None
     os.makedirs(report_root, exist_ok=True)
+    plots_ok = _plots_available()
+    if not plots_ok:
+        print(
+            "WARNING: matplotlib is not available. Reports will be built without plots.\n"
+            "Install with: python3 -m pip install matplotlib",
+            file=sys.stderr,
+        )
 
     candidates = _iter_candidate_runs(nightlybuildx_dir)
     if args.run:
@@ -359,7 +502,7 @@ def main() -> None:
     skipped = 0
     for run_dir in candidates:
         try:
-            changed = _build_one_run(run_dir, tests_dir, report_root)
+            changed = _build_one_run(run_dir, tests_dir, report_root, nightlybuildx_dir, plots_ok)
             if changed:
                 built += 1
             else:

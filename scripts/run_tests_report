@@ -1,13 +1,7 @@
 #!/usr/bin/env bash
 
 #
-# Local regression test runner for OPALX.
-#
-# Contract:
-# - You build OPALX yourself (this script never compiles).
-# - You provide the regression tests directory (this script does not clone/pull).
-# - This script runs regression tests using the provided build, produces matplotlib
-#   plots for .rt-defined stat quantities, and generates a modern HTML report.
+# Local shortcut: run tests, then build report.
 #
 
 set -o errexit
@@ -16,9 +10,6 @@ set -o pipefail
 declare -ri EC_ARG_ERROR=1
 declare -ri EC_RUNTIME_ERROR=20
 
-declare -r today="$(date +%Y-%m-%d)"
-declare -r time="$(date +%H-%M-%S)"
-declare -r timestamp="${today}_${time}"
 
 die() {
   (( $1 > 0 )) && exec 1>&2
@@ -31,13 +22,11 @@ usage() {
 Usage:
   run_tests_report --build <path/to/build> --tests <path/to/RegressionTests> [--unittests on|off] [--] [test1 test2 ...]
 
-Runs OPALX regression tests using an existing build.
+Runs run_tests + build_report for the same local timestamp.
 
 What it does:
-  1) Optionally runs unit tests (`ctest -L unit`) in the build directory (default: on; use --unittests off to skip)
-  2) Runs all regression tests in the given tests folder (or a subset if test names are provided)
-  3) Generates matplotlib plots (reference vs generated + difference) for .rt stat quantities
-  4) Writes a static HTML report under NightlyBuildX/runs/<timestamp>/ and updates NightlyBuildX/report/index.html
+  1) Calls run_tests (local mode only) to generate outputs + results.json
+  2) Calls build_report --run <same timestamp> to generate HTML report pages
 
 Required:
   --build <dir>   Build directory containing the OPALX executable at <dir>/src/opalx
@@ -46,6 +35,7 @@ Required:
 Options:
   --unittests on|off   Run or skip unit tests (default: on).
 Notes:
+  - --remote is not allowed in run_tests_report (local-only shortcut).
   - Any args after -- are treated as regression test names to run.
 EOF
   exit ${EC_ARG_ERROR}
@@ -62,7 +52,6 @@ declare -r bindir="${abs_scriptname%/*}"
 declare -r nightlybuildx_dir="${bindir%/*}"
 
 declare -r report_root="${nightlybuildx_dir}/report"
-declare -r runs_root="${nightlybuildx_dir}/runs"
 
 declare build_dir=""
 declare tests_dir=""
@@ -98,6 +87,9 @@ while (( $# > 0 )); do
         * ) die ${EC_ARG_ERROR} "ERROR: --unittests must be on or off, got: ${ut_val}" ;;
       esac
       ;;
+    --remote )
+      die ${EC_ARG_ERROR} "ERROR: run_tests_report is local-only. Use run_tests --remote on clusters."
+      ;;
     -h|-\?|--help )
       usage
       ;;
@@ -122,28 +114,7 @@ done
 
 [[ -n "${build_dir}" ]] || usage
 [[ -n "${tests_dir}" ]] || usage
-build_dir="$(python3 -c "import os, sys; print(os.path.abspath(sys.argv[1]))" "${build_dir}")"
-[[ -d "${build_dir}" ]] || die ${EC_ARG_ERROR} "ERROR: --build is not a directory: ${build_dir}"
-tests_dir="$(python3 -c "import os, sys; print(os.path.abspath(sys.argv[1]))" "${tests_dir}")"
-[[ -d "${tests_dir}" ]] || die ${EC_ARG_ERROR} "ERROR: --tests is not a directory: ${tests_dir}"
-
-# Accept either a direct RegressionTests dir or a regression-tests-x repo root.
-# If a nested RegressionTests directory exists, prefer it.
-if [[ -d "${tests_dir}/RegressionTests" ]]; then
-  tests_dir="${tests_dir}/RegressionTests"
-fi
-
-declare -r opalx_exe="${build_dir}/src/opalx"
-[[ -f "${opalx_exe}" ]] || die ${EC_ARG_ERROR} "ERROR: OPALX executable not found at: ${opalx_exe}"
-[[ -x "${opalx_exe}" ]] || die ${EC_ARG_ERROR} "ERROR: OPALX executable is not executable: ${opalx_exe}"
-
-declare -r run_dir="${runs_root}/${timestamp}"
-declare -r run_logs_dir="${run_dir}/logs"
-declare -r run_plots_dir="${run_dir}/plots"
-declare -r unit_log_file="${run_logs_dir}/unit-tests.out"
-declare -r unit_summary_file="${run_dir}/unit-tests-summary.json"
-
-mkdir -p "${report_root}" "${run_logs_dir}" "${run_plots_dir}"
+declare -r timestamp="$(date +%Y-%m-%d_%H-%M-%S)"
 
 _fmt_init() {
   if [[ -t 1 ]] && [[ -z "${NO_COLOR:-}" ]]; then
@@ -161,132 +132,31 @@ _fmt_init() {
 }
 
 main() {
-  local reg_exit=0
-  local unit_exit=0
   _fmt_init
 
   echo ""
   echo "${_D}────────────────────────────────────────────────────────${_X}"
-  echo "${_B}${_C}OPALX regression${_X} ${_D}· full report + HTML${_X}"
+  echo "${_B}${_C}OPALX regression${_X} ${_D}· local shortcut (run + report)${_X}"
   echo "${_D}────────────────────────────────────────────────────────${_X}"
   echo ""
   printf '  %sBuild%s      %s%s%s\n' "${_B}" "${_X}" "${_D}" "${build_dir}" "${_X}"
   printf '  %sTests%s      %s%s%s\n' "${_B}" "${_X}" "${_D}" "${tests_dir}" "${_X}"
   printf '  %sUnit tests%s  %s%s%s\n' "${_B}" "${_X}" "${_D}" "${do_unittests}" "${_X}"
-  printf '  %sOutput run%s  %s%s%s\n' "${_B}" "${_X}" "${_M}" "${run_dir}" "${_X}"
+  printf '  %sTimestamp%s  %s%s%s\n' "${_B}" "${_X}" "${_M}" "${timestamp}" "${_X}"
   echo ""
 
-  local -r runner="${bindir}/run-reg-tests.py"
+  local -a run_cmd=()
+  run_cmd+=( "${bindir}/run_tests" )
+  run_cmd+=( "--build=${build_dir}" )
+  run_cmd+=( "--tests=${tests_dir}" )
+  run_cmd+=( "--unittests=${do_unittests}" )
+  run_cmd+=( "--timestamp=${timestamp}" )
+  run_cmd+=( "--" )
+  run_cmd+=( "${tests[@]}" )
+  "${run_cmd[@]}"
 
-  local -a opts=()
-  opts+=( "--base-dir=${tests_dir}" )
-  opts+=( "--publish-dir=${run_dir}" )
-  opts+=( "--plots-dir=${run_plots_dir}" )
-  opts+=( "--logs-dir=${run_logs_dir}" )
-  opts+=( "--build-dir=${build_dir}" )
-  opts+=( "--opalx-exe=${opalx_exe}" )
-  opts+=( "--timestamp=${timestamp}" )
-  opts+=( "--unit-tests-summary=${unit_summary_file}" )
-  opts+=( "--report-root=${report_root}" )
-
-  if [[ "${do_unittests}" == "on" ]]; then
-    echo "${_B}${_Y}▶ Unit tests${_X} ${_D}(ctest -L unit)${_X}"
-    echo "  ${_D}${build_dir}${_X}"
-    echo ""
-    {
-      echo "# ctest -L unit"
-      echo "# started_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-      ( cd "${build_dir}" && ctest -L unit )
-    } > "${unit_log_file}" 2>&1 || unit_exit=$?
-
-    python3 - "$unit_log_file" "$unit_exit" "$unit_summary_file" <<'PY'
-import json
-import re
-import sys
-
-log_path = sys.argv[1]
-unit_exit = int(sys.argv[2])
-out_path = sys.argv[3]
-
-content = ""
-try:
-    with open(log_path, "r", encoding="utf-8", errors="replace") as f:
-        content = f.read()
-except OSError:
-    content = ""
-
-total = 0
-failed = 0
-passed = 0
-
-m = re.search(r"(\d+)\s+tests?\s+failed\s+out\s+of\s+(\d+)", content, re.IGNORECASE)
-if m:
-    failed = int(m.group(1))
-    total = int(m.group(2))
-else:
-    m = re.search(r"(\d+)%\s+tests?\s+passed,\s+(\d+)\s+tests?\s+failed\s+out\s+of\s+(\d+)", content, re.IGNORECASE)
-    if m:
-        failed = int(m.group(2))
-        total = int(m.group(3))
-    else:
-        m = re.search(r"No tests were found!!!", content, re.IGNORECASE)
-        if m:
-            total = 0
-            failed = 0
-
-passed = max(total - failed, 0)
-if total == 0 and unit_exit == 0:
-    state = "passed"
-elif unit_exit == 0 and failed == 0:
-    state = "passed"
-else:
-    state = "failed"
-
-payload = {
-    "state": state,
-    "total": total,
-    "passed": passed,
-    "failed": failed,
-    "log_relpath": "logs/unit-tests.out",
-}
-
-with open(out_path, "w", encoding="utf-8") as f:
-    json.dump(payload, f, indent=2, sort_keys=False)
-PY
-
-    if (( unit_exit != 0 )); then
-      echo "${_R}Unit tests failed (exit=${unit_exit}); continuing with regression tests.${_X}"
-      echo ""
-    fi
-  else
-    echo "${_D}Unit tests skipped (--unittests off).${_X}"
-    echo ""
-    {
-      echo "# Unit tests skipped (--unittests off)"
-      echo "# skipped_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-    } > "${unit_log_file}"
-    python3 - "$unit_summary_file" <<'PY'
-import json
-import sys
-
-path = sys.argv[1]
-payload = {
-    "state": "skipped",
-    "total": 0,
-    "passed": 0,
-    "failed": 0,
-    "log_relpath": "logs/unit-tests.out",
-}
-with open(path, "w", encoding="utf-8") as f:
-    json.dump(payload, f, indent=2, sort_keys=False)
-PY
-  fi
-
-  python3 "${runner}" "${opts[@]}" -- "${tests[@]}" || reg_exit=$?
-
-  if (( unit_exit != 0 || reg_exit != 0 )); then
-    die ${EC_RUNTIME_ERROR} "ERROR: tests failed (unit_exit=${unit_exit}, regression_exit=${reg_exit})"
-  fi
+  echo "${_B}${_Y}▶ Build report${_X}"
+  python3 "${bindir}/build_report" --run "${timestamp}"
 
   echo ""
   echo "${_G}${_B}Done.${_X} Open ${_M}${report_root}/index.html${_X}"

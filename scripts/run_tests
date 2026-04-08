@@ -6,9 +6,7 @@ set -o pipefail
 declare -ri EC_ARG_ERROR=1
 declare -ri EC_RUNTIME_ERROR=20
 
-declare -r today="$(date +%Y-%m-%d)"
-declare -r time="$(date +%H-%M-%S)"
-declare -r timestamp="${today}_${time}"
+declare timestamp_override=""
 
 die() {
   (( $1 > 0 )) && exec 1>&2
@@ -30,6 +28,9 @@ Required:
 Options:
   --unittests on|off   Run or skip unit tests (default: on)
   --remote             Save run under runs_remote/<timestamp>/ instead of runs/<timestamp>/
+
+Internal:
+  --timestamp <value>  Fixed timestamp (used by run_tests_report chaining)
 EOF
   exit ${EC_ARG_ERROR}
 }
@@ -88,6 +89,13 @@ while (( $# > 0 )); do
     --remote )
       run_subdir="runs_remote"
       ;;
+    --timestamp|--timestamp=* )
+      if [[ "$1" == *=* ]]; then
+        timestamp_override="${1#*=}"
+      else
+        timestamp_override="${2:-}"; shift 1
+      fi
+      ;;
     -h|-\?|--help )
       usage
       ;;
@@ -128,6 +136,7 @@ declare run_parent="${runs_root}"
 if [[ "${run_subdir}" == "runs_remote" ]]; then
   run_parent="${runs_remote_root}"
 fi
+declare -r timestamp="${timestamp_override:-$(date +%Y-%m-%d_%H-%M-%S)}"
 declare -r run_dir="${run_parent}/${timestamp}"
 declare -r run_logs_dir="${run_dir}/logs"
 declare -r run_raw_dir="${run_dir}/raw"
@@ -165,6 +174,7 @@ main() {
   printf '  %sBuild%s      %s%s%s\n' "${_B}" "${_X}" "${_D}" "${build_dir}" "${_X}"
   printf '  %sTests%s      %s%s%s\n' "${_B}" "${_X}" "${_D}" "${tests_dir}" "${_X}"
   printf '  %sUnit tests%s  %s%s%s\n' "${_B}" "${_X}" "${_D}" "${do_unittests}" "${_X}"
+  printf '  %sMode%s       %s%s%s\n' "${_B}" "${_X}" "${_D}" "${run_subdir}" "${_X}"
   printf '  %sRaw run dir%s %s%s%s\n' "${_B}" "${_X}" "${_M}" "${run_dir}" "${_X}"
   echo ""
 
@@ -246,7 +256,7 @@ PY
 
   python3 "${runner}" "${opts[@]}" -- "${tests[@]}" || reg_exit=$?
 
-  python3 - "$run_meta_file" "$timestamp" "$build_dir" "$tests_dir" "$opalx_exe" "${tests[@]}" <<'PY'
+  python3 - "$run_meta_file" "$timestamp" "$build_dir" "$tests_dir" "$opalx_exe" "$run_subdir" "${tests[@]}" <<'PY'
 import json
 import os
 import sys
@@ -256,14 +266,39 @@ timestamp = sys.argv[2]
 build_dir = sys.argv[3]
 tests_dir = sys.argv[4]
 opalx_exe = sys.argv[5]
-tests = sys.argv[6:]
+run_mode = sys.argv[6]
+tests = sys.argv[7:]
+
+def parse_cache(cache_path):
+    info = {"Build Type": "-", "Kokkos Architecture": "-", "Device": "CPU", "Compiler": "-"}
+    if not os.path.isfile(cache_path):
+        return info
+    cache = {}
+    with open(cache_path, "r", encoding="utf-8", errors="replace") as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("//") or line.startswith("#") or ":" not in line or "=" not in line:
+                continue
+            key_type, value = line.split("=", 1)
+            key, _ = key_type.split(":", 1)
+            cache[key] = value
+    info["Build Type"] = cache.get("CMAKE_BUILD_TYPE") or "-"
+    arch = sorted(k.replace("Kokkos_ARCH_", "") for k, v in cache.items() if k.startswith("Kokkos_ARCH_") and str(v).upper() in {"ON", "TRUE", "1"})
+    info["Kokkos Architecture"] = ", ".join(arch) if arch else "-"
+    cuda = str(cache.get("Kokkos_ENABLE_CUDA", "OFF")).upper() in {"ON", "TRUE", "1"}
+    hip = str(cache.get("Kokkos_ENABLE_HIP", "OFF")).upper() in {"ON", "TRUE", "1"}
+    info["Device"] = "GPU" if (cuda or hip) else "CPU"
+    info["Compiler"] = cache.get("CMAKE_CXX_COMPILER") or cache.get("CMAKE_C_COMPILER") or "-"
+    return info
 
 payload = {
     "timestamp": timestamp,
+    "run_mode": run_mode,
     "build_dir": build_dir,
     "tests_dir": tests_dir,
     "opalx_exe": opalx_exe,
     "selected_tests": tests,
+    "build_info": parse_cache(os.path.join(build_dir, "CMakeCache.txt")),
 }
 with open(meta_path, "w", encoding="utf-8") as f:
     json.dump(payload, f, indent=2, sort_keys=False)
