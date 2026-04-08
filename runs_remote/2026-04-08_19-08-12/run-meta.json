@@ -1,0 +1,14 @@
+{
+  "timestamp": "2026-04-08_19-08-12",
+  "run_mode": "runs_remote",
+  "build_dir": "/psi/home/ammann_r/build",
+  "tests_dir": "/psi/home/ammann_r/regression-tests-x/RegressionTests",
+  "opalx_exe": "/psi/home/ammann_r/build/src/opalx",
+  "selected_tests": [],
+  "build_info": {
+    "Build Type": "Debug",
+    "Kokkos Architecture": "AMPERE80",
+    "Device": "GPU",
+    "Compiler": "/opt/psi/Programming/gcc/12.3.0/bin/g++"
+  }
+}
