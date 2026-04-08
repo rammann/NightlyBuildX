@@ -21,13 +21,14 @@ class StatTest:
         - name: name of the smb file to be checked
     """
 
-    def __init__(self, var, quant, eps, prefix, name, suffix = ".stat", plot_dirname=None):
+    def __init__(self, var, quant, eps, prefix, name, suffix = ".stat", plot_dirname=None, generate_plot=True):
         self.var = var
         self.quant = quant
         self.eps = eps
         self.prefix = prefix
         self.name = name
         self.plot_dirname = plot_dirname if plot_dirname is not None else name
+        self.generate_plot = generate_plot
         self.fname = os.path.join(self.prefix, self.name) + suffix
         self.reference_fname = os.path.join(self.prefix, "reference", self.name) + suffix
         
@@ -128,7 +129,7 @@ class StatTest:
         root.appendChild(eps_report)
         root.appendChild(delta_report)
 
-        plotfilename = self._plot()
+        plotfilename = self._plot() if self.generate_plot else ""
         plot_rel = None
         if plotfilename:
             fname = os.path.basename(plotfilename)

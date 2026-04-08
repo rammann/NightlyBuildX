@@ -17,6 +17,7 @@ from OpalRegressionTests.reporter import TempXMLElement
 import OpalRegressionTests.stattest as stattest
 from OpalRegressionTests.sitegen import write_report_assets, write_run_report, update_overview
 from OpalRegressionTests.beam_meta import load_beam_containers_from_out
+from OpalRegressionTests.console_theme import Theme
 
 
 def discover_stat_stems(reference_dir: str, simname: str) -> list:
@@ -103,7 +104,7 @@ def _select_build_info(cache: dict) -> dict:
     return info
 
 class OpalRegressionTests:
-    def __init__(self, base_dir, tests, opalx_args, publish_dir=None, timestamp=None, plots_dir=None, logs_dir=None, opalx_exe=None, build_dir=None, unit_tests_summary=None):
+    def __init__(self, base_dir, tests, opalx_args, publish_dir=None, timestamp=None, plots_dir=None, logs_dir=None, opalx_exe=None, build_dir=None, unit_tests_summary=None, execution_only=False, raw_data_dir=None, report_root=None):
         self.base_dir = base_dir
         self.tests = tests
         self.opalx_args = opalx_args
@@ -118,6 +119,9 @@ class OpalRegressionTests:
         self.rundir = sys.path[0]
         self.today = datetime.datetime.today()
         self.timestamp = timestamp
+        self.execution_only = execution_only
+        self.raw_data_dir = raw_data_dir
+        self.report_root = report_root
 
     def run(self):
         rep = Reporter()
@@ -154,12 +158,22 @@ class OpalRegressionTests:
             run_results["build"]["cmake_cache"] = cache_path if os.path.isfile(cache_path) else None
             run_results["build"]["info"] = _select_build_info(cache)
 
-        for test in self.tests:
-            rt = RegressionTest(self.base_dir, test, self.opalx_args, timestamp=self.timestamp)
+        n_tests = len(self.tests)
+        for idx, test in enumerate(self.tests, start=1):
+            rt = RegressionTest(
+                self.base_dir,
+                test,
+                self.opalx_args,
+                timestamp=self.timestamp,
+                execution_only=self.execution_only,
+                raw_data_dir=self.raw_data_dir,
+                progress=(idx, n_tests),
+            )
             rt.run()
             self.totalNrTests += rt.totalNrTests
             self.totalNrPassed += rt.totalNrPassed
-            rt.publish(self.plots_dir, self.logs_dir)
+            if not self.execution_only:
+                rt.publish(self.plots_dir, self.logs_dir)
             if rt.result is not None:
                 run_results["simulations"].append(rt.result)
 
@@ -188,10 +202,11 @@ class OpalRegressionTests:
             with open(results_json, "w", encoding="utf-8") as f:
                 json.dump(run_results, f, indent=2, sort_keys=False)
 
-            report_root = os.path.abspath(os.path.join(self.publish_dir, "..", ".."))
-            write_report_assets(report_root)
-            write_run_report(report_root=report_root, run_dir=self.publish_dir, results=run_results)
-            update_overview(report_root=report_root)
+            if not self.execution_only:
+                report_root = self.report_root or os.path.abspath(os.path.join(self.publish_dir, "..", ".."))
+                write_report_assets(report_root)
+                write_run_report(report_root=report_root, run_dir=self.publish_dir, results=run_results)
+                update_overview(report_root=report_root)
 
         rep.appendReport("\nSummary: {passed} / {total} tests passed \n".format(
             passed = self.totalNrPassed,
@@ -270,11 +285,14 @@ class OpalRegressionTests:
 
 class RegressionTest:
 
-    def __init__(self, base_dir, simname, args, timestamp=None):
+    def __init__(self, base_dir, simname, args, timestamp=None, execution_only=False, raw_data_dir=None, progress=None):
         self.dirname = os.path.join (base_dir, simname)
         self.simname = simname
         self.args = args
         self.timestamp = timestamp or datetime.datetime.today().strftime("%Y-%m-%d_%H-%M")
+        self.execution_only = execution_only
+        self.raw_data_dir = raw_data_dir
+        self._progress = progress  # (index, total) or None
         self.jobnr = -1
         self.totalNrTests = 0
         self.totalNrPassed = 0
@@ -283,6 +301,27 @@ class RegressionTest:
         self.result = None
         self._staged_data_dir = None
         self._baseline_files = set()
+
+    def _export_raw_outputs(self):
+        """
+        Copy newly-generated files for this simulation to raw_data_dir/<simname>/.
+        """
+        if not self.raw_data_dir:
+            return
+        src_dir = pathlib.Path(self.dirname)
+        dst_dir = pathlib.Path(self.raw_data_dir) / self.simname
+        dst_dir.mkdir(parents=True, exist_ok=True)
+        for p in src_dir.iterdir():
+            if not p.is_file():
+                continue
+            if p.name.startswith("."):
+                continue
+            if p.name in self._baseline_files:
+                continue
+            try:
+                shutil.copy(str(p), str(dst_dir / p.name))
+            except Exception:
+                continue
 
     def _stage_generated_files(self):
         """
@@ -434,9 +473,9 @@ class RegressionTest:
         os.chdir(self.dirname)
         self.queue = q
         self._cleanup()
-        self._validateReferenceFiles()
         # Capture baseline file set (static inputs shipped with the test)
         self._baseline_files = {p.name for p in pathlib.Path(self.dirname).iterdir() if p.is_file()}
+        self._validateReferenceFiles()
 
         rep = Reporter()
         rep.appendReport("Run regression test " + self.simname + "\n")
@@ -569,6 +608,9 @@ class RegressionTest:
                     "plot": None,
                 })
 
+        if self.execution_only:
+            self._export_raw_outputs()
+
     def publish(self, plots_dir, logs_dir):
         # Copy plots into plots_dir/<simname>/
         if plots_dir:
@@ -593,29 +635,40 @@ class RegressionTest:
     def mpirun(self):
         os.chdir(self.dirname)
         rep = Reporter()
+        T = Theme()
         if not os.access (self.simname+".local", os.X_OK):
             rep.appendReport ("Error: "+self.simname+".local file could not be executed\n")
 
         cmd = [ os.path.join(".", self.simname + ".local") ]
         cmd.extend(self.args)
+        prog = ""
+        if self._progress:
+            prog = T.dim(" [{}/{}]".format(self._progress[0], self._progress[1]))
+        print()
+        print(T.rule())
+        print(
+            T.green("▶ ")
+            + T.s(self.simname, "1", "36")
+            + prog
+        )
+        print("  " + T.dim(cmd[0]))
+        sys.stdout.flush()
         with open(self.simname + "-RT.o", "wb") as f:
             try:
-                print ("Running test: " + cmd[0])
-                sys.stdout.flush ()
                 proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                 out, err = proc.communicate(timeout=1200)
-                print (out.decode ('utf-8'))
-                print (err.decode ('utf-8'))
+                print(out.decode("utf-8", errors="replace"), end="")
+                print(err.decode("utf-8", errors="replace"), end="")
                 f.write (out)
                 f.write (err)
             except subprocess.TimeoutExpired:
                 msg = "%s timed out!!!" % (cmd)
-                print(msg)
+                print(T.red(msg))
                 rep.appendReport(msg)
                 return False
             except subprocess.CalledProcessError as e:
                 msg = "%s exited with code %d" % (cmd, e.returncode)
-                print(msg)
+                print(T.red(msg))
                 rep.appendReport(msg)
                 return False
 
@@ -687,7 +740,8 @@ class RegressionTest:
             stem = stat_stem if stat_stem is not None else self.simname
             rtest = stattest.StatTest(
                 var, params[0], float(params[1]),
-                self.dirname, stem, plot_dirname=self.simname)
+                self.dirname, stem, plot_dirname=self.simname,
+                generate_plot=(not self.execution_only))
         else:
             return None
 

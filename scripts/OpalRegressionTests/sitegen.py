@@ -5,6 +5,7 @@ import os
 import pathlib
 import datetime
 from collections import OrderedDict
+from typing import Optional
 
 
 ASSETS_DIRNAME = "assets"
@@ -684,8 +685,8 @@ def write_run_report(report_root: str, run_dir: str, results: dict) -> None:
     _write_text(os.path.join(run_dir, "index.html"), html_doc)
 
 
-def _list_run_entries(report_root: str, subdir: str) -> list[str]:
-    d = os.path.join(report_root, subdir)
+def _list_run_entries(runs_dir: str) -> list[str]:
+    d = runs_dir
     pathlib.Path(d).mkdir(parents=True, exist_ok=True)
     names: list[str] = []
     try:
@@ -698,10 +699,9 @@ def _list_run_entries(report_root: str, subdir: str) -> list[str]:
     return names
 
 
-def _build_run_cards(report_root: str, subdir: str, href_prefix: str) -> list[str]:
-    runs_dir = os.path.join(report_root, subdir)
+def _build_run_cards(runs_dir: str, href_prefix: str) -> list[str]:
     cards: list[str] = []
-    for run in _list_run_entries(report_root, subdir)[:200]:
+    for run in _list_run_entries(runs_dir)[:200]:
         rpath = os.path.join(runs_dir, run, "results.json")
         try:
             with open(rpath, "r", encoding="utf-8") as f:
@@ -745,9 +745,15 @@ def _build_run_cards(report_root: str, subdir: str, href_prefix: str) -> list[st
     return cards
 
 
-def update_overview(report_root: str) -> None:
-    local_cards = _build_run_cards(report_root, "runs", "runs/")
-    remote_cards = _build_run_cards(report_root, "runs_remote", "runs_remote/")
+def update_overview(report_root: str, runs_dir: Optional[str] = None, runs_remote_dir: Optional[str] = None) -> None:
+    nightlybuildx_dir = os.path.dirname(os.path.abspath(report_root))
+    local_runs_dir = os.path.abspath(runs_dir) if runs_dir else os.path.join(nightlybuildx_dir, "runs")
+    remote_runs_dir = os.path.abspath(runs_remote_dir) if runs_remote_dir else os.path.join(nightlybuildx_dir, "runs_remote")
+    local_href = os.path.relpath(local_runs_dir, report_root).rstrip("/") + "/"
+    remote_href = os.path.relpath(remote_runs_dir, report_root).rstrip("/") + "/"
+
+    local_cards = _build_run_cards(local_runs_dir, local_href)
+    remote_cards = _build_run_cards(remote_runs_dir, remote_href)
 
     local_body = (
         "".join(local_cards)
@@ -757,7 +763,7 @@ def update_overview(report_root: str) -> None:
     remote_body = (
         "".join(remote_cards)
         if remote_cards
-        else '<div class="subtitle">No remote runs yet. On another machine run <span class="simname">run_tests ... --save</span>, then copy or commit the timestamped folder under <span class="simname">runs_remote/</span>.</div>'
+        else '<div class="subtitle">No remote runs yet. On another machine run <span class="simname">run_tests ... --remote</span>, then copy or commit the timestamped folder under <span class="simname">NightlyBuildX/runs_remote/</span>.</div>'
     )
 
     index = f"""<!doctype html>
@@ -777,8 +783,8 @@ def update_overview(report_root: str) -> None:
         <div class="subtitle">Report root: <span class="simname">{_escape(report_root)}</span></div>
       </div>
       <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:flex-end;">
-        <div class="pill"><span class="dot ok"></span><a href="runs/">runs/</a></div>
-        <div class="pill"><span class="dot ok"></span><a href="runs_remote/">runs_remote/</a></div>
+        <div class="pill"><span class="dot ok"></span><a href="{_escape(local_href)}">runs/</a></div>
+        <div class="pill"><span class="dot ok"></span><a href="{_escape(remote_href)}">runs_remote/</a></div>
       </div>
     </div>
     <div class="card p">

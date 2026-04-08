@@ -6,6 +6,7 @@ import shutil
 import argparse
 
 import OpalRegressionTests
+from OpalRegressionTests.console_theme import Theme
 from OpalRegressionTests.regressiontest import discover_stat_stems
 
 """
@@ -90,6 +91,16 @@ def main(argv):
                         dest='unit_tests_summary', type=str,
                         help='path to JSON summary for unit tests',
                         default=None)
+    parser.add_argument('--report-root',
+                        dest='report_root', type=str,
+                        help='report root (for assets/index generation)',
+                        default=None)
+    parser.add_argument('--execution-only',
+                        dest='execution_only', action='store_true',
+                        help='execute tests and collect raw outputs only (no comparisons, plots, or reports)')
+    parser.add_argument('--raw-data-dir',
+                        dest='raw_data_dir', type=str,
+                        help='directory where raw per-test outputs are copied')
 
     # Support passing tests after a literal "--" (run_tests uses this)
     if "--" in argv:
@@ -109,9 +120,9 @@ def main(argv):
         base_dir = os.path.abspath(args.base_dir)
     else:
         base_dir = os.getcwd()
+    T = Theme()
     if not os.path.isdir (base_dir):
-        print ("%s - regression tests base directory does not exist!" %
-               (base_dir))
+        print(T.red("%s - regression tests base directory does not exist!" % (base_dir)))
         sys.exit(1)
 
     # Directory for publishing results of the regression tests
@@ -133,7 +144,7 @@ def main(argv):
             opalx = os.path.abspath(opalx)
 
     if not opalx or not (os.path.isfile(opalx) and os.access(opalx, os.X_OK)):
-        print("opalx - not found or not executable. Provide --opalx-exe.")
+        print(T.red("opalx - not found or not executable. Provide --opalx-exe."))
         sys.exit(1)
 
     os.environ['OPALX_EXE_PATH'] = os.path.dirname(opalx)
@@ -143,18 +154,25 @@ def main(argv):
     if args.tests:
         for test in args.tests:
             if not test in tests:
-                print("%s - unknown test!" % (test))
+                print(T.red("%s - unknown test!" % (test)))
                 sys.exit(1)
         tests = sorted(args.tests)
 
-    print ("Running the following regression tests:")
-    for test in tests:
-        print ("    {}".format(test))
+    print()
+    print(T.rule())
+    print(T.s("Regression tests", "1", "36") + T.dim("  ({} cases)".format(len(tests))))
+    print(T.rule())
+    for i, test in enumerate(tests, 1):
+        print("  " + T.dim("{:>3}.".format(i)) + "  " + T.s(test, "1"))
+    print(T.rule())
+    print()
     
     plots_dir = os.path.abspath(args.plots_dir) if args.plots_dir else None
     logs_dir = os.path.abspath(args.logs_dir) if args.logs_dir else None
     build_dir = os.path.abspath(args.build_dir) if args.build_dir else None
     unit_tests_summary = os.path.abspath(args.unit_tests_summary) if args.unit_tests_summary else None
+    raw_data_dir = os.path.abspath(args.raw_data_dir) if args.raw_data_dir else None
+    report_root = os.path.abspath(args.report_root) if args.report_root else None
 
     rt = OpalRegressionTests.OpalRegressionTests(
         base_dir=base_dir,
@@ -167,6 +185,9 @@ def main(argv):
         opalx_exe=opalx,
         build_dir=build_dir,
         unit_tests_summary=unit_tests_summary,
+        execution_only=args.execution_only,
+        raw_data_dir=raw_data_dir,
+        report_root=report_root,
     )
     rt.run()
 

@@ -2,7 +2,6 @@
 results/
 workspace/
 .DS_Store
-report/runs/
 report/assets/
 report/index.html
 runs/
@@ -10,6 +9,6 @@ scripts/__pycache__/
 regression-tests-x/
 # Ignore PNGs by default; remote HTML reports need plot files in git under runs_remote/
 *.png
-!report/runs_remote/
-!report/runs_remote/**/
-!report/runs_remote/**/*.png
+!runs_remote/
+!runs_remote/**/
+!runs_remote/**/*.png

@@ -1,0 +1,377 @@
+#!/usr/bin/env python3
+
+import argparse
+import json
+import os
+import pathlib
+import shutil
+import subprocess
+import sys
+from typing import Dict, List, Optional, Tuple
+
+_script_dir = os.path.dirname(os.path.abspath(__file__))
+if _script_dir not in sys.path:
+    sys.path.insert(0, _script_dir)
+
+from OpalRegressionTests.beam_meta import load_beam_containers_from_out
+from OpalRegressionTests.regressiontest import discover_stat_stems
+from OpalRegressionTests.reporter import TempXMLElement
+from OpalRegressionTests.sitegen import update_overview, write_report_assets, write_run_report
+from OpalRegressionTests.stattest import StatTest
+
+
+def _abspath(p: str) -> str:
+    return os.path.abspath(p)
+
+
+def _git_rev(path: str) -> str:
+    try:
+        res = subprocess.run(
+            ["git", "rev-parse", "HEAD"],
+            cwd=path,
+            capture_output=True,
+            text=True,
+            timeout=10,
+        )
+    except Exception:
+        return ""
+    return (res.stdout or "").strip() if res.returncode == 0 else ""
+
+
+def _parse_cmake_cache(cache_path: str) -> Dict[str, str]:
+    out: Dict[str, str] = {}
+    if not os.path.isfile(cache_path):
+        return out
+    with open(cache_path, "r", encoding="utf-8", errors="replace") as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("//") or line.startswith("#"):
+                continue
+            if ":" not in line or "=" not in line:
+                continue
+            key_type, value = line.split("=", 1)
+            key, _typ = key_type.split(":", 1)
+            out[key] = value
+    return out
+
+
+def _select_build_info(cache: Dict[str, str]) -> Dict[str, str]:
+    info: Dict[str, str] = {}
+    info["Build Type"] = cache.get("CMAKE_BUILD_TYPE") or "-"
+    arch_on: List[str] = []
+    for k, v in cache.items():
+        if k.startswith("Kokkos_ARCH_") and str(v).upper() in {"ON", "TRUE", "1"}:
+            arch_on.append(k.replace("Kokkos_ARCH_", ""))
+    arch_on.sort()
+    info["Kokkos Architecture"] = (", ".join(arch_on) if arch_on else "-")
+    cuda = str(cache.get("Kokkos_ENABLE_CUDA", "OFF")).upper() in {"ON", "TRUE", "1"}
+    hip = str(cache.get("Kokkos_ENABLE_HIP", "OFF")).upper() in {"ON", "TRUE", "1"}
+    info["Device"] = "GPU" if (cuda or hip) else "CPU"
+    info["Compiler"] = cache.get("CMAKE_CXX_COMPILER") or cache.get("CMAKE_C_COMPILER") or "-"
+    return info
+
+
+def _scan_tests(base_dir: str) -> List[str]:
+    names: List[str] = []
+    for ent in os.scandir(base_dir):
+        if ent.name.startswith(".") or not ent.is_dir():
+            continue
+        test = ent.name
+        if not os.path.isfile(os.path.join(base_dir, test, f"{test}.in")):
+            continue
+        ref_dir = os.path.join(base_dir, test, "reference")
+        if not os.path.isdir(ref_dir):
+            continue
+        if not discover_stat_stems(ref_dir, test):
+            continue
+        if os.path.isfile(os.path.join(base_dir, test, "disabled")):
+            continue
+        names.append(test)
+    return sorted(names)
+
+
+def _parse_rt_line(line: str) -> Tuple[str, str, float]:
+    nameparams = str.split(line, "\"")
+    var = nameparams[1]
+    params = str.split(nameparams[2].lstrip(), " ")
+    return var, params[0], float(params[1])
+
+
+def _build_one_sim(
+    simname: str,
+    tests_dir: str,
+    raw_dir: str,
+    run_dir: str,
+    tmp_root: str,
+    run_logs_dir: str,
+    run_plots_dir: str,
+) -> dict:
+    sim_test_dir = os.path.join(tests_dir, simname)
+    sim_raw_dir = os.path.join(raw_dir, simname)
+    sim_tmp_dir = os.path.join(tmp_root, simname)
+    shutil.rmtree(sim_tmp_dir, ignore_errors=True)
+    os.makedirs(sim_tmp_dir, exist_ok=True)
+
+    sim_result = {
+        "name": simname,
+        "date": "",
+        "description": "",
+        "tests": [],
+        "log_relpath": None,
+        "beam_containers": [],
+    }
+
+    ref_src = os.path.join(sim_test_dir, "reference")
+    ref_dst = os.path.join(sim_tmp_dir, "reference")
+    if os.path.isdir(ref_src):
+        shutil.copytree(ref_src, ref_dst, dirs_exist_ok=True)
+
+    if os.path.isdir(sim_raw_dir):
+        for p in pathlib.Path(sim_raw_dir).iterdir():
+            if p.is_file():
+                shutil.copy(str(p), os.path.join(sim_tmp_dir, p.name))
+
+    log_src = None
+    for candidate in [f"{simname}-RT.o", f"{simname}.out"]:
+        cpath = os.path.join(sim_tmp_dir, candidate)
+        if os.path.isfile(cpath):
+            log_src = cpath
+            break
+    if log_src:
+        os.makedirs(run_logs_dir, exist_ok=True)
+        log_dst = os.path.join(run_logs_dir, f"{simname}.out")
+        shutil.copy(log_src, log_dst)
+        sim_result["log_relpath"] = os.path.relpath(log_dst, run_dir)
+        if not os.path.isfile(os.path.join(sim_tmp_dir, f"{simname}.out")):
+            shutil.copy(log_src, os.path.join(sim_tmp_dir, f"{simname}.out"))
+
+    stat_stems = discover_stat_stems(ref_dst, simname) if os.path.isdir(ref_dst) else []
+    out_path_meta = os.path.join(sim_tmp_dir, f"{simname}.out")
+    beam_containers, beam_meta_warn = load_beam_containers_from_out(out_path_meta, stat_stems, simname)
+    sim_result["beam_containers"] = beam_containers
+    if beam_meta_warn:
+        sim_result["beam_metadata_warning"] = beam_meta_warn
+
+    rt_path = os.path.join(sim_test_dir, f"{simname}.rt")
+    if not os.path.isfile(rt_path):
+        sim_result["description"] = "No definition file (.rt) found."
+        sim_result["tests"].append(
+            {
+                "type": "execution",
+                "var": "execution",
+                "mode": "run",
+                "eps": "-",
+                "delta": "-",
+                "state": "broken",
+                "plot": None,
+            }
+        )
+        return sim_result
+
+    with open(rt_path, "r", encoding="utf-8", errors="replace") as f:
+        lines = [line.rstrip("\n") for line in f]
+    sim_result["description"] = (lines[0].lstrip("\"").rstrip("\"") if lines else "")
+
+    for line in lines[1:]:
+        if "stat" not in line:
+            continue
+        try:
+            var, quant, eps = _parse_rt_line(line)
+        except Exception:
+            sim_result["tests"].append(
+                {
+                    "type": "stat",
+                    "var": "?",
+                    "mode": "-",
+                    "eps": "-",
+                    "delta": "-",
+                    "state": "broken",
+                    "plot": None,
+                    "stat_stem": "-",
+                }
+            )
+            continue
+        if not stat_stems:
+            sim_result["tests"].append(
+                {
+                    "type": "stat",
+                    "var": var,
+                    "mode": quant,
+                    "eps": str(eps),
+                    "delta": "-",
+                    "state": "broken",
+                    "plot": None,
+                    "stat_stem": "-",
+                }
+            )
+            continue
+        for stem in stat_stems:
+            root = TempXMLElement("Test")
+            st = StatTest(var, quant, eps, sim_tmp_dir, stem, plot_dirname=simname)
+            st.checkResult(root)
+            sim_result["tests"].append(getattr(st, "last_result", None) or {})
+
+    sim_plot_out_dir = os.path.join(run_plots_dir, simname)
+    os.makedirs(sim_plot_out_dir, exist_ok=True)
+    for p in pathlib.Path(sim_tmp_dir).glob("*.png"):
+        shutil.copy(str(p), os.path.join(sim_plot_out_dir, p.name))
+
+    return sim_result
+
+
+def _load_unit_summary(run_dir: str) -> dict:
+    path = os.path.join(run_dir, "unit-tests-summary.json")
+    if not os.path.isfile(path):
+        return {}
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return {}
+
+
+def _build_one_run(run_dir: str, tests_dir_override: Optional[str], report_root: str) -> bool:
+    raw_dir = os.path.join(run_dir, "raw")
+    if not os.path.isdir(raw_dir):
+        return False
+    index_path = os.path.join(run_dir, "index.html")
+    results_path = os.path.join(run_dir, "results.json")
+    if os.path.isfile(index_path) and os.path.isfile(results_path):
+        try:
+            with open(results_path, "r", encoding="utf-8") as f:
+                existing = json.load(f)
+            has_sims = bool(existing.get("simulations"))
+        except Exception:
+            has_sims = False
+        if has_sims:
+            return False
+
+    meta = {}
+    meta_path = os.path.join(run_dir, "run-meta.json")
+    if os.path.isfile(meta_path):
+        try:
+            with open(meta_path, "r", encoding="utf-8") as f:
+                meta = json.load(f)
+        except Exception:
+            meta = {}
+
+    tests_dir = tests_dir_override or meta.get("tests_dir")
+    if not tests_dir or not os.path.isdir(tests_dir):
+        raise RuntimeError(f"tests directory not found for run {run_dir}; pass --tests")
+
+    selected = meta.get("selected_tests") or []
+    if selected:
+        tests = selected
+    else:
+        tests = _scan_tests(tests_dir)
+
+    run_name = os.path.basename(run_dir)
+    build_dir = meta.get("build_dir")
+    cache_path = os.path.join(build_dir, "CMakeCache.txt") if build_dir else ""
+    cache = _parse_cmake_cache(cache_path) if cache_path else {}
+
+    run_results = {
+        "timestamp": meta.get("timestamp") or run_name,
+        "started_at": meta.get("timestamp") or run_name,
+        "opalx_exe": meta.get("opalx_exe"),
+        "build": {
+            "build_dir": build_dir,
+            "cmake_cache": (cache_path if cache and os.path.isfile(cache_path) else None),
+            "info": _select_build_info(cache),
+        },
+        "revisions": {
+            "code_full": _git_rev(os.path.abspath(os.path.join(_script_dir, "..", "..", "opalx"))),
+            "tests_full": _git_rev(tests_dir),
+        },
+        "summary": {"total": 0, "passed": 0, "failed": 0, "broken": 0},
+        "simulations": [],
+        "unit_tests": _load_unit_summary(run_dir),
+    }
+
+    run_logs_dir = os.path.join(run_dir, "logs")
+    run_plots_dir = os.path.join(run_dir, "plots")
+    tmp_root = os.path.join(run_dir, ".build_report_tmp")
+    shutil.rmtree(tmp_root, ignore_errors=True)
+    os.makedirs(tmp_root, exist_ok=True)
+    os.makedirs(run_logs_dir, exist_ok=True)
+    os.makedirs(run_plots_dir, exist_ok=True)
+
+    for simname in tests:
+        sim_result = _build_one_sim(
+            simname=simname,
+            tests_dir=tests_dir,
+            raw_dir=raw_dir,
+            run_dir=run_dir,
+            tmp_root=tmp_root,
+            run_logs_dir=run_logs_dir,
+            run_plots_dir=run_plots_dir,
+        )
+        run_results["simulations"].append(sim_result)
+        for t in sim_result.get("tests", []):
+            state = t.get("state")
+            run_results["summary"]["total"] += 1
+            if state == "passed":
+                run_results["summary"]["passed"] += 1
+            elif state == "failed":
+                run_results["summary"]["failed"] += 1
+            elif state == "broken":
+                run_results["summary"]["broken"] += 1
+
+    shutil.rmtree(tmp_root, ignore_errors=True)
+
+    with open(os.path.join(run_dir, "results.json"), "w", encoding="utf-8") as f:
+        json.dump(run_results, f, indent=2, sort_keys=False)
+
+    write_report_assets(report_root)
+    write_run_report(report_root=report_root, run_dir=run_dir, results=run_results)
+    return True
+
+
+def _iter_candidate_runs(nightlybuildx_dir: str) -> List[str]:
+    runs: List[str] = []
+    for sub in ("runs", "runs_remote"):
+        base = os.path.join(nightlybuildx_dir, sub)
+        os.makedirs(base, exist_ok=True)
+        for name in sorted(os.listdir(base), reverse=True):
+            p = os.path.join(base, name)
+            if os.path.isdir(p):
+                runs.append(p)
+    return runs
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Build missing reports from raw regression run data.")
+    parser.add_argument("--tests", type=str, default=None, help="RegressionTests directory (overrides run-meta.json)")
+    parser.add_argument("--report-root", type=str, default=None, help="NightlyBuildX/report root")
+    parser.add_argument("--run", type=str, default=None, help="Single run timestamp to build (searches NightlyBuildX/runs and NightlyBuildX/runs_remote)")
+    args = parser.parse_args()
+
+    nightlybuildx_dir = os.path.dirname(_script_dir)
+    report_root = _abspath(args.report_root) if args.report_root else os.path.join(nightlybuildx_dir, "report")
+    tests_dir = _abspath(args.tests) if args.tests else None
+    os.makedirs(report_root, exist_ok=True)
+
+    candidates = _iter_candidate_runs(nightlybuildx_dir)
+    if args.run:
+        candidates = [p for p in candidates if os.path.basename(p) == args.run]
+
+    built = 0
+    skipped = 0
+    for run_dir in candidates:
+        try:
+            changed = _build_one_run(run_dir, tests_dir, report_root)
+            if changed:
+                built += 1
+            else:
+                skipped += 1
+        except Exception as e:
+            print(f"ERROR: {run_dir}: {e}", file=sys.stderr)
+            continue
+
+    write_report_assets(report_root)
+    update_overview(report_root)
+    print(f"build_report: built={built} skipped={skipped}")
+
+
+if __name__ == "__main__":
+    main()
