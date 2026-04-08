@@ -1,6 +1,7 @@
 import sys
 import subprocess
 import glob
+import tempfile
 if sys.version_info < (3, 0):
     import commands  # noqa: F401 used in _getRevision* Python 2 branches
 import datetime
@@ -167,6 +168,7 @@ class OpalRegressionTests:
                 timestamp=self.timestamp,
                 execution_only=self.execution_only,
                 raw_data_dir=self.raw_data_dir,
+                publish_dir_fallback=self.publish_dir,
                 progress=(idx, n_tests),
             )
             rt.run()
@@ -285,13 +287,26 @@ class OpalRegressionTests:
 
 class RegressionTest:
 
-    def __init__(self, base_dir, simname, args, timestamp=None, execution_only=False, raw_data_dir=None, progress=None):
-        self.dirname = os.path.join (base_dir, simname)
+    def __init__(
+        self,
+        base_dir,
+        simname,
+        args,
+        timestamp=None,
+        execution_only=False,
+        raw_data_dir=None,
+        publish_dir_fallback=None,
+        progress=None,
+    ):
+        self.base_dir = base_dir
         self.simname = simname
+        self.srcdir = os.path.join(base_dir, simname)
+        self.workdir = None
         self.args = args
         self.timestamp = timestamp or datetime.datetime.today().strftime("%Y-%m-%d_%H-%M")
         self.execution_only = execution_only
         self.raw_data_dir = raw_data_dir
+        self.publish_dir_fallback = publish_dir_fallback
         self._progress = progress  # (index, total) or None
         self.jobnr = -1
         self.totalNrTests = 0
@@ -302,14 +317,51 @@ class RegressionTest:
         self._staged_data_dir = None
         self._baseline_files = set()
 
+    def _prepare_workdir_layout(self) -> None:
+        """
+        Materialize a run directory outside the regression source tree so OPALX
+        never writes .out/.stat (or other outputs) under --tests.
+        """
+        if not os.path.isdir(self.srcdir):
+            raise FileNotFoundError("Regression test directory not found: " + self.srcdir)
+        if self.raw_data_dir:
+            parent = os.path.abspath(self.raw_data_dir)
+        elif self.publish_dir_fallback:
+            parent = os.path.abspath(os.path.join(self.publish_dir_fallback, "_regtest_work"))
+        else:
+            parent = os.path.join(tempfile.gettempdir(), "opalx_regtest_work")
+        os.makedirs(parent, exist_ok=True)
+        self.workdir = os.path.join(parent, self.simname)
+        dst = self.workdir
+        shutil.rmtree(dst, ignore_errors=True)
+        os.makedirs(dst, exist_ok=True)
+        for name in os.listdir(self.srcdir):
+            if name == "reference":
+                continue
+            sp = os.path.join(self.srcdir, name)
+            dp = os.path.join(dst, name)
+            if os.path.isdir(sp):
+                shutil.copytree(sp, dp, symlinks=True)
+            else:
+                shutil.copy2(sp, dp)
+        ref_src = os.path.join(self.srcdir, "reference")
+        if os.path.isdir(ref_src):
+            ref_dst = os.path.join(dst, "reference")
+            try:
+                os.symlink(os.path.abspath(ref_src), ref_dst)
+            except OSError:
+                shutil.copytree(ref_src, ref_dst, symlinks=True)
+
     def _export_raw_outputs(self):
         """
         Copy newly-generated files for this simulation to raw_data_dir/<simname>/.
         """
         if not self.raw_data_dir:
             return
-        src_dir = pathlib.Path(self.dirname)
+        src_dir = pathlib.Path(self.workdir)
         dst_dir = pathlib.Path(self.raw_data_dir) / self.simname
+        if os.path.abspath(str(src_dir)) == os.path.abspath(str(dst_dir)):
+            return
         dst_dir.mkdir(parents=True, exist_ok=True)
         for p in src_dir.iterdir():
             if not p.is_file():
@@ -330,7 +382,7 @@ class RegressionTest:
         We move only *newly created* files (compared to the baseline captured
         before the simulation run) to avoid moving static inputs shipped with the test.
         """
-        data_dir = os.path.join(self.dirname, "data")
+        data_dir = os.path.join(self.workdir, "data")
         pathlib.Path(data_dir).mkdir(parents=True, exist_ok=True)
 
         moved_any = False
@@ -342,7 +394,7 @@ class RegressionTest:
             "disabled",
         }
 
-        for p in pathlib.Path(self.dirname).iterdir():
+        for p in pathlib.Path(self.workdir).iterdir():
             if not p.is_file():
                 continue
             if p.name.startswith("."):
@@ -387,8 +439,8 @@ class RegressionTest:
         the simulation run
         """
         rep = Reporter()
-        os.chdir(self.dirname)
-        ref_abs = os.path.join(self.dirname, "reference")
+        os.chdir(self.workdir)
+        ref_abs = os.path.join(self.workdir, "reference")
         allok = True
         stems = discover_stat_stems(ref_abs, self.simname)
         if not stems:
@@ -421,8 +473,8 @@ class RegressionTest:
         """
         rep = Reporter()
         allok = True
-        os.chdir(self.dirname)
-        ref_abs = os.path.join(self.dirname, "reference")
+        os.chdir(self.workdir)
+        ref_abs = os.path.join(self.workdir, "reference")
         stems = discover_stat_stems(ref_abs, self.simname)
         if not stems:
             return True
@@ -470,11 +522,12 @@ class RegressionTest:
             os.remove (self.simname + ".out")
 
     def run(self, run_local = True, q = None):
-        os.chdir(self.dirname)
+        self._prepare_workdir_layout()
+        os.chdir(self.workdir)
         self.queue = q
         self._cleanup()
-        # Capture baseline file set (static inputs shipped with the test)
-        self._baseline_files = {p.name for p in pathlib.Path(self.dirname).iterdir() if p.is_file()}
+        # Capture baseline file set (materialized inputs under the workdir)
+        self._baseline_files = {p.name for p in pathlib.Path(self.workdir).iterdir() if p.is_file()}
         self._validateReferenceFiles()
 
         rep = Reporter()
@@ -511,9 +564,9 @@ class RegressionTest:
             "log_relpath": None,
             "beam_containers": [],
         }
-        ref_dir_meta = os.path.join(self.dirname, "reference")
+        ref_dir_meta = os.path.join(self.workdir, "reference")
         stat_stems_meta = discover_stat_stems(ref_dir_meta, self.simname)
-        out_path_meta = os.path.join(self.dirname, self.simname + ".out")
+        out_path_meta = os.path.join(self.workdir, self.simname + ".out")
         beam_containers, beam_meta_warn = load_beam_containers_from_out(
             out_path_meta, stat_stems_meta, self.simname
         )
@@ -534,7 +587,7 @@ class RegressionTest:
 
             rep.appendChild(simulation_report)
             # loop over all tests in rt file, first line is a comment, skip this line
-            ref_dir = os.path.join(self.dirname, "reference")
+            ref_dir = os.path.join(self.workdir, "reference")
             stat_stems = discover_stat_stems(ref_dir, self.simname)
             for i, test in enumerate(tests[1::]):
                 try:
@@ -622,7 +675,7 @@ class RegressionTest:
         # Copy the combined stdout/stderr log into logs_dir
         if logs_dir:
             pathlib.Path(logs_dir).mkdir(parents=True, exist_ok=True)
-            src = os.path.join(self.dirname, self.simname + "-RT.o")
+            src = os.path.join(self.workdir, self.simname + "-RT.o")
             if os.path.isfile(src):
                 dst = os.path.join(logs_dir, self.simname + ".out")
                 shutil.copy(src, dst)
@@ -633,7 +686,7 @@ class RegressionTest:
         self._stage_generated_files()
 
     def mpirun(self):
-        os.chdir(self.dirname)
+        os.chdir(self.workdir)
         rep = Reporter()
         T = Theme()
         if not os.access (self.simname+".local", os.X_OK):
@@ -678,7 +731,7 @@ class RegressionTest:
         # FIXME: we could create a sge file on the fly if no sge is specified
         # for a give test ("default sge")
         qsub_command = "qsub " + self.queue + " " + self.simname + ".sge"
-        qsub_command += "-v REG_TEST_DIR=" + self.dirname + ",OPALX_EXE_PATH=" + os.getenv("OPALX_EXE_PATH")
+        qsub_command += "-v REG_TEST_DIR=" + self.workdir + ",OPALX_EXE_PATH=" + os.getenv("OPALX_EXE_PATH")
         submit_out = subprocess.getoutput(qsub_command)
         self.jobnr = str.split(submit_out, " ")[2]
 
@@ -740,7 +793,7 @@ class RegressionTest:
             stem = stat_stem if stat_stem is not None else self.simname
             rtest = stattest.StatTest(
                 var, params[0], float(params[1]),
-                self.dirname, stem, plot_dirname=self.simname,
+                self.workdir, stem, plot_dirname=self.simname,
                 generate_plot=(not self.execution_only))
         else:
             return None

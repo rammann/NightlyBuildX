@@ -1,2 +1,0 @@
-# Plot assets for tracked remote regression reports (binary, not diffed as text)
-runs_remote/**/*.png binary

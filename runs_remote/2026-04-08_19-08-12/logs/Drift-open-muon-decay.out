@@ -1,0 +1,40 @@
+OPAL-X>               ____  _____        _       __   __
+OPAL-X> [1;32m
+OPAL-X> 
+OPAL-X>   ██████  ██████   █████  ██      ██   ██
+OPAL-X>  ██    ██ ██   ██ ██   ██ ██       ██ ██
+OPAL-X>  ██    ██ ██████  ███████ ██        ███
+OPAL-X>  ██    ██ ██      ██   ██ ██       ██ ██
+OPAL-X>   ██████  ██      ██   ██ ███████ ██   ██
+OPAL-X> 
+OPAL-X>          This is OPALX (Object Oriented Parallel Accelerator Library for Exascale)
+OPAL-X> 
+OPAL-X> [0m
+OPAL-X> 
+OPAL-X> OPALX is the performance portable version of OPAL :: Version 0.9
+OPAL-X>             git rev. f8123a3644151ab7fba8f2268e38acc12460e561
+OPAL-X> 
+OPAL-X> 
+OPAL-X>              (c) PSI, https://github.com/OPALX-project/OPALX
+OPAL-X> 
+OPAL-X> 
+OPAL-X> Please send cookies, goodies or other motivations (wine and beer ... ) 
+OPAL-X> to the OPAL developers https://github.com/OPALX-project/OPALX/issues
+OPAL-X> 
+OPAL-X> Time: 19:09:14 date: 08/04/2026
+OPAL-X> 
+OPAL-X> * Host:   Serial
+OPAL-X> * Device: Cuda
+OPAL-X> 
+OPAL-X> * Reading input stream 'Drift-open-muon-decay.in'
+OPAL-X> 
+OPAL-X> value: {OPALVERSION} = {900}
+OPAL-X> 
+OPAL-X> 
+OPAL-X> value: {EDES,P0} = {1e-09, 1.45367e-05}
+OPAL-X> 
+Error> 
+Error> *** Parse error detected by function "Object::parse()"
+Error> *** in line 50 of file "Drift-open-muon-decay.in" before token "=":
+Error>     Object "BEAM1" has no attribute "PHYSICSPROCESSES".
+Error>     Object "BEAM1" has no attribute "PHYSICSPROCESSES".

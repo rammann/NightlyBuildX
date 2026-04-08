@@ -2,13 +2,18 @@
 results/
 workspace/
 .DS_Store
-report/assets/
-report/index.html
+
+# Generated HTML site (overview + assets + per-run links)
+report/
+
 runs/
+
+# Per-run report HTML and plot trees (raw data under runs_remote may still be tracked)
+runs_remote/**/index.html
+runs_remote/**/plots/
+
 scripts/__pycache__/
 regression-tests-x/
-# Ignore PNGs by default; remote HTML reports need plot files in git under runs_remote/
+
+# Plot images anywhere under NightlyBuildX
 *.png
-!runs_remote/
-!runs_remote/**/
-!runs_remote/**/*.png

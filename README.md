@@ -54,5 +54,6 @@ python3 NightlyBuildX/scripts/build_report --tests <path-to-reg-tests> --report-
 ## Git tracking policy
 
 - `NightlyBuildX/runs/` is local-only and git-ignored.
-- `NightlyBuildX/runs_remote/` is git-tracked (including report PNG plots).
+- `NightlyBuildX/report/` is git-ignored (regenerate with `build_report`).
+- Under `runs_remote/<timestamp>/`, git ignores generated `index.html`, `plots/`, and `*.png`; other run artifacts (e.g. `raw/`, `logs/`, `results.json`, `run-meta.json`) may be tracked if you add them.
 

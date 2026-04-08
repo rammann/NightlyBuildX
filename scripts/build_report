@@ -144,6 +144,89 @@ def _select_build_info(cache: Dict[str, str]) -> Dict[str, str]:
     return info
 
 
+def _info_placeholder(v: object) -> bool:
+    if v is None:
+        return True
+    s = str(v).strip()
+    return s == "" or s == "-"
+
+
+def _read_run_meta_build_info(run_dir: str) -> Optional[dict]:
+    path = os.path.join(run_dir, "run-meta.json")
+    if not os.path.isfile(path):
+        return None
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            meta = json.load(f)
+    except Exception:
+        return None
+    bi = meta.get("build_info")
+    return bi if isinstance(bi, dict) else None
+
+
+def _resolve_build_info(
+    cache_path: str,
+    cache: Dict[str, str],
+    meta_build_info: Optional[dict],
+) -> Dict[str, str]:
+    """
+    Prefer a readable local CMakeCache when present; otherwise use build_info from
+    run-meta.json (recorded on the machine that ran the tests — needed for remote runs).
+    """
+    local = _select_build_info(cache)
+    meta_ok = bool(isinstance(meta_build_info, dict) and meta_build_info)
+    cache_ok = bool(cache_path and os.path.isfile(cache_path) and cache)
+
+    if cache_ok:
+        out = dict(local)
+        if meta_ok:
+            for k, v in meta_build_info.items():
+                if _info_placeholder(out.get(k)):
+                    out[k] = str(v) if v is not None else "-"
+        return out
+
+    out = dict(local)
+    if meta_ok:
+        for k, v in meta_build_info.items():
+            out[k] = str(v) if v is not None else "-"
+    return out
+
+
+def _refresh_build_info_in_results(run_dir: str, results: dict) -> None:
+    """Fill build.info from CMakeCache and/or run-meta.json (mutates results)."""
+    build = results.get("build") or {}
+    build_dir = build.get("build_dir")
+    cmake_cached = build.get("cmake_cache")
+    cache_path = ""
+    if isinstance(cmake_cached, str) and cmake_cached:
+        cache_path = cmake_cached
+    elif isinstance(build_dir, str) and build_dir:
+        cache_path = os.path.join(build_dir, "CMakeCache.txt")
+    cache = _parse_cmake_cache(cache_path) if cache_path else {}
+    meta_bi = _read_run_meta_build_info(run_dir)
+    info = _resolve_build_info(cache_path, cache, meta_bi)
+    slot = results.setdefault("build", {})
+    slot["info"] = info
+
+
+def _build_info_needs_refresh(run_dir: str, results: dict) -> bool:
+    meta_bi = _read_run_meta_build_info(run_dir)
+    if not meta_bi:
+        return False
+    build = results.get("build") or {}
+    build_dir = build.get("build_dir")
+    cmake_cached = build.get("cmake_cache")
+    cache_path = ""
+    if isinstance(cmake_cached, str) and cmake_cached:
+        cache_path = cmake_cached
+    elif isinstance(build_dir, str) and build_dir:
+        cache_path = os.path.join(build_dir, "CMakeCache.txt")
+    cache = _parse_cmake_cache(cache_path) if cache_path else {}
+    resolved = _resolve_build_info(cache_path, cache, meta_bi)
+    cur = build.get("info") or {}
+    return resolved != cur
+
+
 def _scan_tests(base_dir: str) -> List[str]:
     names: List[str] = []
     for ent in os.scandir(base_dir):
@@ -367,9 +450,25 @@ def _build_one_run(
     raw_dir = os.path.join(run_dir, "raw")
     state, existing_results = _run_state(run_dir, generate_plots)
     if state == "complete":
+        if existing_results and _build_info_needs_refresh(run_dir, existing_results):
+            _refresh_build_info_in_results(run_dir, existing_results)
+            try:
+                with open(os.path.join(run_dir, "results.json"), "w", encoding="utf-8") as f:
+                    json.dump(existing_results, f, indent=2, sort_keys=False)
+            except OSError:
+                pass
+            write_report_assets(report_root)
+            write_run_report(report_root=report_root, run_dir=run_dir, results=existing_results)
+            return True
         return False
     if state == "results_without_html" and existing_results is not None:
         write_report_assets(report_root)
+        _refresh_build_info_in_results(run_dir, existing_results)
+        try:
+            with open(os.path.join(run_dir, "results.json"), "w", encoding="utf-8") as f:
+                json.dump(existing_results, f, indent=2, sort_keys=False)
+        except OSError:
+            pass
         write_run_report(report_root=report_root, run_dir=run_dir, results=existing_results)
         return True
     if state == "missing_raw_data":
@@ -404,6 +503,9 @@ def _build_one_run(
     build_dir = meta.get("build_dir")
     cache_path = os.path.join(build_dir, "CMakeCache.txt") if build_dir else ""
     cache = _parse_cmake_cache(cache_path) if cache_path else {}
+    meta_bi = meta.get("build_info")
+    meta_bi = meta_bi if isinstance(meta_bi, dict) else None
+    build_info = _resolve_build_info(cache_path, cache, meta_bi)
 
     run_results = {
         "timestamp": meta.get("timestamp") or run_name,
@@ -411,8 +513,8 @@ def _build_one_run(
         "opalx_exe": meta.get("opalx_exe"),
         "build": {
             "build_dir": build_dir,
-            "cmake_cache": (cache_path if cache and os.path.isfile(cache_path) else None),
-            "info": _select_build_info(cache),
+            "cmake_cache": (cache_path if cache_path and os.path.isfile(cache_path) else None),
+            "info": build_info,
         },
         "revisions": {
             "code_full": _git_rev(os.path.abspath(os.path.join(_script_dir, "..", "..", "opalx"))),

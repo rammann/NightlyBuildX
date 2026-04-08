@@ -1,10 +1,10 @@
 {
   "timestamp": "2026-04-08_19-08-12",
-  "started_at": "2026-04-08T19:08:13.718777",
+  "started_at": "2026-04-08_19-08-12",
   "opalx_exe": "/psi/home/ammann_r/build/src/opalx",
   "build": {
     "build_dir": "/psi/home/ammann_r/build",
-    "cmake_cache": "/psi/home/ammann_r/build/CMakeCache.txt",
+    "cmake_cache": null,
     "info": {
       "Build Type": "Debug",
       "Kokkos Architecture": "AMPERE80",
@@ -13,8 +13,8 @@
     }
   },
   "revisions": {
-    "code_full": "",
-    "tests_full": "d4b7ac35e69b6ba564984382f7f8bcf78049e056"
+    "code_full": "845c2669310b1e8f08046e4c2d978dbe1d351938",
+    "tests_full": "b52d21d3727e4bbea250d749466592befe2ef309"
   },
   "summary": {
     "total": 143,
@@ -25,7 +25,7 @@
   "simulations": [
     {
       "name": "Dist-fromfile",
-      "date": "2026-04-08",
+      "date": "",
       "description": "Dist-fromfile: 1 step FROMFILE distribution read-in sanity check without BINNING element.",
       "tests": [
         {
@@ -35,7 +35,7 @@
           "eps": "1e-12",
           "delta": "0.0",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-fromfile/Dist-fromfile_rms_x.png",
           "stat_stem": "Dist-fromfile"
         },
         {
@@ -45,7 +45,7 @@
           "eps": "1e-12",
           "delta": "1.0842021724855044e-18",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-fromfile/Dist-fromfile_rms_y.png",
           "stat_stem": "Dist-fromfile"
         },
         {
@@ -55,7 +55,7 @@
           "eps": "1e-12",
           "delta": "8.673617379884035e-19",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-fromfile/Dist-fromfile_rms_s.png",
           "stat_stem": "Dist-fromfile"
         },
         {
@@ -65,7 +65,7 @@
           "eps": "1e-12",
           "delta": "2.0816681711721685e-17",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-fromfile/Dist-fromfile_rms_px.png",
           "stat_stem": "Dist-fromfile"
         },
         {
@@ -75,7 +75,7 @@
           "eps": "1e-12",
           "delta": "1.0408340855860843e-17",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-fromfile/Dist-fromfile_rms_py.png",
           "stat_stem": "Dist-fromfile"
         },
         {
@@ -85,7 +85,7 @@
           "eps": "1e-12",
           "delta": "1.0408340855860843e-17",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-fromfile/Dist-fromfile_rms_ps.png",
           "stat_stem": "Dist-fromfile"
         },
         {
@@ -95,7 +95,7 @@
           "eps": "1e-12",
           "delta": "0.0",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-fromfile/Dist-fromfile_emit_x.png",
           "stat_stem": "Dist-fromfile"
         },
         {
@@ -105,7 +105,7 @@
           "eps": "1e-12",
           "delta": "9.994988777600744e-20",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-fromfile/Dist-fromfile_emit_y.png",
           "stat_stem": "Dist-fromfile"
         },
         {
@@ -115,7 +115,7 @@
           "eps": "1e-12",
           "delta": "6.776263578034403e-21",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-fromfile/Dist-fromfile_emit_s.png",
           "stat_stem": "Dist-fromfile"
         },
         {
@@ -125,7 +125,7 @@
           "eps": "1e-12",
           "delta": "1.647743780205631e-20",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-fromfile/Dist-fromfile_mean_x.png",
           "stat_stem": "Dist-fromfile"
         },
         {
@@ -135,7 +135,7 @@
           "eps": "1e-12",
           "delta": "2.3420791863826426e-20",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-fromfile/Dist-fromfile_mean_y.png",
           "stat_stem": "Dist-fromfile"
         },
         {
@@ -145,7 +145,7 @@
           "eps": "1e-12",
           "delta": "1.1805521702356811e-20",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-fromfile/Dist-fromfile_mean_s.png",
           "stat_stem": "Dist-fromfile"
         },
         {
@@ -155,7 +155,7 @@
           "eps": "1e-10",
           "delta": "6.505213034913027e-19",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-fromfile/Dist-fromfile_energy.png",
           "stat_stem": "Dist-fromfile"
         },
         {
@@ -165,7 +165,7 @@
           "eps": "1e-12",
           "delta": "0.0",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-fromfile/Dist-fromfile_nBins.png",
           "stat_stem": "Dist-fromfile"
         },
         {
@@ -175,11 +175,11 @@
           "eps": "1e-12",
           "delta": "0.0",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-fromfile/Dist-fromfile_numParticles.png",
           "stat_stem": "Dist-fromfile"
         }
       ],
-      "log_relpath": null,
+      "log_relpath": "logs/Dist-fromfile.out",
       "beam_containers": [
         {
           "stat_stem": "Dist-fromfile",
@@ -201,7 +201,7 @@
     },
     {
       "name": "Dist-gauss",
-      "date": "2026-04-08",
+      "date": "",
       "description": "Dist-gauss: 1 step Gaussian distribution sanity without BINNING element.",
       "tests": [
         {
@@ -211,7 +211,7 @@
           "eps": "0.0001",
           "delta": "1.4239531874503733e-07",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-gauss/Dist-gauss_rms_x.png",
           "stat_stem": "Dist-gauss"
         },
         {
@@ -221,7 +221,7 @@
           "eps": "0.0001",
           "delta": "1.442418117601589e-05",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-gauss/Dist-gauss_rms_y.png",
           "stat_stem": "Dist-gauss"
         },
         {
@@ -231,7 +231,7 @@
           "eps": "0.0001",
           "delta": "5.762396819790003e-06",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-gauss/Dist-gauss_rms_s.png",
           "stat_stem": "Dist-gauss"
         },
         {
@@ -241,7 +241,7 @@
           "eps": "1e-05",
           "delta": "3.967886341420409e-10",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-gauss/Dist-gauss_rms_px.png",
           "stat_stem": "Dist-gauss"
         },
         {
@@ -251,7 +251,7 @@
           "eps": "1e-05",
           "delta": "1.6281197601393854e-09",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-gauss/Dist-gauss_rms_py.png",
           "stat_stem": "Dist-gauss"
         },
         {
@@ -261,7 +261,7 @@
           "eps": "1e-05",
           "delta": "3.510936483954303e-09",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-gauss/Dist-gauss_rms_ps.png",
           "stat_stem": "Dist-gauss"
         },
         {
@@ -271,7 +271,7 @@
           "eps": "1e-09",
           "delta": "5.338184700639598e-13",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-gauss/Dist-gauss_emit_x.png",
           "stat_stem": "Dist-gauss"
         },
         {
@@ -281,7 +281,7 @@
           "eps": "1e-09",
           "delta": "6.324496515179299e-12",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-gauss/Dist-gauss_emit_y.png",
           "stat_stem": "Dist-gauss"
         },
         {
@@ -291,7 +291,7 @@
           "eps": "1e-09",
           "delta": "2.893818103537563e-11",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-gauss/Dist-gauss_emit_s.png",
           "stat_stem": "Dist-gauss"
         },
         {
@@ -301,7 +301,7 @@
           "eps": "1e-09",
           "delta": "2.862510575796227e-20",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-gauss/Dist-gauss_mean_x.png",
           "stat_stem": "Dist-gauss"
         },
         {
@@ -311,7 +311,7 @@
           "eps": "1e-09",
           "delta": "4.679156367926042e-19",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-gauss/Dist-gauss_mean_y.png",
           "stat_stem": "Dist-gauss"
         },
         {
@@ -321,7 +321,7 @@
           "eps": "1e-09",
           "delta": "3.9301895071729788e-19",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-gauss/Dist-gauss_mean_s.png",
           "stat_stem": "Dist-gauss"
         },
         {
@@ -331,7 +331,7 @@
           "eps": "1e-09",
           "delta": "7.730491802249162e-10",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-gauss/Dist-gauss_energy.png",
           "stat_stem": "Dist-gauss"
         },
         {
@@ -341,7 +341,7 @@
           "eps": "1e-12",
           "delta": "0.0",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-gauss/Dist-gauss_nBins.png",
           "stat_stem": "Dist-gauss"
         },
         {
@@ -351,11 +351,11 @@
           "eps": "1e-12",
           "delta": "0.0",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-gauss/Dist-gauss_numParticles.png",
           "stat_stem": "Dist-gauss"
         }
       ],
-      "log_relpath": null,
+      "log_relpath": "logs/Dist-gauss.out",
       "beam_containers": [
         {
           "stat_stem": "Dist-gauss",
@@ -377,7 +377,7 @@
     },
     {
       "name": "Dist-gauss-bins",
-      "date": "2026-04-08",
+      "date": "",
       "description": "Dist-gauss-bins: 1 step Gaussian distribution sanity check with BINNING element.",
       "tests": [
         {
@@ -387,7 +387,7 @@
           "eps": "0.0001",
           "delta": "5.434801983018531e-06",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-gauss-bins/Dist-gauss-bins_rms_x.png",
           "stat_stem": "Dist-gauss-bins"
         },
         {
@@ -397,7 +397,7 @@
           "eps": "0.0001",
           "delta": "3.362425830368606e-06",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-gauss-bins/Dist-gauss-bins_rms_y.png",
           "stat_stem": "Dist-gauss-bins"
         },
         {
@@ -407,7 +407,7 @@
           "eps": "0.0001",
           "delta": "2.683135466635591e-06",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-gauss-bins/Dist-gauss-bins_rms_s.png",
           "stat_stem": "Dist-gauss-bins"
         },
         {
@@ -417,7 +417,7 @@
           "eps": "1e-09",
           "delta": "4.738838222068671e-12",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-gauss-bins/Dist-gauss-bins_rms_px.png",
           "stat_stem": "Dist-gauss-bins"
         },
         {
@@ -427,7 +427,7 @@
           "eps": "1e-09",
           "delta": "1.857351696351203e-12",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-gauss-bins/Dist-gauss-bins_rms_py.png",
           "stat_stem": "Dist-gauss-bins"
         },
         {
@@ -437,7 +437,7 @@
           "eps": "1e-09",
           "delta": "5.853778315182213e-12",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-gauss-bins/Dist-gauss-bins_rms_ps.png",
           "stat_stem": "Dist-gauss-bins"
         },
         {
@@ -447,7 +447,7 @@
           "eps": "1e-09",
           "delta": "1.0098434567954148e-14",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-gauss-bins/Dist-gauss-bins_emit_x.png",
           "stat_stem": "Dist-gauss-bins"
         },
         {
@@ -457,7 +457,7 @@
           "eps": "1e-09",
           "delta": "1.510863533184889e-15",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-gauss-bins/Dist-gauss-bins_emit_y.png",
           "stat_stem": "Dist-gauss-bins"
         },
         {
@@ -467,7 +467,7 @@
           "eps": "1e-09",
           "delta": "3.102096505945328e-15",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-gauss-bins/Dist-gauss-bins_emit_s.png",
           "stat_stem": "Dist-gauss-bins"
         },
         {
@@ -477,7 +477,7 @@
           "eps": "1e-05",
           "delta": "2.1291628967114993e-21",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-gauss-bins/Dist-gauss-bins_mean_x.png",
           "stat_stem": "Dist-gauss-bins"
         },
         {
@@ -487,7 +487,7 @@
           "eps": "1e-09",
           "delta": "2.708023889376102e-20",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-gauss-bins/Dist-gauss-bins_mean_y.png",
           "stat_stem": "Dist-gauss-bins"
         },
         {
@@ -497,7 +497,7 @@
           "eps": "1e-09",
           "delta": "2.558635070749025e-19",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-gauss-bins/Dist-gauss-bins_mean_s.png",
           "stat_stem": "Dist-gauss-bins"
         },
         {
@@ -507,7 +507,7 @@
           "eps": "1e-09",
           "delta": "4.0860996430489537e-16",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-gauss-bins/Dist-gauss-bins_energy.png",
           "stat_stem": "Dist-gauss-bins"
         },
         {
@@ -517,7 +517,7 @@
           "eps": "1e-12",
           "delta": "0.0",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-gauss-bins/Dist-gauss-bins_nBins.png",
           "stat_stem": "Dist-gauss-bins"
         },
         {
@@ -527,11 +527,11 @@
           "eps": "1e-12",
           "delta": "0.0",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-gauss-bins/Dist-gauss-bins_numParticles.png",
           "stat_stem": "Dist-gauss-bins"
         }
       ],
-      "log_relpath": null,
+      "log_relpath": "logs/Dist-gauss-bins.out",
       "beam_containers": [
         {
           "stat_stem": "Dist-gauss-bins",
@@ -553,7 +553,7 @@
     },
     {
       "name": "Dist-multivariate",
-      "date": "2026-04-08",
+      "date": "",
       "description": "Dist-multivariate: 1 step Multivariate Gaussian distribution sanity check.",
       "tests": [
         {
@@ -563,7 +563,7 @@
           "eps": "0.0001",
           "delta": "7.037854467022153e-05",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-multivariate/Dist-multivariate_rms_x.png",
           "stat_stem": "Dist-multivariate"
         },
         {
@@ -573,7 +573,7 @@
           "eps": "0.0001",
           "delta": "1.491013088667989e-05",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-multivariate/Dist-multivariate_rms_y.png",
           "stat_stem": "Dist-multivariate"
         },
         {
@@ -583,7 +583,7 @@
           "eps": "0.0001",
           "delta": "2.0640789456895844e-06",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-multivariate/Dist-multivariate_rms_s.png",
           "stat_stem": "Dist-multivariate"
         },
         {
@@ -593,7 +593,7 @@
           "eps": "1e-09",
           "delta": "2.476136599068382e-06",
           "state": "failed",
-          "plot": null,
+          "plot": "plots/Dist-multivariate/Dist-multivariate_rms_px.png",
           "stat_stem": "Dist-multivariate"
         },
         {
@@ -603,7 +603,7 @@
           "eps": "1e-09",
           "delta": "1.0355655945962564e-06",
           "state": "failed",
-          "plot": null,
+          "plot": "plots/Dist-multivariate/Dist-multivariate_rms_py.png",
           "stat_stem": "Dist-multivariate"
         },
         {
@@ -613,7 +613,7 @@
           "eps": "1e-09",
           "delta": "4.1059236629181935e-06",
           "state": "failed",
-          "plot": null,
+          "plot": "plots/Dist-multivariate/Dist-multivariate_rms_ps.png",
           "stat_stem": "Dist-multivariate"
         },
         {
@@ -623,7 +623,7 @@
           "eps": "1e-09",
           "delta": "1.1734500809290529e-06",
           "state": "failed",
-          "plot": null,
+          "plot": "plots/Dist-multivariate/Dist-multivariate_emit_x.png",
           "stat_stem": "Dist-multivariate"
         },
         {
@@ -633,7 +633,7 @@
           "eps": "1e-09",
           "delta": "4.4100413578492e-09",
           "state": "failed",
-          "plot": null,
+          "plot": "plots/Dist-multivariate/Dist-multivariate_emit_y.png",
           "stat_stem": "Dist-multivariate"
         },
         {
@@ -643,7 +643,7 @@
           "eps": "1e-09",
           "delta": "7.868613774434946e-09",
           "state": "failed",
-          "plot": null,
+          "plot": "plots/Dist-multivariate/Dist-multivariate_emit_s.png",
           "stat_stem": "Dist-multivariate"
         },
         {
@@ -653,7 +653,7 @@
           "eps": "1e-09",
           "delta": "0.00011385547448866015",
           "state": "failed",
-          "plot": null,
+          "plot": "plots/Dist-multivariate/Dist-multivariate_mean_x.png",
           "stat_stem": "Dist-multivariate"
         },
         {
@@ -663,7 +663,7 @@
           "eps": "1e-09",
           "delta": "2.0577777034100322e-05",
           "state": "failed",
-          "plot": null,
+          "plot": "plots/Dist-multivariate/Dist-multivariate_mean_y.png",
           "stat_stem": "Dist-multivariate"
         },
         {
@@ -673,7 +673,7 @@
           "eps": "1e-09",
           "delta": "9.526456431961702e-07",
           "state": "failed",
-          "plot": null,
+          "plot": "plots/Dist-multivariate/Dist-multivariate_mean_s.png",
           "stat_stem": "Dist-multivariate"
         },
         {
@@ -683,11 +683,11 @@
           "eps": "1e-12",
           "delta": "0.0",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Dist-multivariate/Dist-multivariate_numParticles.png",
           "stat_stem": "Dist-multivariate"
         }
       ],
-      "log_relpath": null,
+      "log_relpath": "logs/Dist-multivariate.out",
       "beam_containers": [
         {
           "stat_stem": "Dist-multivariate",
@@ -709,7 +709,7 @@
     },
     {
       "name": "Drift-long-open",
-      "date": "2026-04-08",
+      "date": "",
       "description": "Minimal larger scale drift with one bin, open field solver, low resolution and four empty drift elements. Adapted from previous awa-... tests. Exists to test a big drift with space charge.",
       "tests": [
         {
@@ -719,7 +719,7 @@
           "eps": "0.001",
           "delta": "0.0010321143416133424",
           "state": "failed",
-          "plot": null,
+          "plot": "plots/Drift-long-open/Drift-long-open_rms_x.png",
           "stat_stem": "Drift-long-open"
         },
         {
@@ -729,7 +729,7 @@
           "eps": "0.001",
           "delta": "0.0011195908971291246",
           "state": "failed",
-          "plot": null,
+          "plot": "plots/Drift-long-open/Drift-long-open_rms_y.png",
           "stat_stem": "Drift-long-open"
         },
         {
@@ -739,7 +739,7 @@
           "eps": "0.01",
           "delta": "5.2435028556017125e-06",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Drift-long-open/Drift-long-open_rms_s.png",
           "stat_stem": "Drift-long-open"
         },
         {
@@ -749,7 +749,7 @@
           "eps": "0.001",
           "delta": "0.28437230829864824",
           "state": "failed",
-          "plot": null,
+          "plot": "plots/Drift-long-open/Drift-long-open_rms_px.png",
           "stat_stem": "Drift-long-open"
         },
         {
@@ -759,7 +759,7 @@
           "eps": "0.001",
           "delta": "0.37898275449115637",
           "state": "failed",
-          "plot": null,
+          "plot": "plots/Drift-long-open/Drift-long-open_rms_py.png",
           "stat_stem": "Drift-long-open"
         },
         {
@@ -769,7 +769,7 @@
           "eps": "0.01",
           "delta": "172.78035067670828",
           "state": "failed",
-          "plot": null,
+          "plot": "plots/Drift-long-open/Drift-long-open_rms_ps.png",
           "stat_stem": "Drift-long-open"
         },
         {
@@ -779,7 +779,7 @@
           "eps": "1000.0",
           "delta": "0.9829748457240157",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Drift-long-open/Drift-long-open_energy.png",
           "stat_stem": "Drift-long-open"
         },
         {
@@ -789,11 +789,11 @@
           "eps": "1e-12",
           "delta": "0.0",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Drift-long-open/Drift-long-open_nBins.png",
           "stat_stem": "Drift-long-open"
         }
       ],
-      "log_relpath": null,
+      "log_relpath": "logs/Drift-long-open.out",
       "beam_containers": [
         {
           "stat_stem": "Drift-long-open",
@@ -815,7 +815,7 @@
     },
     {
       "name": "Drift-open",
-      "date": "2026-04-08",
+      "date": "",
       "description": "Drift with open space charge solver, 20 steps. Simulates pure space charge expansion, very small initial P0.",
       "tests": [
         {
@@ -825,7 +825,7 @@
           "eps": "0.0001",
           "delta": "3.361984517769945e-06",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Drift-open/Drift-open_rms_x.png",
           "stat_stem": "Drift-open"
         },
         {
@@ -835,7 +835,7 @@
           "eps": "0.0001",
           "delta": "5.2879311407980165e-06",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Drift-open/Drift-open_rms_y.png",
           "stat_stem": "Drift-open"
         },
         {
@@ -845,7 +845,7 @@
           "eps": "0.0001",
           "delta": "6.651691582630886e-07",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Drift-open/Drift-open_rms_s.png",
           "stat_stem": "Drift-open"
         },
         {
@@ -855,7 +855,7 @@
           "eps": "1e-05",
           "delta": "1.7610487269720996e-08",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Drift-open/Drift-open_emit_x.png",
           "stat_stem": "Drift-open"
         },
         {
@@ -865,7 +865,7 @@
           "eps": "1e-05",
           "delta": "2.3776285350511487e-10",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Drift-open/Drift-open_emit_y.png",
           "stat_stem": "Drift-open"
         },
         {
@@ -875,7 +875,7 @@
           "eps": "1e-05",
           "delta": "9.891456518447935e-09",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Drift-open/Drift-open_emit_s.png",
           "stat_stem": "Drift-open"
         },
         {
@@ -885,7 +885,7 @@
           "eps": "0.001",
           "delta": "6.048680683521037e-08",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Drift-open/Drift-open_energy.png",
           "stat_stem": "Drift-open"
         },
         {
@@ -895,11 +895,11 @@
           "eps": "1e-05",
           "delta": "1.2121553760735537e-13",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Drift-open/Drift-open_s.png",
           "stat_stem": "Drift-open"
         }
       ],
-      "log_relpath": null,
+      "log_relpath": "logs/Drift-open.out",
       "beam_containers": [
         {
           "stat_stem": "Drift-open",
@@ -921,7 +921,7 @@
     },
     {
       "name": "Drift-open-bins",
-      "date": "2026-04-08",
+      "date": "",
       "description": "Drift with bins in accelerating cavity: create significant energy spread that leads to multiple bins. When particles are close to c, bin number decreases.",
       "tests": [
         {
@@ -931,7 +931,7 @@
           "eps": "0.001",
           "delta": "0.0005363157808915345",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Drift-open-bins/Drift-open-bins_rms_x.png",
           "stat_stem": "Drift-open-bins"
         },
         {
@@ -941,7 +941,7 @@
           "eps": "0.001",
           "delta": "0.0004359430583637594",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Drift-open-bins/Drift-open-bins_rms_y.png",
           "stat_stem": "Drift-open-bins"
         },
         {
@@ -951,7 +951,7 @@
           "eps": "0.01",
           "delta": "0.000886510396562401",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Drift-open-bins/Drift-open-bins_rms_s.png",
           "stat_stem": "Drift-open-bins"
         },
         {
@@ -961,7 +961,7 @@
           "eps": "0.001",
           "delta": "0.00018585092395222852",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Drift-open-bins/Drift-open-bins_rms_px.png",
           "stat_stem": "Drift-open-bins"
         },
         {
@@ -971,7 +971,7 @@
           "eps": "0.001",
           "delta": "0.00014899851577243953",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Drift-open-bins/Drift-open-bins_rms_py.png",
           "stat_stem": "Drift-open-bins"
         },
         {
@@ -981,7 +981,7 @@
           "eps": "0.01",
           "delta": "0.003156428322070859",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Drift-open-bins/Drift-open-bins_rms_ps.png",
           "stat_stem": "Drift-open-bins"
         },
         {
@@ -991,7 +991,7 @@
           "eps": "1000.0",
           "delta": "0.0010791595131212084",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Drift-open-bins/Drift-open-bins_energy.png",
           "stat_stem": "Drift-open-bins"
         },
         {
@@ -1001,11 +1001,11 @@
           "eps": "0.2",
           "delta": "0.020672140258419566",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Drift-open-bins/Drift-open-bins_nBins.png",
           "stat_stem": "Drift-open-bins"
         }
       ],
-      "log_relpath": null,
+      "log_relpath": "logs/Drift-open-bins.out",
       "beam_containers": [
         {
           "stat_stem": "Drift-open-bins",
@@ -1027,7 +1027,7 @@
     },
     {
       "name": "Drift-open-muon-decay",
-      "date": "2026-04-08",
+      "date": "",
       "description": "Drift with open space charge solver, MUON beam, global DECAY enabled.",
       "tests": [
         {
@@ -1121,12 +1121,12 @@
           "stat_stem": "Drift-open-muon-decay"
         }
       ],
-      "log_relpath": null,
+      "log_relpath": "logs/Drift-open-muon-decay.out",
       "beam_containers": []
     },
     {
       "name": "Drift-periodic",
-      "date": "2026-04-08",
+      "date": "",
       "description": "Drift with periodic FFT space charge solver, 20 steps. Simulates pure space charge expansion, very small initial P0.",
       "tests": [
         {
@@ -1136,7 +1136,7 @@
           "eps": "1e-05",
           "delta": "2.020039697184055e-06",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Drift-periodic/Drift-periodic_rms_x.png",
           "stat_stem": "Drift-periodic"
         },
         {
@@ -1146,7 +1146,7 @@
           "eps": "1e-05",
           "delta": "2.721016510723144e-06",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Drift-periodic/Drift-periodic_rms_y.png",
           "stat_stem": "Drift-periodic"
         },
         {
@@ -1156,7 +1156,7 @@
           "eps": "1e-05",
           "delta": "6.758434036851103e-07",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Drift-periodic/Drift-periodic_rms_s.png",
           "stat_stem": "Drift-periodic"
         },
         {
@@ -1166,7 +1166,7 @@
           "eps": "1e-05",
           "delta": "2.4491413695596817e-08",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Drift-periodic/Drift-periodic_emit_x.png",
           "stat_stem": "Drift-periodic"
         },
         {
@@ -1176,7 +1176,7 @@
           "eps": "1e-05",
           "delta": "2.3551093860859506e-09",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Drift-periodic/Drift-periodic_emit_y.png",
           "stat_stem": "Drift-periodic"
         },
         {
@@ -1186,7 +1186,7 @@
           "eps": "1e-05",
           "delta": "1.1434867856168161e-08",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Drift-periodic/Drift-periodic_emit_s.png",
           "stat_stem": "Drift-periodic"
         },
         {
@@ -1196,7 +1196,7 @@
           "eps": "0.001",
           "delta": "6.232133719662686e-08",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Drift-periodic/Drift-periodic_energy.png",
           "stat_stem": "Drift-periodic"
         },
         {
@@ -1206,11 +1206,11 @@
           "eps": "1e-05",
           "delta": "1.2121553760735537e-13",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Drift-periodic/Drift-periodic_s.png",
           "stat_stem": "Drift-periodic"
         }
       ],
-      "log_relpath": null,
+      "log_relpath": "logs/Drift-periodic.out",
       "beam_containers": [
         {
           "stat_stem": "Drift-periodic",
@@ -1232,7 +1232,7 @@
     },
     {
       "name": "Fodo-long",
-      "date": "2026-04-08",
+      "date": "",
       "description": "FodoCell without Space Charge",
       "tests": [
         {
@@ -1242,7 +1242,7 @@
           "eps": "1e-05",
           "delta": "9.414078339322332e-06",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Fodo-long/Fodo-long_rms_x.png",
           "stat_stem": "Fodo-long"
         },
         {
@@ -1252,7 +1252,7 @@
           "eps": "1e-05",
           "delta": "1.1643052943179797e-05",
           "state": "failed",
-          "plot": null,
+          "plot": "plots/Fodo-long/Fodo-long_rms_y.png",
           "stat_stem": "Fodo-long"
         },
         {
@@ -1262,7 +1262,7 @@
           "eps": "1e-05",
           "delta": "6.976861428407379e-08",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Fodo-long/Fodo-long_rms_s.png",
           "stat_stem": "Fodo-long"
         },
         {
@@ -1272,7 +1272,7 @@
           "eps": "1e-05",
           "delta": "8.306219420998454e-06",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Fodo-long/Fodo-long_emit_x.png",
           "stat_stem": "Fodo-long"
         },
         {
@@ -1282,7 +1282,7 @@
           "eps": "1e-05",
           "delta": "9.130340332263835e-06",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Fodo-long/Fodo-long_emit_y.png",
           "stat_stem": "Fodo-long"
         },
         {
@@ -1292,7 +1292,7 @@
           "eps": "1e-05",
           "delta": "8.423214915198515e-08",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Fodo-long/Fodo-long_emit_s.png",
           "stat_stem": "Fodo-long"
         },
         {
@@ -1302,11 +1302,11 @@
           "eps": "1e-05",
           "delta": "0.0",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Fodo-long/Fodo-long_energy.png",
           "stat_stem": "Fodo-long"
         }
       ],
-      "log_relpath": null,
+      "log_relpath": "logs/Fodo-long.out",
       "beam_containers": [
         {
           "stat_stem": "Fodo-long",
@@ -1328,7 +1328,7 @@
     },
     {
       "name": "Fodo-long-multibeam",
-      "date": "2026-04-08",
+      "date": "",
       "description": "FodoCell without Space Charge",
       "tests": [
         {
@@ -1338,7 +1338,7 @@
           "eps": "1e-05",
           "delta": "8.797938119547789e-06",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Fodo-long-multibeam/Fodo-long-multibeam_c0_rms_x.png",
           "stat_stem": "Fodo-long-multibeam_c0"
         },
         {
@@ -1348,7 +1348,7 @@
           "eps": "1e-05",
           "delta": "5.7270562852761864e-06",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Fodo-long-multibeam/Fodo-long-multibeam_c1_rms_x.png",
           "stat_stem": "Fodo-long-multibeam_c1"
         },
         {
@@ -1358,7 +1358,7 @@
           "eps": "1e-05",
           "delta": "1.134031840051427e-05",
           "state": "failed",
-          "plot": null,
+          "plot": "plots/Fodo-long-multibeam/Fodo-long-multibeam_c0_rms_y.png",
           "stat_stem": "Fodo-long-multibeam_c0"
         },
         {
@@ -1368,7 +1368,7 @@
           "eps": "1e-05",
           "delta": "1.3549180699507464e-05",
           "state": "failed",
-          "plot": null,
+          "plot": "plots/Fodo-long-multibeam/Fodo-long-multibeam_c1_rms_y.png",
           "stat_stem": "Fodo-long-multibeam_c1"
         },
         {
@@ -1378,7 +1378,7 @@
           "eps": "1e-05",
           "delta": "6.456618133703664e-08",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Fodo-long-multibeam/Fodo-long-multibeam_c0_rms_s.png",
           "stat_stem": "Fodo-long-multibeam_c0"
         },
         {
@@ -1388,7 +1388,7 @@
           "eps": "1e-05",
           "delta": "1.1297054039335352e-07",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Fodo-long-multibeam/Fodo-long-multibeam_c1_rms_s.png",
           "stat_stem": "Fodo-long-multibeam_c1"
         },
         {
@@ -1398,7 +1398,7 @@
           "eps": "1e-05",
           "delta": "8.376036274249515e-06",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Fodo-long-multibeam/Fodo-long-multibeam_c0_emit_x.png",
           "stat_stem": "Fodo-long-multibeam_c0"
         },
         {
@@ -1408,7 +1408,7 @@
           "eps": "1e-05",
           "delta": "1.1980156996130139e-08",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Fodo-long-multibeam/Fodo-long-multibeam_c1_emit_x.png",
           "stat_stem": "Fodo-long-multibeam_c1"
         },
         {
@@ -1418,7 +1418,7 @@
           "eps": "1e-05",
           "delta": "8.917668360556815e-06",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Fodo-long-multibeam/Fodo-long-multibeam_c0_emit_y.png",
           "stat_stem": "Fodo-long-multibeam_c0"
         },
         {
@@ -1428,7 +1428,7 @@
           "eps": "1e-05",
           "delta": "2.086255807395005e-08",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Fodo-long-multibeam/Fodo-long-multibeam_c1_emit_y.png",
           "stat_stem": "Fodo-long-multibeam_c1"
         },
         {
@@ -1438,7 +1438,7 @@
           "eps": "1e-05",
           "delta": "8.445407710056768e-08",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Fodo-long-multibeam/Fodo-long-multibeam_c0_emit_s.png",
           "stat_stem": "Fodo-long-multibeam_c0"
         },
         {
@@ -1448,7 +1448,7 @@
           "eps": "1e-05",
           "delta": "3.0149975488559016e-11",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Fodo-long-multibeam/Fodo-long-multibeam_c1_emit_s.png",
           "stat_stem": "Fodo-long-multibeam_c1"
         },
         {
@@ -1458,7 +1458,7 @@
           "eps": "1e-05",
           "delta": "0.0",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Fodo-long-multibeam/Fodo-long-multibeam_c0_energy.png",
           "stat_stem": "Fodo-long-multibeam_c0"
         },
         {
@@ -1468,11 +1468,11 @@
           "eps": "1e-05",
           "delta": "4.0144138068121624e-13",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Fodo-long-multibeam/Fodo-long-multibeam_c1_energy.png",
           "stat_stem": "Fodo-long-multibeam_c1"
         }
       ],
-      "log_relpath": null,
+      "log_relpath": "logs/Fodo-long-multibeam.out",
       "beam_containers": [
         {
           "stat_stem": "Fodo-long-multibeam_c0",
@@ -1510,7 +1510,7 @@
     },
     {
       "name": "Fodo-long-qm",
-      "date": "2026-04-08",
+      "date": "",
       "description": "FodoCell without Space Charge",
       "tests": [
         {
@@ -1520,7 +1520,7 @@
           "eps": "1e-05",
           "delta": "9.414078339322332e-06",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Fodo-long-qm/Fodo-long-qm_rms_x.png",
           "stat_stem": "Fodo-long-qm"
         },
         {
@@ -1530,7 +1530,7 @@
           "eps": "1e-05",
           "delta": "1.1643052943179797e-05",
           "state": "failed",
-          "plot": null,
+          "plot": "plots/Fodo-long-qm/Fodo-long-qm_rms_y.png",
           "stat_stem": "Fodo-long-qm"
         },
         {
@@ -1540,7 +1540,7 @@
           "eps": "1e-05",
           "delta": "6.976861428407379e-08",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Fodo-long-qm/Fodo-long-qm_rms_s.png",
           "stat_stem": "Fodo-long-qm"
         },
         {
@@ -1550,7 +1550,7 @@
           "eps": "1e-05",
           "delta": "8.306219420998454e-06",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Fodo-long-qm/Fodo-long-qm_emit_x.png",
           "stat_stem": "Fodo-long-qm"
         },
         {
@@ -1560,7 +1560,7 @@
           "eps": "1e-05",
           "delta": "9.130340332263835e-06",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Fodo-long-qm/Fodo-long-qm_emit_y.png",
           "stat_stem": "Fodo-long-qm"
         },
         {
@@ -1570,7 +1570,7 @@
           "eps": "1e-05",
           "delta": "8.423214915198515e-08",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Fodo-long-qm/Fodo-long-qm_emit_s.png",
           "stat_stem": "Fodo-long-qm"
         },
         {
@@ -1580,11 +1580,11 @@
           "eps": "1e-05",
           "delta": "0.0",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Fodo-long-qm/Fodo-long-qm_energy.png",
           "stat_stem": "Fodo-long-qm"
         }
       ],
-      "log_relpath": null,
+      "log_relpath": "logs/Fodo-long-qm.out",
       "beam_containers": [
         {
           "stat_stem": "Fodo-long-qm",
@@ -1606,7 +1606,7 @@
     },
     {
       "name": "Qpole-short",
-      "date": "2026-04-08",
+      "date": "",
       "description": "FODO channel no space charge 7 MeV e",
       "tests": [
         {
@@ -1616,7 +1616,7 @@
           "eps": "2e-08",
           "delta": "0.00017276424939634272",
           "state": "failed",
-          "plot": null,
+          "plot": "plots/Qpole-short/Qpole-short_rms_x.png",
           "stat_stem": "Qpole-short"
         },
         {
@@ -1626,7 +1626,7 @@
           "eps": "2e-08",
           "delta": "0.000230863605139223",
           "state": "failed",
-          "plot": null,
+          "plot": "plots/Qpole-short/Qpole-short_rms_y.png",
           "stat_stem": "Qpole-short"
         },
         {
@@ -1636,7 +1636,7 @@
           "eps": "2e-08",
           "delta": "2.7627721640472325e-06",
           "state": "failed",
-          "plot": null,
+          "plot": "plots/Qpole-short/Qpole-short_rms_s.png",
           "stat_stem": "Qpole-short"
         },
         {
@@ -1646,7 +1646,7 @@
           "eps": "2e-08",
           "delta": "3.3216514038127424e-07",
           "state": "failed",
-          "plot": null,
+          "plot": "plots/Qpole-short/Qpole-short_emit_x.png",
           "stat_stem": "Qpole-short"
         },
         {
@@ -1656,7 +1656,7 @@
           "eps": "2e-08",
           "delta": "7.356258582204858e-08",
           "state": "failed",
-          "plot": null,
+          "plot": "plots/Qpole-short/Qpole-short_emit_y.png",
           "stat_stem": "Qpole-short"
         },
         {
@@ -1666,11 +1666,11 @@
           "eps": "2e-08",
           "delta": "4.675497921318423e-10",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Qpole-short/Qpole-short_emit_s.png",
           "stat_stem": "Qpole-short"
         }
       ],
-      "log_relpath": null,
+      "log_relpath": "logs/Qpole-short.out",
       "beam_containers": [
         {
           "stat_stem": "Qpole-short",
@@ -1692,7 +1692,7 @@
     },
     {
       "name": "Sol-fm",
-      "date": "2026-04-08",
+      "date": "",
       "description": "Solenoid fieldmaptest without Space Charge",
       "tests": [
         {
@@ -1702,7 +1702,7 @@
           "eps": "1e-05",
           "delta": "2.4310560232493514e-06",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Sol-fm/Sol-fm_rms_x.png",
           "stat_stem": "Sol-fm"
         },
         {
@@ -1712,7 +1712,7 @@
           "eps": "1e-05",
           "delta": "1.18754566650653e-06",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Sol-fm/Sol-fm_rms_y.png",
           "stat_stem": "Sol-fm"
         },
         {
@@ -1722,7 +1722,7 @@
           "eps": "1e-05",
           "delta": "7.192149747175313e-09",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Sol-fm/Sol-fm_rms_s.png",
           "stat_stem": "Sol-fm"
         },
         {
@@ -1732,7 +1732,7 @@
           "eps": "0.001",
           "delta": "0.0006690884125791091",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Sol-fm/Sol-fm_rms_px.png",
           "stat_stem": "Sol-fm"
         },
         {
@@ -1742,7 +1742,7 @@
           "eps": "0.001",
           "delta": "0.0006362394042039115",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Sol-fm/Sol-fm_rms_py.png",
           "stat_stem": "Sol-fm"
         },
         {
@@ -1752,7 +1752,7 @@
           "eps": "0.001",
           "delta": "0.0002215545250899403",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Sol-fm/Sol-fm_rms_ps.png",
           "stat_stem": "Sol-fm"
         },
         {
@@ -1762,7 +1762,7 @@
           "eps": "1e-05",
           "delta": "3.23877848582734e-06",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Sol-fm/Sol-fm_emit_x.png",
           "stat_stem": "Sol-fm"
         },
         {
@@ -1772,7 +1772,7 @@
           "eps": "1e-05",
           "delta": "2.7056498582914414e-06",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Sol-fm/Sol-fm_emit_y.png",
           "stat_stem": "Sol-fm"
         },
         {
@@ -1782,7 +1782,7 @@
           "eps": "1e-05",
           "delta": "2.452758945987731e-07",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Sol-fm/Sol-fm_emit_s.png",
           "stat_stem": "Sol-fm"
         },
         {
@@ -1792,11 +1792,11 @@
           "eps": "0.001",
           "delta": "7.365168237575146e-05",
           "state": "passed",
-          "plot": null,
+          "plot": "plots/Sol-fm/Sol-fm_energy.png",
           "stat_stem": "Sol-fm"
         }
       ],
-      "log_relpath": null,
+      "log_relpath": "logs/Sol-fm.out",
       "beam_containers": [
         {
           "stat_stem": "Sol-fm",
