@@ -748,7 +748,7 @@ class RegressionTest:
         quant = "-"
         eps = "-"
         if len(nameparams) >= 3:
-            params = str.split(nameparams[2].lstrip(), " ")
+            params = nameparams[2].split()
             if len(params) >= 2:
                 quant = params[0]
                 eps = str(params[1])
@@ -787,7 +787,7 @@ class RegressionTest:
         """
         nameparams = str.split(test,"\"")
         var = nameparams[1]
-        params = str.split(nameparams[2].lstrip(), " ")
+        params = nameparams[2].split()
         rtest = 0
         if "stat" in test:
             stem = stat_stem if stat_stem is not None else self.simname
